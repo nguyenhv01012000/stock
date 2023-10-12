@@ -605,6 +605,12 @@ pre code {
   margin-left: auto;
 }
 
+@media (min-width: 980px) {
+  .cover-image {
+    height: 435px;
+  }
+}
+
 /* @media (min-width: 576px) {
   .container, .container-sm {
     max-width: 540px;
