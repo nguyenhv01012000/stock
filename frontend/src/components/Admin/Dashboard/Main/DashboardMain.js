@@ -48,7 +48,7 @@ export default function DashboardMain() {
                 setUser(res.data)
             }
         ) 
-        axios.get(`http://pe.heromc.net:4000/email`)
+        axios.get(`http://localhost:4000/email`)
             .then(res => {
                 setEmail(res.data)
             }
@@ -237,7 +237,7 @@ export default function DashboardMain() {
     
     return (
         <div className="dashboard-main">
-            <div className="row flex">
+            <div className="row flex" style={{flexWrap:"nowrap"}}>
                 { totalCount.map((item, index)=> { 
                     return (
                         <DashboardTotalCount
@@ -250,7 +250,7 @@ export default function DashboardMain() {
             <DashboardLocation
                 order={order}
             /> 
-            <div className="row flex">
+            <div className="row flex" style={{flexWrap:"nowrap"}}>
                 <DashboardChartPie
                     email = {email}
                     color = "pink"
@@ -270,7 +270,7 @@ export default function DashboardMain() {
                     ]}
                 />
             </div>
-            <div className="row flex">
+            <div className="row flex" style={{flexWrap:"nowrap"}}>
                 <DashboardRecentReview
                     icon = {faStar}
                     title = "Recent Reviews"

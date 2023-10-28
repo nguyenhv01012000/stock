@@ -285,12 +285,12 @@ export default function DashboardProductTable(props) {
                                                 <p>{item.productName}</p>
                                             </td>
                                             <td className="table-mobile-productimages" style={{display: 'flex'}}>
-                                                <img 
-                                                    src={item.productColor[0].productImg[0]} 
+                                               {item.productImg && <img 
+                                                    src={item.productImg[0]} 
                                                     width="70px" height="80px"
                                                     style={{padding: '5px 0'}}
                                                     alt=""
-                                                />
+                                                />}
                                             </td>
                                             <td>
                                                 <p>{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>

@@ -21,8 +21,11 @@ var vietnamRoutes = require('./routes/vietnam');
 var todosRoutes = require('./routes/todos');
 var noticeRoutes = require('./routes/notice');
 
-mongoose.connect('mongodb://localhost:27017/Pet', { useNewUrlParser: true , useUnifiedTopology: true, rejectUnauthorized: false});
-mongoose.set('useFindAndModify', false);
+mongoose.connect('mongodb+srv://nguyenhd01012000:yZldRox09ZpWOwhd@cluster0.r1ugjsg.mongodb.net/shop?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
 
 var cors = require('cors');
 app.use(bodyParser.json());

@@ -1,18 +1,17 @@
 import React from 'react'
 import '../../Styles/Home.css'
 import '../../App.css'
-import Feature from '../Home/Feature' 
 import { withRouter } from 'react-router-dom'
 
 function ShopFeatures(props) { 
 
     return (
         <div>
-            { props.location.pathname === '/dog' &&
+            {/* { props.location.pathname === '/dog' &&
                 <div className="Features">
                 <Feature
                     reverse={true}
-                    img={"http://pe.heromc.net:4000/images/cfbe102bcecf88953796934e4cef8421"}
+                    img={"http://localhost:4000/images/cfbe102bcecf88953796934e4cef8421"}
                     color={"linear-gradient(to right, #00a5e1, rgba(0,127,200,0.5)),linear-gradient(#007fc8, #007fc8)"}
                 >
                     <div className="feature-intro flex">
@@ -32,7 +31,7 @@ function ShopFeatures(props) {
                 </Feature>
                 <Feature
                     reverse={false}
-                    img={"http://pe.heromc.net:4000/images/3a1422567ded62c98857eb374e5d5db9"}
+                    img={"http://localhost:4000/images/3a1422567ded62c98857eb374e5d5db9"}
                     color={"#f5f6f8"}
                 >
                     <div className="feature-intro flex">
@@ -56,7 +55,7 @@ function ShopFeatures(props) {
                 <div className="Features">
                 <Feature
                     reverse={true}
-                    img={"http://pe.heromc.net:4000/images/f3447388493277f92f3351352814f070"}
+                    img={"http://localhost:4000/images/f3447388493277f92f3351352814f070"}
                     color={"linear-gradient(to right, #00a5e1, rgba(0,127,200,0.5)),linear-gradient(#007fc8, #007fc8)"}
                 >
                     <div className="feature-intro flex">
@@ -76,7 +75,7 @@ function ShopFeatures(props) {
                 </Feature>
                 <Feature
                     reverse={false}
-                    img={"http://pe.heromc.net:4000/images/dd9d8dd2710275aeb19125efd3c15e5a"}
+                    img={"http://localhost:4000/images/dd9d8dd2710275aeb19125efd3c15e5a"}
                     color={"#f5f6f8"}
                 >
                     <div className="feature-intro flex">
@@ -95,7 +94,7 @@ function ShopFeatures(props) {
                     </div>
                 </Feature>
             </div>
-            }
+            } */}
         </div>
     )
 }

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { stateFromHTML } from 'draft-js-import-html'
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState, ContentState, convertToRaw, convertFromHTML, convertFromRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 
 function uploadImageCallBack(file) {
@@ -32,13 +32,12 @@ export default function DashboardEditor(props) {
 
   const onEditorStateChange = (editorState) => {
     setEditorState(editorState)
-    props.setNewsContent(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+    props.setNewsContent(JSON.stringify(convertToRaw(editorState.getCurrentContent())))
   }
 
   useEffect(() => {
     if (props.newsContent) {
-      let contentState = stateFromHTML(props.newsContent);
-      let test = EditorState.createWithContent(contentState);
+      let test = EditorState.createWithContent(convertFromRaw(JSON.parse(props.newsContent)))
       setEditorState(EditorState.moveFocusToEnd(test));
     }
   }, [props.newsContent]);

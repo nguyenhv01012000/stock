@@ -1,9 +1,9 @@
-* {
+/* * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: Poppins ,sans-serif;
-}
+} */
 .Dashboard {
     width: 100%;
     font-family: sans-serif !important;
@@ -201,6 +201,10 @@
     overflow-y: scroll;
 }
 
+.create-box-title-text{
+    font-weight: bolder;
+    font-size: 20px;
+}
 
 /* width */
 .notice-box::-webkit-scrollbar {
@@ -375,11 +379,11 @@ display: none !important;
     margin-left: 30px;
 }
 
-.row {
+/* .row {
     width: 100%;
     justify-content: space-between;
     margin-bottom: 40px;
-}
+} */
 .total-count-item:last-child {
     margin: 0;
 }
@@ -1515,10 +1519,10 @@ select {
         margin: 0;
         margin: 10px 0 !important;
     }
-    .row {
+    /* .row {
         flex-wrap: wrap;
         margin-bottom: 10px;
-    }
+    } */
     .top-location {
         margin: 0;
         margin-bottom: 20px;

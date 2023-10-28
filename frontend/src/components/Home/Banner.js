@@ -19,41 +19,82 @@ function Banner(props) {
     }
 
     return (
-        <div className="Banner flex">
-            <div className="left-banner">
-                <Slider {...settings}>
-                    <div className="slider-item banner1">
-                        <img src={Banner12} alt="" className="slider-img-child"></img>
+        <div className="container-fluid py-3" style={{marginTop: "100px"}}>
+        <div className="container">
+            <div className="row">
+                <div className="col-lg-8">
+                    <div className="position-relative mb-3 mb-lg-0">
+                        <div className="position-relative overflow-hidden cover-image">
+                            <img className="img-fluid h-100" src="https://cophieux.com/wp-content/uploads/2023/05/BANNER-KHOA-HOC-2023-GIF.gif" style={{objectFit: "cover"}}/>
+                        </div>
                     </div>
-                    <div className="slider-item banner2">
-                        <img src={Banner22} alt="" className="slider-img-child"></img>
+                </div>
+                <div className="col-lg-4">
+                    <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                        <h3 className="m-0">TIN MỚI NHÂT</h3>
+                        <a className="text-secondary font-weight-medium text-decoration-none" href="">Xem Tất Cả</a>
                     </div>
-                </Slider>
-            </div>
-            <div className="right-banner">
-                <div className="banner-title">
-                    <strong>GPS theo dõi</strong> dành cho mèo và chó
-                </div>
-                <div className="banner-text">
-                    Sản phẩm vòng cổ GPS cho phép bạn xác định vị trí của chó và mèo của mình mọi lúc, mọi nơi. Sử dụng phần đính kèm vòng đeo cổ GPS để xem vị trí chính xác của thú cưng của bạn trực tiếp trên điện thoại thông minh hoặc trong bất kỳ trình duyệt nào
-                </div>
-                <div className="banner-btn-list flex">
-                    <div 
-                        className="banner-btn"
-                        onClick={()=>{
-                            props.history.push("/dog")
-                        }}
-                    >Vòng cho chó</div>
-                    <div 
-                        className="banner-btn"
-                        onClick={()=>{
-                            props.history.push("/cat")
-                        }}
-                        className="banner-btn"
-                    >Vòng cho mèo</div>
+                    <div className="overflow-auto" style={{maxHeight: "350px"}}>
+                        <div className="d-flex mb-3">
+                            <img src="img/news-100x100-1.jpg" style={{width: "100px",height: "100px",objectFit: "cover"}}/>
+                            <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{height: "100px"}}>
+                                <div className="mb-1" style={{fontSize: "13px"}}>
+                                    <a href="">Chứng khoán cho NĐT mới</a>
+                                    <span className="px-1">/</span>
+                                    <span>10-11-2023</span>
+                                </div>
+                                <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản & Siêu Hiệu Quả</a>
+                            </div>
+                        </div>
+                        <div className="d-flex mb-3">
+                            <img src="img/news-100x100-1.jpg" style={{width: "100px",height: "100px",objectFit: "cover"}}/>
+                            <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{height: "100px"}}>
+                                <div className="mb-1" style={{fontSize: "13px"}}>
+                                    <a href="">Chứng khoán cho NĐT mới</a>
+                                    <span className="px-1">/</span>
+                                    <span>10-11-2023</span>
+                                </div>
+                                <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản & Siêu Hiệu Quả</a>
+                            </div>
+                        </div>
+                        <div className="d-flex mb-3">
+                            <img src="img/news-100x100-1.jpg" style={{width: "100px",height: "100px",objectFit: "cover"}}/>
+                            <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{height: "100px"}}>
+                                <div className="mb-1" style={{fontSize: "13px"}}>
+                                    <a href="">Chứng khoán cho NĐT mới</a>
+                                    <span className="px-1">/</span>
+                                    <span>10-11-2023</span>
+                                </div>
+                                <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản & Siêu Hiệu Quả</a>
+                            </div>
+                        </div>
+                        <div className="d-flex mb-3">
+                            <img src="img/news-100x100-1.jpg" style={{width: "100px",height: "100px",objectFit: "cover"}}/>
+                            <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{height: "100px"}}>
+                                <div className="mb-1" style={{fontSize: "13px"}}>
+                                    <a href="">Chứng khoán cho NĐT mới</a>
+                                    <span className="px-1">/</span>
+                                    <span>10-11-2023</span>
+                                </div>
+                                <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản & Siêu Hiệu Quả</a>
+                            </div>
+                        </div>
+                        <div className="d-flex mb-3">
+                            <img src="img/news-100x100-1.jpg" style={{width: "100px",height: "100px",objectFit: "cover"}}/>
+                            <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{height: "100px"}}>
+                                <div className="mb-1" style={{fontSize: "13px"}}>
+                                    <a href="">Chứng khoán cho NĐT mới</a>
+                                    <span className="px-1">/</span>
+                                    <span>10-11-2023</span>
+                                </div>
+                                <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản & Siêu Hiệu Quả</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     )
 }
 export default withRouter(Banner)

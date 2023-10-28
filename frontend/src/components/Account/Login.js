@@ -19,10 +19,11 @@ function Login(props) {
     const [arrErr, setArrErr] = useState() 
 
     useEffect(()=> {
-        Axios.get(`http://pe.heromc.net:4000/users/${localStorage.getItem('user-id')}`, { 
+        Axios.get(`http://localhost:4000/users/${localStorage.getItem('user-id')}`, { 
             headers: {"authorization" : `Bearer ${localStorage.getItem('token')}`}
         })
         .then(res => { 
+            console.log(res)
             setUserInfoFunc(res.data.user);
             props.history.push("/account")
         })
@@ -39,7 +40,7 @@ function Login(props) {
                 loginPassword: password
             }) 
             .then(res => {
-                setArrSuccess("Đăng nhập thành công!") 
+                setArrSuccess(res.data.msg) 
                 setArrErr("");
                 setTimeout(()=> {
                     window.location.reload(false);
@@ -49,7 +50,6 @@ function Login(props) {
                 localStorage.setItem('user-id', res.data.user._id);
             })
             .catch(err => {
-                setArrSuccess("");
                 setArrErr(err.response.data);
             })
         } else {
@@ -57,15 +57,16 @@ function Login(props) {
                 userName: name,
                 userEmail: email,
                 userPassword: password,
-                userRole: "user"
             })
             .then(res => { 
-                setArrSuccess(res.data)
+                setArrSuccess(res.data.msg);
                 setArrErr("");
                 setTimeout(()=> {
                     window.location.reload(false);
                     document.body.style.overflow = 'unset';
                 }, 1000)
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('user-id', res.data.user._id);
             })
             .catch(err => { 
                 setArrSuccess("");
@@ -75,13 +76,15 @@ function Login(props) {
     }
 
     return (
-        <div className="login flex-col">
-            <div className="login-title">
+        <div className="login flex-col" style={{background:"#f2f2f2"}}>
+            {/* <div className="login-title">
                 <strong>Thiết bị định vị</strong> cho chó và mèo
             </div>
             <div className="login-banner"> 
-            </div>
-            { tab === 0 &&
+            </div> */}
+    <div className="container-fluid py-3" style={{background:"#f2f2f2",marginTop:"100px"}}>
+          <div className="container" style={{display: "flex",justifyContent: "center"}}>
+          { tab === 0 &&
                 <div className="login-box flex-col">
                     <div className="login-box-title"><strong>Đăng</strong> nhập</div>
                     <div className="login-status">
@@ -102,6 +105,7 @@ function Login(props) {
                             onChange={(event)=>{
                                 setPassword(event.target.value)
                             }}
+                            type='password'
                         ></input>
                         <button>Đăng nhập</button>
                     </form>
@@ -137,12 +141,16 @@ function Login(props) {
                             onChange={(event)=>{
                                 setPassword(event.target.value)
                             }}
+                            type='password'
                         ></input>
                         <button>Tạo tài khoản</button>
                     </form> 
                     <div className="login-register" onClick={()=>{setTab(0)}}>Đã có tài khoản?</div>
                 </div>
             }
+            </div>
+            </div>
+           
         </div>
     )
 }

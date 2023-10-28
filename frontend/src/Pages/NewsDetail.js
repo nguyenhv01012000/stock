@@ -1,6 +1,5 @@
 import '../App.css';
 import Header from '../components/Home/Header'; 
-import Newsletter from '../components/Home/Newsletter';
 import Footer from '../components/Home/Footer'; 
 import NewsBanner from '../components/News/NewsBanner'
 import NewsContent from '../components/News/NewsContent';
@@ -30,7 +29,6 @@ function NewsDetail(props) {
         <NewsContent
             news={news}
         />
-        <Newsletter/>
         <Footer/>
         </div>
     );

@@ -59,7 +59,7 @@ export default function NewsList(props) {
         pageNumbers.push(i);
     }
 
-    const pages = [];
+    const pages = [1,2,3];
 
     if (currentPage === 2) {
         pages.push(currentPage - 1, currentPage, currentPage + 1);

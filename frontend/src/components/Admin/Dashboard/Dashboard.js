@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../../../App.css'
-import '../../../Styles/Dashboard.css'
+// import '../../../Styles/Dashboard.css'
 import DashboardBody from './DashboardBody'
 import DashboardMenu from './DashboardMenu'
 import { faEnvelope, faFileInvoice, faHome, faInbox, faNewspaper, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
@@ -49,7 +49,7 @@ function Dashboard(props) {
             icon: faEnvelope
         },
     ]
-    const [tabId, setTabId] = useState("1");
+    const [tabId, setTabId] = useState(props.match.params.id ? props.match.params.id : "1");
     const [openMenu, setOpenMenu] = useState(true); 
     const [openMenuMobile, setOpenMenuMobile] = useState(true); 
     const [productId, setProductId] = useState("")
@@ -74,7 +74,7 @@ function Dashboard(props) {
                     })
                     socket.on("placeAnOrder-notice", function(data) {
                         setOrderNotice(data)
-                    }) 
+                    })
                 } else {
                     localStorage.setItem("errLogin", "You do not have Administrator access!")
                     props.history.push('/admin') 
@@ -89,6 +89,7 @@ function Dashboard(props) {
     },[]) 
 
     const setTabIdOnClick = (id) => {
+        props.history.push(`/admin/dashboard/${id}`)
         setTabId(id);
     }
 

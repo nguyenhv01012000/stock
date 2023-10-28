@@ -65,7 +65,7 @@ export default function DashboardBody(props) {
                 setOrder(res.data)
             } 
         ) 
-        Axios.get(`http://pe.heromc.net:4000/email/${props.productId}`)
+        Axios.get(`http://localhost:4000/email/${props.productId}`)
             .then(res => {
                 setEmail(res.data)
             } 

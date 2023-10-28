@@ -1,96 +1,363 @@
 import React from 'react'
-import '../../Styles/Home.css'
-import '../../App.css'
-import Feature from './Feature'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarker, faTint } from '@fortawesome/free-solid-svg-icons'
 
 export default function Features(props) {
 
     return (
         <div className="Features">
-            <Feature
-                reverse={true}
-                img={"https://tractive.com/static/images/cooperations/the-pack/tractive-the-pack-primary-2560.jpg"}
-                color={"linear-gradient(to right, #00a5e1, rgba(0,127,200,0.5)),linear-gradient(#007fc8, #007fc8)"}
-            >
-                <div className="feature-intro flex">
-                    <div className="feature-title" style={{color: '#FFF'}}>
-                        Như đã được thấy ở Amazon Original series
-                    </div>
-                    <div className="feature-text" style={{color: '#FFF'}}> 
-                        <p style={{fontSize: '15px', marginTop: '10px'}}>The Pack, một loạt cuộc thi thực tế mới từ Prime Video, tôn vinh mối quan hệ vô song giữa những chú chó và những người bạn đồng hành của chúng. Tractive tham gia cùng các đội khi họ đi khắp thế giới để đảm bảo mọi thí sinh bốn chân đều an toàn, vui vẻ và có thể theo dõi!</p>
-                        <br/><br/>
-                        <strong style={{fontSize: '18px'}}>Bạn không thể chờ đợi để xem?</strong>
-                        <br/>
-                        <p style={{fontSize: '15px', marginTop: '10px'}}>The Pack sẽ công chiếu vào ngày 20 tháng 11 tại hơn 240 quốc gia và vùng lãnh thổ, độc quyền trên Prime Video. Truy cập amazon.com/ThePack để tìm hiểu thêm.</p>
-                    </div>
-                </div>
-            </Feature>
-            <Feature
-                reverse={false}
-                img={"https://tractive.com/static/images/sections/tractive-gps-dog-4-and-tractive-gps-cat-tracker-2560.jpg"}
-                color={"#f5f6f8"}
-            >
-                <div className="feature-intro flex">
-                    <div className="feature-title">
-                        <strong>Sản phẩm Tractive</strong> mạnh mẽ và dễ sử dụng
-                    </div>
-                    <div className="feature-text">
-                        Chúng tôi đã thiết kế Tractive GPS để dễ sử dụng cho mọi người, ở bất kỳ đâu. Nhờ các công nghệ tiên tiến, các thiết bị theo dõi Tractive GPS có thể được định vị chính xác và đáng tin cậy từ hầu hết mọi nơi trên thế giới, cho dù thú cưng của bạn đang ở sân sau hay ở phía bên kia địa cầu.
-                    </div>
-                    <div className="feature-icon-list flex">
-                            <div className="feature-icon-item">
-                                <FontAwesomeIcon icon={faMapMarker} style={{fontSize: '40px', color : '#007FC8'}}/>
-                                <p>Theo Dõi trực tiếp</p>
+            <div>
+                <div className="container-fluid py-3">
+                    <div className="container">
+                        <div className="row"> 
+                            <div className="col-lg-8">
+                                <div className="row mb-3">
+                                    <div className="col-12">
+                                        <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                                            <h3 className="m-0">BÀI VIẾT ĐỌC NHIỀU</h3>
+                                            <a className="text-secondary font-weight-medium text-decoration-none" href>Xem Tất Cả</a>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-2.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-3.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-2.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-3.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-2.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-3.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="feature-icon-item">
-                                <FontAwesomeIcon icon={faTint} style={{fontSize: '40px', color : '#007FC8'}}/>
-                                <p>100% chống nước</p>
+                            <div className="col-lg-4 pt-3 pt-lg-0">
+                                {/* Popular News Start */}
+                                <div className="pb-3">
+                                    <div className="bg-light py-2 px-4 mb-3">
+                                        <h3 className="m-0">KIẾN THỨC HAY</h3>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-1.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-2.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-3.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-4.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-4.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-5.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* Popular News End */}
                             </div>
+                        </div>
                     </div>
                 </div>
-            </Feature>
-            <Feature
-                reverse={true}
-                img={"https://tractive.com/static/images/sections/Tractive-DOG-LIVE-Tracking-2560.jpg"}
-                color={"linear-gradient(to right, #00a5e1, rgba(0,127,200,0.5)),linear-gradient(#007fc8, #007fc8)"}
-            >
-                <div className="feature-intro flex">
-                    <div className="feature-title" style={{color: '#FFF'}}>
-                        <strong>Không bao giờ</strong> bị lạc mất thú cưng nữa
+                {/* News With Sidebar End */}
+                {/* News With Sidebar Start */}
+                <div className="container-fluid py-3">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-8">
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                                            <h3 className="m-0">KIẾN THỨC ĐẦU CƠ</h3>
+                                            <a className="text-secondary font-weight-medium text-decoration-none" href>Xem Tất Cả</a>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-5.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-6.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-6.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-5.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-6.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4">
+                                        <div className="position-relative mb-3">
+                                            <img className="img-fluid w-100" src="img/news-500x280-6.jpg" style={{ objectFit: 'cover' }} />
+                                            <div className="overlay position-relative bg-light">
+                                                <div className="mb-2" style={{ fontSize: '14px' }}>
+                                                    <a href>Chứng khoán cho NĐT mới</a>
+                                                    <span className="px-1">/</span>
+                                                    <span>10-11-2023</span>
+                                                </div>
+                                                <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                                <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 pt-3 pt-lg-0">
+                                {/* Popular News Start */}
+                                <div className="pb-3">
+                                    <div className="bg-light py-2 px-4 mb-3">
+                                        <h3 className="m-0">TẶNG 1000 EBOOK</h3>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-1.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-2.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-2.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-3.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-4.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex mb-3">
+                                        <img src="img/news-100x100-5.jpg" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                        <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
+                                            <div className="mb-1" style={{ fontSize: '13px' }}>
+                                                <a href>Chứng khoán cho NĐT mới</a>
+                                                <span className="px-1">/</span>
+                                                <span>10-11-2023</span>
+                                            </div>
+                                            <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* Popular News End */}
+                            </div>
+                        </div>
                     </div>
-                    <div className="feature-text" style={{color: '#FFF'}}>
-                        <strong style={{fontSize: '18px'}}>Virtual Fence (Geofence)</strong>
-                        <br/>
-                        <p style={{fontSize: '15px', marginTop: '10px'}}>Nhận thông báo ngay lập tức khi thú cưng của bạn rời khỏi khu vực an toàn xác định (ví dụ: sân sau hoặc khu vực lân cận).</p>
-                        <br/><br/>
-                        <strong style={{fontSize: '18px'}}>Theo dõi TRỰC TIẾP</strong>
-                        <br/>
-                        <p style={{fontSize: '15px', marginTop: '10px'}}>Xác định vị trí thời gian thực của người bạn lông bông của bạn khi nó quan trọng nhất. Ở chế độ Theo dõi TRỰC TIẾP, vị trí sẽ được cập nhật sau mỗi 2-3 giây.</p>
-                    </div>
-                </div>
-            </Feature>
-            <Feature
-                reverse={false}
-                img={"https://tractive.com/static/images/sections/Tractive-DOG-vani-2560.jpg"}
-                color={"#f5f6f8"}
-            >
-            <div className="feature-intro flex">
-                <div className="feature-title">
-                    <strong>Sản phẩm tốt nhất</strong> cho thú cưng của bạn
-                </div>
-                <div className="feature-text">
-                    <strong style={{fontSize: '18px'}}>Mạnh mẽ và không thấm nước</strong>
-                    <br/>
-                    <p style={{fontSize: '15px', marginTop: '10px'}}>Nếu thú cưng của bạn thích ở ngoài trời, chúng tôi có sản phẩm phù hợp cho bạn. Nhờ thiết kế tối giản, thiết bị GPS Tractive rất mạnh mẽ, chống thấm nước 100% và hầu như không thể phá vỡ.</p>
-                    <br/><br/>
-                    <strong style={{fontSize: '18px'}}>Lịch sử VỊ TRÍ</strong>
-                    <br/>
-                    <p style={{fontSize: '15px', marginTop: '10px'}}>Bạn đã bao giờ tự hỏi thú cưng của mình ở đâu khi không có bạn? Các sản phẩm theo dõi không chỉ hiển thị nơi thú cưng của bạn hiện tại mà còn cho biết chúng đã ở đâu gần đây.</p>
                 </div>
             </div>
-            </Feature>
         </div>
     )
 }

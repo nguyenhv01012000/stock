@@ -26,22 +26,22 @@
 }
 .login-box {
     position: absolute;
-    top: 120px;
-    right: 150px;
-    width: 350px; 
+    /* top: 120px;
+    right: 150px; */
+    width: 450px; 
     box-shadow: 5px 5px 15px 0 #ccc;
     background-color: #fff;
-    color: #007FC8;
+    color: #34aa40;
     padding: 30px;
-    height: 470px; 
+    height: 530px; 
     justify-content: space-around;
 }
 .login-box-title {
-    font-size: 30px;
+    font-size: 40px;
     text-align: center;  
 }
 .login-box label {
-    font-size: 12px;
+    font-size: 18px;
     color: #555;
     margin-bottom: 5px;
     margin-top: 20px;
@@ -50,7 +50,7 @@
     margin-top: 0px;
 }
 .login-box input {
-    font-size: 14px;
+    font-size: 18px;
     padding: 0;
     height: 30px;
     border: none;
@@ -65,13 +65,13 @@
     border: none;
     outline: none;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 18px;
 }
 .login-forgot { 
     margin: 20px 0;
     text-align: center;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 18px;
 }
 .login-forgot:hover {
     text-decoration: underline;
@@ -79,7 +79,7 @@
 .login-register {
     padding: 10px 20px;
     text-align: center;
-    border: 1px #007FC8 solid;
+    border: 1px #00c83f solid;
     border-radius: 5px;
     cursor: pointer; 
 } 

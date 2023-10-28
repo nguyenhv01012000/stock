@@ -1,4 +1,4 @@
-import { faCheckCircle, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faFileInvoice, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import DashboardProductTable from './DashboardOrderTable'
@@ -66,7 +66,7 @@ export default function DashboardOrder(props) {
                 Update order successfully
             </div>
             <DashboardProductTable
-                icon = {faUser}
+                icon = {faFileInvoice}
                 title = "Orders"
                 color = "orange"
                 table = {table}

@@ -8,6 +8,7 @@ import { UserContext } from '../../contexts/User'
 import axios from 'axios' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt, faHome, faSignOutAlt, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 function AccountInfo(props) {
 
@@ -31,6 +32,8 @@ function AccountInfo(props) {
     const [userAddress, setUserAddress] = useState(null) 
     const [orderList, setOrderList] = useState([])
     const [tab, setTab] = useState(0)
+    const [toast, setToast] = useState(false)
+
     
     useEffect(()=>{  
         if (userInfo) {
@@ -39,24 +42,20 @@ function AccountInfo(props) {
             setUserPhone(userInfo.userPhone)
             setUserAvt(userInfo.userAvt)
             setUserAddress(userInfo.userAddress) 
-            if (userInfo.userTinh !== "") {
-                axios.get(`http://localhost:4000/vietnam`)
-                .then(res => {
-                    setTinh(res.data[0].tinh)
-                    setHuyen(res.data[0].huyen)
-                    res.data[0].tinh.filter((item)=>{ 
-                        if (userInfo.userTinh === item.name) {
-                            setProvinceId(item.id)
-                        }
-                        return null
-                    })
-                }
-                ) 
-                setUserTinh(userInfo.userTinh)
+            axios.get(`http://localhost:4000/vietnam`)
+            .then(res => {
+                setTinh(res.data[0].tinh)
+                setHuyen(res.data[0].huyen)
+                res.data[0].tinh.filter((item)=>{ 
+                    if (userInfo.userTinh === item.name) {
+                        setProvinceId(item.id)
+                    }
+                    return null
+                })
             }
-            if (userInfo.userHuyen !== "") {
-                setUserHuyen(userInfo.userHuyen)
-            }
+            ) 
+            setUserTinh(userInfo.userTinh)
+            setUserHuyen(userInfo.userHuyen)
             axios.get(`http://localhost:4000/order`)
                 .then(res => {
                 const orderList2 = []
@@ -74,7 +73,7 @@ function AccountInfo(props) {
     },[userInfo])
 
     useEffect(()=> {
-        axios.get(`http://pe.heromc.net:4000/users/${localStorage.getItem('user-id')}`, { 
+        axios.get(`http://localhost:4000/users/${localStorage.getItem('user-id')}`, { 
             headers: {"authorization" : `Bearer ${localStorage.getItem('token')}`}
         })
         .then(res => { 
@@ -107,20 +106,27 @@ function AccountInfo(props) {
         localStorage.removeItem('token')
         axios.post(`http://localhost:4000/users/update/${userInfo._id}`, formData, config)
         .then(res => {
-            alert("Sửa thành công!")
-            setUserInfoFunc(res.data.user);
+            //alert("Sửa thành công!")
+            setUserInfoFunc(userInfo => res.data.user);
             localStorage.setItem('token', res.data.token);
-            window.location.reload(false);
+            //window.location.reload(false);
+            setToast(true)
+            setTimeout(()=>{
+                    setToast(false)
+            }, 2000)
         })
         .catch(err => {
-            alert("Lỗi!")
             console.log(err.response.data);
         }) 
     }  
 
     return(
-        <div className='Account flex'>
+        <div className='Account flex' style={{marginTop: "80px"}}>
             <div className="account-menu flex-col">
+            <div className={toast ? "toast toast-show" : "toast"} style={{top: '20px'}}>
+                  <FontAwesomeIcon icon={faCheckCircle} className="icon"/>
+                  Cập nhật thông tin tài khoản thành công!
+               </div>
                 <div 
                     className="account-menu-home"
                     onClick={()=>{props.history.push("/")}}
@@ -238,7 +244,7 @@ function AccountInfo(props) {
                                         setUserTinh(event.target.value)
                                         }}
                                     >
-                                        <option defaultValue disabled>select a province</option>
+                                        <option defaultValue>Chọn Tỉnh</option>
                                         {tinh.map((item, index) => {
                                         return (
                                             <option 
@@ -260,7 +266,7 @@ function AccountInfo(props) {
                                             setUserHuyen(event.target.value)
                                         }}
                                     >
-                                        <option defaultValue disabled>select a district</option>
+                                        <option defaultValue>Chọn Huyện</option>
                                         {huyen.map((item, index) => { 
                                             if (item.tinh_id === provinceId) { 
                                                 return (

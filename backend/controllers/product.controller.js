@@ -5,20 +5,20 @@ var mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
 
 // Login with admin email
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: '18521118@gm.uit.edu.vn',
-        pass: 'Dbnbl08081999'
-    }
-})
-transporter.verify(function(error, success) {
-    if (error) {
-        console.log(error);
-    } else { 
-        // console.log('Kết nối thành công!');
-    }
-});
+// var transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: '18521118@gm.uit.edu.vn',
+//         pass: 'Dbnbl08081999'
+//     }
+// })
+// transporter.verify(function(error, success) {
+//     if (error) {
+//         console.log(error);
+//     } else { 
+//         // console.log('Kết nối thành công!');
+//     }
+// });
 
 module.exports.index = async function(req, res) {
 	var products = await Product.find();
@@ -35,7 +35,7 @@ module.exports.product = function(req, res) {
 module.exports.postProduct = async function(req, res) {
 	const imgArr = [];
 	req.files.map((item)=>{
-		imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
+		imgArr.push(`http://localhost:4000/images/${item.filename}`)
 	})
 	const data = {
 		productName: req.body.productName,
@@ -44,7 +44,7 @@ module.exports.postProduct = async function(req, res) {
 		productFinalPrice: req.body.productPrice - (req.body.productPrice * (req.body.productSale/100)),
 		productGroupCate: req.body.productGroupCate,
 		productCate: req.body.productCate,
-		productSize: req.body.productSize.split(","),
+		// productSize: req.body.productSize.split(","),
 		productSex: req.body.productSex,
 		productDate: req.body.productDate,
 		productImg: imgArr,
@@ -53,38 +53,38 @@ module.exports.postProduct = async function(req, res) {
 	}
 	await Product.create(data)
 
-	var emailList = await Email.find()
+	// var emailList = await Email.find()
 
-	for (let i in emailList) {
+	// for (let i in emailList) {
 	
-		Email.findOne({ _id: emailList[i]._id })
-			.updateOne({$push: { 
-				sendedEmail: {
-					emailId: new mongoose.mongo.ObjectId(),
-					isSeen: false
-				}
-			}})
-			.exec()
+	// 	Email.findOne({ _id: emailList[i]._id })
+	// 		.updateOne({$push: { 
+	// 			sendedEmail: {
+	// 				emailId: new mongoose.mongo.ObjectId(),
+	// 				isSeen: false
+	// 			}
+	// 		}})
+	// 		.exec()
 
 
-		var emailInfo = await Email.findById(emailList[i]._id)
+	// 	var emailInfo = await Email.findById(emailList[i]._id)
 		
-		var mailOptions = {
-			from: '18521118@gm.uit.edu.vn',
-			to: emailList[i].subscriberEmail,
-			subject: 'Sản phẩm mới tại SOBER SHOP',
-			html: '<p>Sản phẩm mới nè</p>' +
-			`<img src="http://pe.heromc.net:4000/email/${emailList[i]._id}/${emailInfo.sendedEmail[emailInfo.sendedEmail.length - 1].emailId}" alt=""></img>`
-		}
+	// 	var mailOptions = {
+	// 		from: '18521118@gm.uit.edu.vn',
+	// 		to: emailList[i].subscriberEmail,
+	// 		subject: 'Sản phẩm mới tại SOBER SHOP',
+	// 		html: '<p>Sản phẩm mới nè</p>' +
+	// 		`<img src="http://localhost:4000/email/${emailList[i]._id}/${emailInfo.sendedEmail[emailInfo.sendedEmail.length - 1].emailId}" alt=""></img>`
+	// 	}
 
-		transporter.sendMail(mailOptions, function(error, info){
-		    if (error) {
-		      console.log(error);
-		    } else {
-		      console.log('Email sent: ' + info.response);
-		    }
-		})
-	}
+	// 	transporter.sendMail(mailOptions, function(error, info){
+	// 	    if (error) {
+	// 	      console.log(error);
+	// 	    } else {
+	// 	      console.log('Email sent: ' + info.response);
+	// 	    }
+	// 	})
+	// }
 
 	res.status(200);
 }
@@ -115,7 +115,7 @@ module.exports.updateProduct = async function(req, res) {
 	const imgArr = [];
 	if (req.files) {
 		req.files.map((item)=>{
-			imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
+			imgArr.push(`http://localhost:4000/images/${item.filename}`)
 		})
 	}
 	const img = {
@@ -128,7 +128,7 @@ module.exports.updateProduct = async function(req, res) {
 		productFinalPrice: req.body.productPrice - (req.body.productPrice * (req.body.productSale/100)),
 		productCate: req.body.productCate,
 		productGroupCate: req.body.productGroupCate,
-		productSize: req.body.productSize.split(","),
+		// productSize: req.body.productSize.split(","),
 		productSex: req.body.productSex,
 		productDes: req.body.productDes
 	}

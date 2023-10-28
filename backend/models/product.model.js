@@ -8,7 +8,7 @@ var productSchema = new mongoose.Schema({
 	productPrice: Number,
 	productFinalPrice: Number,
     productCate: String, 
-    productColor: Array, 
+    productImg: Array, 
 	productDes: String,
 	productVote: Array, 
 	productFeature: Array, 

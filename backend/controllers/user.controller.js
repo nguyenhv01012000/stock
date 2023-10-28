@@ -38,7 +38,7 @@ module.exports.postLogin = async function(req, res) {
 	} 
 
 	const token = jwt.sign({user}, 'hahaha');
-	res.status(200).json({token: token, user: user});
+	res.status(200).json({token: token, user: user, msg: 'Đăng nhập tài khoản thành công!'});
 };
 module.exports.register = async function(req, res) {
 	var password = req.body.userPassword;
@@ -54,7 +54,7 @@ module.exports.register = async function(req, res) {
 	} catch {}
 
 	const data = {
-		userAvt: "http://pe.heromc.net:4000/images/16f9bbf512b66a228f7978e34d8fb163",
+		userAvt: "https://static.thenounproject.com/png/4035889-200.png",
 		userName: req.body.userName,
 		userTinh: "",
 		userHuyen: "",
@@ -62,12 +62,13 @@ module.exports.register = async function(req, res) {
 		userPhone: "",
 		userEmail: req.body.userEmail,
 		userPassword: req.body.password,
-		userRole: req.body.userRole,
+		userRole: "user",
 		userCreateDay: new Date,
 	}
 
-	await User.create(data);
-	res.status(200).send('Đăng kí tài khoản thành công');
+	user = await User.create(data);
+	const token = jwt.sign({user}, 'hahaha');
+	res.status(200).json({token: token, user: user, msg: 'Đăng ký tài khoản thành công!'});
 }
 module.exports.updateUser = async function(req, res) {
 	var id = req.params.id;
@@ -75,7 +76,7 @@ module.exports.updateUser = async function(req, res) {
 	if (req.files.length > 0) {
 		const imgArr = [];
 		req.files.map((item)=>{
-			imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
+			imgArr.push(`http://localhost:4000/images/${item.filename}`)
 		})
 		const img = {
 			userAvt: imgArr[0]

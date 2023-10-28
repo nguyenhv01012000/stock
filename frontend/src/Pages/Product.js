@@ -1,6 +1,5 @@
 import '../App.css';
 import Header from '../components/Home/Header'; 
-import Newsletter from '../components/Home/Newsletter';
 import Footer from '../components/Home/Footer'; 
 import ProductDetail from '../components/Shop/ProductDetail';
 import ShopFeatures from '../components/Shop/ShopFeatures';
@@ -127,7 +126,6 @@ function ProductForDog(props) {
             }
             {/* <ProductRecommend/> */}
             <ProductNews news={news}/>
-            <Newsletter/>
             <Footer/>
         </div>
     );

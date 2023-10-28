@@ -218,7 +218,7 @@ export default function DashboardNewsTable(props) {
                             </tr>
                             {
                                 current.map((item, index) => {
-                                    const date = new Date(item.newTime)
+                                    const date = new Date(item.newDate)
                                     const day = date.getDate();
                                     const month = date.getMonth() + 1;
                                     const year = date.getFullYear();

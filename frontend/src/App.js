@@ -9,13 +9,16 @@ import AdminLogin from './components/Admin/Login/Login'
 import Dashboard from './components/Admin/Dashboard/Dashboard'
 import {
   BrowserRouter as Router,
-  Route
+  Route, Switch
 } from "react-router-dom"; 
 import Toast from './components/Toast';
 import { CartProvider } from './contexts/Cart';
 import { UserProvider } from './contexts/User';
 import OpenChatBtn from './components/OpenChatBtn';
-import Account from './components/Account/Account';
+import Introduction from './Pages/Introduction';
+import AccountInfo from './Pages/AccountInfo';
+import Course from './Pages/Course';
+import CourseDetail from './Pages/CourseDetail';
 
 function App(props) { 
   
@@ -26,17 +29,23 @@ function App(props) {
         <div className="App"> 
           <Toast/>
           <Route path="/" exact component={Home}></Route> 
-          <Route path="/dog" exact component={Product}></Route> 
+          <Route path="/introduction" exact component={Introduction}></Route> 
+          <Route path="/course" exact component={Course}></Route> 
+          <Route path="/course/:id" exact component={CourseDetail}></Route> 
+          <Route path="/news/category/:id" exact component={News}></Route> 
+
+
           <Route path="/cat" exact component={Product}></Route> 
           <Route path="/news" exact component={News}></Route> 
-          <Route path="/news/:id" exact component={NewsDetail}></Route> 
+          <Route path="/news/detail/:id" exact component={NewsDetail}></Route> 
           <Route path="/login" exact component={Login}></Route> 
           <Route path="/admin" exact component={AdminLogin}></Route> 
-          <Route path="/account" exact component={Account}></Route> 
+          <Route path="/account" exact component={AccountInfo}></Route> 
           <Route path="/checkout" exact component={Checkout}></Route> 
           <Route path="/admin/dashboard" exact component={Dashboard}></Route> 
+          <Route path="/admin/dashboard/:id" exact component={Dashboard}></Route> 
         </div> 
-        <OpenChatBtn/>
+        {/* <OpenChatBtn/> */}
       </Router> 
     </CartProvider>
     </UserProvider>
