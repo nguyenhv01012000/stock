@@ -8,31 +8,36 @@ module.exports.index = async function(req, res) {
 
 	var sort = req.query.sort;
 	var news = [];
+	var count = 0;
 
-	if(sort == "view"){
+	if(sort == "view" || sort == "BÀI VIẾT ĐỌC NHIỀU"){
 		news = await News.find()
 			.sort({ newView: "desc" })
 			.sort({ newDate: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
-	}else if(sort == "latest") {
+		count = await News.count();
+	}else if(sort == "latest" || sort == "TIN MỚI NHÂT") {
 		news = await News.find()
 			.sort({ newDate: "desc" })
 			.sort({ newView: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
+		count = await News.count();
 	}else if(sort == "hot") {
 		news = await News.find({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}})
 			.sort({ newDate: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
+		count = await News.count({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}});
 	}else {
 		news = await News.find({ newCate: req.query.sort})
 			.sort({ newDate: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit); 
+		count = await News.count({ newCate: req.query.sort});
 	}
-	res.json(news);
+	res.json({news: news, count:count});
 };
 
 module.exports.news = function(req, res) {

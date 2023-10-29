@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import NewsSmall from '../News/NewsSmall';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 function Banner(props) {
     const [newsLatest, setNewsLatest] = useState([]);
@@ -18,7 +19,7 @@ function Banner(props) {
         }
         Axios.get(`http://localhost:4000/news`, config)
             .then(res => {
-                const arr = [...res.data]
+                 const arr = [...res.data.news]
                 setNewsLatest(arr)
             }
             )
@@ -38,7 +39,7 @@ function Banner(props) {
                 <div className="col-lg-4">
                     <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
                         <h3 className="m-0">TIN MỚI NHÂT</h3>
-                        <a className="text-secondary font-weight-medium text-decoration-none" href="">Xem Tất Cả</a>
+                        <Link className="text-secondary font-weight-medium text-decoration-none" to="/news/category/TIN MỚI NHÂT">Xem Tất Cả</Link>
                     </div>
                     <div className="overflow-auto" style={{maxHeight: "350px"}}>
                                 {

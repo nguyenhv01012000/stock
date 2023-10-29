@@ -11,6 +11,9 @@ function NewsCategory(props) {
     const category = props.category
 
     const [newsView, setNewsView] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pages, setPages] = useState([1]);
+    const [count, setCount] = useState(1);
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -23,11 +26,33 @@ function NewsCategory(props) {
         }
         Axios.get(`http://localhost:4000/news`, config)
             .then(res => {
-                const arr = [...res.data]
+                const arr = [...res.data.news]
                 setNewsView(arr)
+                setCount(Math.ceil(Number(res.data.count) / 9))
+                let pageNumbers = []
+                for (let i = 1; i <= Math.min(Math.ceil(Number(res.data.count) / 9), 5); i++) {
+                    pageNumbers.push(i);
+                }
+                setPages(pageNumbers)
             }
             )
     }, [category])
+
+    const choosePage = (number) => {
+        if(number == 1){
+            let pagesClone = pages;
+            pagesClone.shift();
+            pagesClone.push(pagesClone[3] + 1);
+            console.log(pagesClone)
+            setPages(pagesClone);
+        }else{
+            let pagesClone = pages;
+            pagesClone.pop();
+            pagesClone.unshift(pagesClone[0] - 1);
+            setPages(pagesClone);
+        }
+        if(currentPage + number >= 1 && currentPage + number <= 5) setCurrentPage(currentPage + number);
+    }
 
     return (<div>
         {/* Breadcrumb Start */}
@@ -67,20 +92,24 @@ function NewsCategory(props) {
                             <div className="col-12">
                                 <nav aria-label="Page navigation">
                                     <ul className="pagination justify-content-center">
-                                        <li className="page-item disabled">
-                                            <a className="page-link" href="#" aria-label="Previous">
+                                        <li className={pages[0] == 1 ? "page-item disabled" : "page-item" }>
+                                            <div className="page-link" aria-label="Previous" onClick={() => choosePage(-1)}>
                                                 <span className="fa fa-angle-double-left" aria-hidden="true" />
                                                 <span className="sr-only">Previous</span>
-                                            </a>
+                                            </div>
                                         </li>
-                                        <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                                        <li className="page-item">
-                                            <a className="page-link" href="#" aria-label="Next">
+                                        {
+                                            pages.map((item, index) => {
+                                                return (
+                                                    <li className={item == currentPage ? "page-item active": "page-item"}><div className="page-link" onClick={() => setCurrentPage(item)}>{item}</div></li>
+                                                )
+                                            })
+                                        }
+                                        <li className={pages[pages.length -1] == count ? "page-item disabled" : "page-item" }>
+                                            <div className="page-link" aria-label="Next" onClick={() => choosePage(1)}>
                                                 <span className="fa fa-angle-double-right" aria-hidden="true" />
                                                 <span className="sr-only">Next</span>
-                                            </a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </nav>

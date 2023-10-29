@@ -16,6 +16,9 @@
 .news-img {
     position: relative;
 }
+.news-content-img {
+    height: 550px;
+}
 .news-img img {
     width: 100%;
     height: 180px;
@@ -391,6 +394,9 @@
     }    
     .news-img img {
         height: 120px;
+    }
+    .news-content-img {
+        height: max-content !important;
     }
     .newsbig {
         width: 100%; 

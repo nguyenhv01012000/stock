@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import News from '../News/News';
 import NewsSmall from '../News/NewsSmall';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 export default function Features(props) {
 
@@ -22,7 +23,7 @@ export default function Features(props) {
         }
         Axios.get(`http://localhost:4000/news`, config)
             .then(res => {
-                const arr = [...res.data]
+                 const arr = [...res.data.news]
                 setNewsView(arr)
             }
             )
@@ -35,7 +36,7 @@ export default function Features(props) {
         }
         Axios.get(`http://localhost:4000/news`, config)
             .then(res => {
-                const arr = [...res.data]
+                 const arr = [...res.data.news]
                 setNewsHot(arr)
             }
             )
@@ -52,7 +53,7 @@ export default function Features(props) {
                                     <div className="col-12">
                                         <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
                                             <h3 className="m-0">BÀI VIẾT ĐỌC NHIỀU</h3>
-                                            <a className="text-secondary font-weight-medium text-decoration-none" href>Xem Tất Cả</a>
+                                            <Link className="text-secondary font-weight-medium text-decoration-none" to="/news/category/BÀI VIẾT ĐỌC NHIỀU">Xem Tất Cả</Link>
                                         </div>
                                     </div>
                                     {

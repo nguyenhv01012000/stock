@@ -20,7 +20,7 @@ function NewsAds(props) {
     }
     Axios.get(`http://localhost:4000/news`, config)
       .then(res => {
-        const arr = [...res.data]
+         const arr = [...res.data.news]
         setNewsLatest(arr)
       }
       )
@@ -33,7 +33,7 @@ function NewsAds(props) {
     }
     Axios.get(`http://localhost:4000/news`, config)
       .then(res => {
-        const arr = [...res.data]
+         const arr = [...res.data.news]
         setNewsView(arr)
       }
       )

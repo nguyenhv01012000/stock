@@ -4598,6 +4598,7 @@ input[type="button"].btn-block {
   color: #34aa40;
   background-color: #fff;
   border: 1px solid #dee2e6;
+  cursor: pointer;
 }
 
 .page-link:hover {
@@ -4611,7 +4612,7 @@ input[type="button"].btn-block {
 .page-link:focus {
   z-index: 3;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(237, 28, 36, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(28, 237, 112, 0.21);
 }
 
 .page-item:first-child .page-link {
