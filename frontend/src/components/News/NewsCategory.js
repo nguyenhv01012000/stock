@@ -3,10 +3,31 @@ import { withRouter } from 'react-router-dom'
 import '../../App.css'
 import '../../Styles/News.css'
 import NewsAds from './NewsAds'
+import Axios from 'axios';
+import News from '../News/News';
 
 function NewsCategory(props) {
 
     const category = props.category
+
+    const [newsView, setNewsView] = useState([]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        let config = {
+            params: {
+                page: 0,
+                limit: 9,
+                sort: category
+            },
+        }
+        Axios.get(`http://localhost:4000/news`, config)
+            .then(res => {
+                const arr = [...res.data]
+                setNewsView(arr)
+            }
+            )
+    }, [category])
 
     return (<div>
         {/* Breadcrumb Start */}
@@ -27,23 +48,20 @@ function NewsCategory(props) {
                             <div className="col-12">
                                 <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
                                     <h3 className="m-0">{category}</h3>
-                                    <a className="text-secondary font-weight-medium text-decoration-none" href>Xem Tất Cả</a>
                                 </div>
                             </div>
-                            <div className="col-lg-4">
-                                <div className="position-relative mb-3">
-                                    <img className="img-fluid w-100" src="img/news-500x280-1.jpg" style={{ objectFit: 'cover' }} />
-                                    <div className="overlay position-relative bg-light">
-                                        <div className="mb-2" style={{ fontSize: '14px' }}>
-                                            <a href>Chứng khoán cho NĐT mới</a>
-                                            <span className="px-1">/</span>
-                                            <span>10-11-2023</span>
+                            {
+                                newsView.map((item, index) => {
+                                    return (
+                                        <div className="col-lg-4">
+                                            <News
+                                                key={index}
+                                                news={item}
+                                            />
                                         </div>
-                                        <a className="h4" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản &amp; Siêu Hiệu Quả</a>
-                                        <p className="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at justo, lorem amet vero eos sed sit...</p>
-                                    </div>
-                                </div>
-                            </div>
+                                    )
+                                })
+                            }
                         </div>
                         <div className="row">
                             <div className="col-12">
@@ -69,7 +87,7 @@ function NewsCategory(props) {
                             </div>
                         </div>
                     </div>
-                    <NewsAds/>
+                    <NewsAds />
                 </div>
             </div>
         </div>

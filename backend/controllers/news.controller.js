@@ -1,7 +1,37 @@
 var News = require("../models/news.model.js");
 
 module.exports.index = async function(req, res) {
-	var news = await News.find();
+	const pageOptions = {
+		page: parseInt(req.query.page, 10) || 0,
+		limit: parseInt(req.query.limit, 10) || 10
+	}
+
+	var sort = req.query.sort;
+	var news = [];
+
+	if(sort == "view"){
+		news = await News.find()
+			.sort({ newView: "desc" })
+			.sort({ newDate: "desc" })
+			.skip(pageOptions.page * pageOptions.limit)
+			.limit(pageOptions.limit);
+	}else if(sort == "latest") {
+		news = await News.find()
+			.sort({ newDate: "desc" })
+			.sort({ newView: "desc" })
+			.skip(pageOptions.page * pageOptions.limit)
+			.limit(pageOptions.limit);
+	}else if(sort == "hot") {
+		news = await News.find({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}})
+			.sort({ newDate: "desc" })
+			.skip(pageOptions.page * pageOptions.limit)
+			.limit(pageOptions.limit);
+	}else {
+		news = await News.find({ newCate: req.query.sort})
+			.sort({ newDate: "desc" })
+			.skip(pageOptions.page * pageOptions.limit)
+			.limit(pageOptions.limit); 
+	}
 	res.json(news);
 };
 

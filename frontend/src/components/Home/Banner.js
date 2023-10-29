@@ -1,22 +1,28 @@
 import React from 'react'
 import '../../Styles/Home.css'
 import '../../App.css'
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
-import Banner12 from '../../assets/banner1.2.png'
-import Banner22 from '../../assets/banner2.2.png'
 import { withRouter } from 'react-router-dom'
+import Axios from 'axios';
+import { useEffect, useState } from 'react';
+import NewsSmall from '../News/NewsSmall';
 
 function Banner(props) {
-
-    const settings = {
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000
-    }
+    const [newsLatest, setNewsLatest] = useState([]);
+    useEffect(() => {
+        let config = {
+            params: {
+                page: 0,
+                limit: 10,
+                sort: "latest"
+            },
+        }
+        Axios.get(`http://localhost:4000/news`, config)
+            .then(res => {
+                const arr = [...res.data]
+                setNewsLatest(arr)
+            }
+            )
+    }, [])
 
     return (
         <div className="container-fluid py-3" style={{marginTop: "100px"}}>
@@ -35,61 +41,16 @@ function Banner(props) {
                         <a className="text-secondary font-weight-medium text-decoration-none" href="">Xem Tất Cả</a>
                     </div>
                     <div className="overflow-auto" style={{maxHeight: "350px"}}>
-                        <div className="d-flex mb-3">
-                            <img src="img/news-100x100-1.jpg" style={{width: "100px",height: "100px",objectFit: "cover"}}/>
-                            <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{height: "100px"}}>
-                                <div className="mb-1" style={{fontSize: "13px"}}>
-                                    <a href="">Chứng khoán cho NĐT mới</a>
-                                    <span className="px-1">/</span>
-                                    <span>10-11-2023</span>
-                                </div>
-                                <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản & Siêu Hiệu Quả</a>
-                            </div>
-                        </div>
-                        <div className="d-flex mb-3">
-                            <img src="img/news-100x100-1.jpg" style={{width: "100px",height: "100px",objectFit: "cover"}}/>
-                            <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{height: "100px"}}>
-                                <div className="mb-1" style={{fontSize: "13px"}}>
-                                    <a href="">Chứng khoán cho NĐT mới</a>
-                                    <span className="px-1">/</span>
-                                    <span>10-11-2023</span>
-                                </div>
-                                <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản & Siêu Hiệu Quả</a>
-                            </div>
-                        </div>
-                        <div className="d-flex mb-3">
-                            <img src="img/news-100x100-1.jpg" style={{width: "100px",height: "100px",objectFit: "cover"}}/>
-                            <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{height: "100px"}}>
-                                <div className="mb-1" style={{fontSize: "13px"}}>
-                                    <a href="">Chứng khoán cho NĐT mới</a>
-                                    <span className="px-1">/</span>
-                                    <span>10-11-2023</span>
-                                </div>
-                                <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản & Siêu Hiệu Quả</a>
-                            </div>
-                        </div>
-                        <div className="d-flex mb-3">
-                            <img src="img/news-100x100-1.jpg" style={{width: "100px",height: "100px",objectFit: "cover"}}/>
-                            <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{height: "100px"}}>
-                                <div className="mb-1" style={{fontSize: "13px"}}>
-                                    <a href="">Chứng khoán cho NĐT mới</a>
-                                    <span className="px-1">/</span>
-                                    <span>10-11-2023</span>
-                                </div>
-                                <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản & Siêu Hiệu Quả</a>
-                            </div>
-                        </div>
-                        <div className="d-flex mb-3">
-                            <img src="img/news-100x100-1.jpg" style={{width: "100px",height: "100px",objectFit: "cover"}}/>
-                            <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{height: "100px"}}>
-                                <div className="mb-1" style={{fontSize: "13px"}}>
-                                    <a href="">Chứng khoán cho NĐT mới</a>
-                                    <span className="px-1">/</span>
-                                    <span>10-11-2023</span>
-                                </div>
-                                <a className="h6 m-0" href="single.html">11+ Công thức ĐỊNH GIÁ cổ phiếu: Đơn Giản & Siêu Hiệu Quả</a>
-                            </div>
-                        </div>
+                                {
+                                        newsLatest.map((item, index) => {
+                                            return (
+                                                <NewsSmall   
+                                                    key={index}
+                                                    news={item}
+                                                />
+                                            )
+                                        })
+                                    }
                     </div>
                 </div>
             </div>

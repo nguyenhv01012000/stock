@@ -1,6 +1,6 @@
 .news {
-    margin: 0 10px; 
-    width: calc(25% - 20px);
+    /* margin: 0 10px;  */
+    /* width: calc(25% - 20px); */
     height: max-content;
     display: flex;
     flex-direction: column;   
@@ -25,8 +25,8 @@
 }
 .news-cate {
     padding: 10px 10px;
-    background-color: #007FC8;
-    width: 150px;
+    background-color: #28a745;
+    /* width: 150px; */
     color: #FFF;
     text-align: center;
     border-top-right-radius: 5px;
@@ -65,7 +65,7 @@
     -webkit-line-clamp: 2 !important;
 }
 .news-readmore {
-    color: #007FC8;
+    color: #28a745;
     padding: 20px;
     text-transform:capitalize;
     cursor: pointer;

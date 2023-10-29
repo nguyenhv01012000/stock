@@ -31,7 +31,12 @@ export default function DashboardNewsCreate(props) {
             setNewsCate(news.newCate)
             setNewsContent(news.newContent)
             setNewsIntro(news.newIntro)
-            setNewsDate(news.newDate)
+            const date = new Date(news.newDate)
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const shortedDate = year + '-' + month + '-' + day;
+            setNewsDate(shortedDate)
 
             // axios.get(`http://localhost:4000/news`)
             //     .then(res => {
@@ -188,7 +193,7 @@ export default function DashboardNewsCreate(props) {
                             </select>
                             <label style={{ marginLeft: "10%", width: "30%" }}>Ngày xuất bản </label>
                             <input type="date" name="Ngày xuất bản" value={newsDate} onChange={(event) => { setNewsDate(event.target.value) }}
-                                required placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
+                                required placeholder="mm/dd/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
                         </div>
                     </div>
                     <div className="create-box-row flex">

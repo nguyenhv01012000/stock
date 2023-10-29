@@ -11,8 +11,8 @@ function News(props) {
     
     useEffect(()=>{
         const monthNames = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
+            "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
+            "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
         ];
         if (news) {
             const date = new Date(news.newTime)
@@ -27,7 +27,7 @@ function News(props) {
         <div 
             className="news"
             onClick={()=>{ 
-                props.history.push(`/news/${news._id}`)
+                props.history.push(`/news/detail/${news._id}`)
             }}
         >
             {news &&
@@ -43,10 +43,10 @@ function News(props) {
                 <div className="news-title">{news.newTitle}</div>
             }
             {news &&
-                <div className="news-content">{news.newContent.replace(/<[^>]+>/g, '')}</div>
+                <div className="news-content">{news.newIntro.replace(/<[^>]+>/g, '')}</div>
             }
             {news &&
-                <div className="news-readmore">read more...</div>
+                <div className="news-readmore">Đọc Thêm...</div>
             }
         </div>
     )

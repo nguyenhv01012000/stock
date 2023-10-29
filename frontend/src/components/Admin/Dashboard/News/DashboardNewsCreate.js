@@ -6,6 +6,12 @@ import DashboardEditor from './DashboardEditor';
 
 export default function DashboardNewsCreate(props) {
 
+    const date = new Date()
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const shortedDate = year + '-' + month + '-' + day;
+
     const createForm = useRef();
     const cateInput = useRef();
     const [inputValue, setInputValue] = useState([])
@@ -15,7 +21,7 @@ export default function DashboardNewsCreate(props) {
     const [newsImg, setNewsImg] = useState([])
     const [cateList, setCateList] = useState([])
     const [newsIntro, setNewsIntro] = useState("")
-    const [newsDate, setNewsDate] = useState("")
+    const [newsDate, setNewsDate] = useState(shortedDate)
 
     const handleOnChange = (event) => {
         setInputValue({...inputValue, [event.target.name]: event.target.value})
