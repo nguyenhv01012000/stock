@@ -1,8 +1,8 @@
 .account-menu {
     width: 250px;
     height: 100vh;
-    background-image: linear-gradient(248deg,#209ff8,#20c5f2 100%);
-    box-shadow: 5px 0 10px #007FC8;
+    background-image: linear-gradient(248deg,#34aa40,#20f2a8 100%);
+    box-shadow: 5px 0 10px #00c88584;
 }
 .account-menu-home {
     color: #FFF; 
@@ -36,7 +36,7 @@
     padding: 40px 10px;
     width: 100%;
     flex-grow: 1;
-    background-image: linear-gradient(248deg,#007fc8,#00a5e1 100%);
+    background-image: linear-gradient(248deg,#34aa75e8,#00e1a5ed 100%);
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
 }
@@ -69,7 +69,7 @@
     padding-bottom: 20px;
 }
 .account-title h1 {
-    color: #007FC8;
+    color: #34aa40;
     margin-bottom: 10px;
 }
 .account-body { 

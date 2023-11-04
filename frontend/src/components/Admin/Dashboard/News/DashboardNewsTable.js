@@ -16,8 +16,8 @@ export default function DashboardNewsTable(props) {
     useEffect(()=>{
         axios.get(`http://localhost:4000/news`)
             .then(res => {
-                setNews(res.data)
-                setConstNews(res.data)
+                setNews(res.data.news)
+                setConstNews(res.data.news)
             }
         )
     },[props.isChange]) 
@@ -186,7 +186,7 @@ export default function DashboardNewsTable(props) {
                         <div 
                             className="dashboard-addnew-btn"
                             onClick={props.setOpenCreateFunc}
-                        >Add new</div>
+                        >Thêm bài viết</div>
                         <div className="dashboard-addnew-search">
                             <form 
                                 onSubmit={searchOnSubmit}

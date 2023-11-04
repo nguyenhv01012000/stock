@@ -218,7 +218,7 @@ function IntroductionContent(props) {
                     <a href="https://smtfx.vn/khoa-hoc-chung-khoan-free/" aria-label="Khóa học Chứng khoán Free" tabIndex={0}>
                       <img style={{objectFit: 'cover', width: '100%', height: '100%'}} src="https://smtfx.vn/wp-content/uploads/2023/06/business-man-holding-phone-260nw-1049641082.png" alt="Z4486508269138 8fced4ced0e9a6cf38aaf8c002cf0642" decoding="async" /> </a>
                   </p>
-                  <p>
+                  <p  style={{marginTop:"10px"}}>
                     <a className="button primary lowercase btn-type-1">
                       <span>Đăng ký nhận tư vấn</span>
                     </a>

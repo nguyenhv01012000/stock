@@ -1,5 +1,6 @@
 import $ from 'jquery'; 
-export const HOST = 'http://localhost:4000';
+import { BACKEND } from '../env';
+export const HOST = BACKEND;
 
 export const APIs = {
   QR: HOST + '/order/zalo/createorder?ordertype=createorder',

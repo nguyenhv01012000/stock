@@ -23,6 +23,8 @@ export default function DashboardNewsCreate(props) {
     const [newsImg, setNewsImg] = useState([])
     const [newsCate, setNewsCate] = useState("")
     const [newsContent, setNewsContent] = useState("")
+    const [deleteImgId, setDeleteImgId] = useState(null)
+
 
     useEffect(() => {
         if (news) {
@@ -31,24 +33,22 @@ export default function DashboardNewsCreate(props) {
             setNewsCate(news.newCate)
             setNewsContent(news.newContent)
             setNewsIntro(news.newIntro)
-            const date = new Date(news.newDate)
-            const day = date.getDate();
-            const month = date.getMonth() + 1;
-            const year = date.getFullYear();
-            const shortedDate = year + '-' + month + '-' + day;
-            setNewsDate(shortedDate)
-
-            // axios.get(`http://localhost:4000/news`)
-            //     .then(res => {
-            //         const test = Object.values(res.data.reduce((a, {newCate}) => {
-            //             a[newCate] = a[newCate] || {newCate};
-            //             return a;
-            //         }, Object.create(null)));
-            //         setCateList(test)
-            //     }
-            // )
+            setNewsDate(convertDate(news.newDate))
         }
     }, [news])
+
+    const convertDate = (dateString) => {
+        const date = new Date(dateString)
+        let day = '' + date.getDate();
+        let month = '' + (date.getMonth() + 1);
+        let year = date.getFullYear();
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        const shortedDate = year + '-' + month + '-' + day;
+        return shortedDate;
+    }
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -68,6 +68,7 @@ export default function DashboardNewsCreate(props) {
         formData.append("newContent", newsContent);
         formData.append("newDate", newsDate);
         formData.append("newIntro", newsIntro);
+        formData.append("deleteImgId", deleteImgId);
 
         axios.post(`http://localhost:4000/news/update/${news._id}`, formData, config)
             .then(() => {
@@ -82,6 +83,7 @@ export default function DashboardNewsCreate(props) {
     }
 
     const deleteImg = (event) => {
+        setDeleteImgId(1)
         const id = event.target.id
         const virutalFile = [...file]
         virutalFile.splice(id, 1)
@@ -90,9 +92,6 @@ export default function DashboardNewsCreate(props) {
         const items = [...newsImg]
         items.splice(id, 1)
         setNewsImg(items)
-        axios.post(`http://localhost:4000/news/update/${news._id}`, {
-            deleteImgId: id
-        })
     }
 
     return (
@@ -199,13 +198,12 @@ export default function DashboardNewsCreate(props) {
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Giới Thiệu</div>
                         <div className="dashboard-right">
-                            <textarea style={{ width: "100%", height: "150px", padding: "10px" }}
-                                type="text" name="Intro"
-                                value={newsIntro || ""}
-                                onChange={(event) => {
-                                    setNewsIntro(event.target.value)
-                                }} required
-                            ></textarea>
+                            <div style={{ border: '1px #ddd solid', padding: "10px" }}>
+                                <DashboardEditor
+                                    newsContent={newsIntro}
+                                    setNewsContent={setNewsIntro}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className="create-box-row flex">

@@ -7,27 +7,27 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 export default function DashboardProduct(props) {
 
     const table = [
-        "Name",
-        "Images",
-        "Price",
-        "Sale",
-        "Sold",
+        "Tên",
+        "Hình Ảnh",
+        "Giá",
+        "Giảm Giá",
+        "Đã Bán",
         // "Category",    
         // "Size",
-        "Date",    
-        "Rating",
-        "Action"
+        "Ngày Tạo",    
+        "Số Sao",
+        ""
     ]
 
     return (
         <div className="dashboard-product">
             <div className={props.toast ? "toast toast-show" : "toast"} style={{top: '20px'}}>
                 <FontAwesomeIcon icon={faCheckCircle} className="icon"/>
-                Update products successfully
+                Cập Nhập Khóa Học Thành Công!
             </div>
             <DashboardProductTable
                 icon = {faTshirt}
-                title = "Products"
+                title = "Khóa Học"
                 color = "pink"
                 table = {table}
                 setOpenCreateFunc = {props.setOpenCreateFunc}

@@ -26,57 +26,17 @@ export default function DashboardOrderCreate(props) {
     const [chooseUser, setChooseUser] = useState(false)
     const order = props.order
 
-    useEffect(()=>{
-        if (chooseUser === false) {
-            axios.get(`http://localhost:4000/vietnam`)
-                .then(res => {
-                    setTinh(res.data[0].tinh)
-                    setHuyen(res.data[0].huyen)
-                    if (order) {
-                        setOrderName(order.orderName)
-                        setOrderEmail(order.orderEmail)
-                        setOrderPhone(order.orderPhone)
-                        setOrderAddress(order.orderAddress)
-                        setOrderProvince(order.orderTinh)
-                        setOrderDistric(order.orderHuyen)
-                        setOrderPaymentMethod(order.orderPaymentMethod)
-                        if(typeof order.orderList !== "undefined") {
-                            order.orderList.map((item)=>{
-                                axios.get(`http://localhost:4000/products/${item.id}`)
-                                    .then(res => {
-                                        res.data.count = item.amount
-                                        setProductList(productList => [...productList, res.data])
-                                    })
-                                return null
-                            })
-                            return
-                        }
-                        setOrderPaymentMethod(order.orderPaymentMethod)
-                        if (order.orderTinh !== "") {
-                            res.data[0].tinh.filter((item)=>{
-                                if (order.orderTinh === item.name) {
-                                    setProvinceId(item.id)
-                                }
-                                return null
-                            })
-                            setOrderProvince(order.orderTinh)
-                        }
-                        if (order.orderHuyen !== "") {
-                            setOrderDistric(order.orderHuyen)
-                        }
-                    }
-                }
-            )
-        } 
+    useEffect(() => {
+
         axios.get(`http://localhost:4000/products`)
             .then(res => {
                 setProduct(res.data)
             }
-        )
+            )
         axios.get(`http://localhost:4000/users/list`)
             .then(res => {
                 setUserList(res.data)
-                res.data.filter((item)=>{
+                res.data.filter((item) => {
                     if (item.userEmail === user) {
                         setOrderName(item.userName)
                         setOrderEmail(item.userEmail)
@@ -85,7 +45,7 @@ export default function DashboardOrderCreate(props) {
                         setOrderDistric(item.userDistric)
                         setOrderAddress(item.userAddress)
                         if (item.userTinh !== "") {
-                            tinh.filter((item2)=>{
+                            tinh.filter((item2) => {
                                 if (item.userTinh === item2.name) {
                                     setProvinceId(item2.id)
                                 }
@@ -99,21 +59,89 @@ export default function DashboardOrderCreate(props) {
                     return null
                 })
             }
-        )
-    },[order, user])
+            )
+        if (chooseUser === false) {
+            axios.get(`http://localhost:4000/vietnam`)
+                .then(res => {
+                    setTinh(res.data[0].tinh)
+                    setHuyen(res.data[0].huyen)
+                    if (order) {
+                        setOrderName(order.orderName)
+                        setOrderEmail(order.orderEmail)
+                        setOrderPhone(order.orderPhone)
+                        setOrderAddress(order.orderAddress)
+                        setOrderProvince(order.orderTinh)
+                        setOrderDistric(order.orderHuyen)
+                        setOrderPaymentMethod(order.orderPaymentMethod)
+                        if (typeof order.orderList !== "undefined") {
+                            order.orderList.map((item) => {
+                                axios.get(`http://localhost:4000/products/${item.id}`)
+                                    .then(res => {
+                                        res.data.count = item.amount
+                                        setProductList([...productList, res.data])
+                                    })
+                                return null
+                            })
+                            return
+                        }
+                        setOrderPaymentMethod(order.orderPaymentMethod)
+                        if (order.orderTinh !== "") {
+                            res.data[0].tinh.filter((item) => {
+                                if (order.orderTinh === item.name) {
+                                    setProvinceId(item.id)
+                                }
+                                return null
+                            })
+                            setOrderProvince(order.orderTinh)
+                        }
+                        if (order.orderHuyen !== "") {
+                            setOrderDistric(order.orderHuyen)
+                        }
+                    }
+                }
+                )
+        }
+    }, [order, user])
 
-    const onSubmit = (event) => {
-        event.preventDefault()
+    useEffect(() => {
         var listOrder = []
+        var ids = []
         var total = 0;
-        for(let i in productList) {
+        for (let i in productList) {
+            if (ids.includes(productList[i]._id)) continue;
             const data = {
                 id: productList[i]._id,
                 amount: productList[i].count,
             }
             total += productList[i].productFinalPrice * productList[i].count
             listOrder.push(data)
+            ids.push(productList[i]._id)
         }
+        if (ids.length > 0)
+            setProductList(listOrder);
+    }, [])
+
+    const onSubmit = (event) => {
+        event.preventDefault()
+        var listOrder = []
+        var ids = []
+        var total = 0;
+        for (let i in productList) {
+            if (ids.includes(productList[i]._id)) continue;
+            const data = {
+                id: productList[i]._id,
+                amount: productList[i].count,
+            }
+            total += productList[i].productFinalPrice * productList[i].count
+            listOrder.push(data)
+            ids.push(productList[i]._id)
+        }
+
+        var status = "Comfirming"
+        if (order.orderStatus == "Comfirming") status = "Comfirmed"
+        if (order.orderStatus == "Comfirmed") status = "Delivering"
+        if (order.orderStatus == "Delivering") status = "Delivered"
+
         axios.post(`http://localhost:4000/order/update/${order._id}`, {
             orderName: orderName,
             orderEmail: orderEmail,
@@ -124,31 +152,32 @@ export default function DashboardOrderCreate(props) {
             orderList: listOrder,
             orderTotal: total,
             orderPaymentMethod: orderPaymentMethod,
-            orderDate: new Date()
+            orderDate: new Date(),
+            orderStatus: status
+        }).then(() => {
+            props.setCloseEditFunc(false);
+            props.setToastFunc(true);
         })
-
-        props.setCloseEditFunc(false);
-        props.setToastFunc(true);
     }
 
     return (
         <div className="DashboardProductInfo">
-            <div className="create-box"> 
+            <div className="create-box">
                 <div className="create-box-title flex">
                     <div className="create-box-title-text">
                         Order infomation
                     </div>
-                    <div  
+                    <div
                         className="create-box-title-close flex-center"
-                        onClick={()=>{
+                        onClick={() => {
                             props.setCloseEditFunc(false);
                         }}
                     >
-                        <FontAwesomeIcon icon={faTimes}/>
+                        <FontAwesomeIcon icon={faTimes} />
                     </div>
                 </div>
                 <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
-                    <div className="create-box-row flex">
+                    {/* <div className="create-box-row flex">
                         <div className="dashboard-left flex">Already have an account?</div>
                         <div className="dashboard-right">
                             <select 
@@ -171,53 +200,57 @@ export default function DashboardOrderCreate(props) {
                                 }
                             </select>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Name</div>
                         <div className="dashboard-right">
-                            <input 
-                                type="text" name="name" 
+                            <input
+                                type="text" name="name"
                                 value={orderName || ""}
-                                onChange={(event)=>{
+                                onChange={(event) => {
                                     setOrderName(event.target.value)
                                 }} required
+                                disabled
                             ></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Email</div>
                         <div className="dashboard-right">
-                            <input 
-                                type="text" name="email" 
+                            <input
+                                type="text" name="email"
                                 value={orderEmail || ""}
-                                onChange={(event)=>{
+                                onChange={(event) => {
                                     setOrderEmail(event.target.value)
                                 }} required
-                                ></input>
+                                disabled
+                            ></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Phone</div>
                         <div className="dashboard-right">
-                            <input 
-                                type="text" name="phone" 
+                            <input
+                                type="text" name="phone"
                                 value={orderPhone || ""}
-                                onChange={(event)=>{
+                                onChange={(event) => {
                                     setOrderPhone(event.target.value)
                                 }} required
-                                ></input>
+                                disabled
+                            ></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Province</div>
                         <div className="dashboard-right">
-                            <select 
+                            {/* <select 
                                 className="input"
                                 value={orderProvince}
                                 onChange={(event)=>{
                                     setProvinceId(event.target.selectedIndex)
                                     setOrderProvince(event.target.value)
                                 }}
+                                disabled
                                 >
                                 <option disabled selected value>select a province</option>
                                 {tinh.map((item, index) => {
@@ -228,19 +261,28 @@ export default function DashboardOrderCreate(props) {
                                         >{item.name}</option>
                                     )
                                 })}
-                            </select>
+                            </select> */}
+                            <input
+                                type="text" name="phone"
+                                value={orderProvince || ""}
+                                onChange={(event) => {
+                                    setOrderPhone(event.target.value)
+                                }} required
+                                disabled
+                            ></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">District</div>
                         <div className="dashboard-right">
-                            <select 
+                            {/* <select 
                                 className="input"
                                 value={orderDistric}
                                 onChange={(event)=>{
                                     setOrderDistric(event.target.value)
                                 }}
-                            >
+                                disabled
+                            >{console.log(orderDistric)}
                                 <option disabled selected value>select a district</option>
                                 {huyen.map((item, index) => {
                                     if (item.tinh_id === provinceId) {
@@ -252,26 +294,35 @@ export default function DashboardOrderCreate(props) {
                                         )
                                     }
                                 })}
-                            </select>
+                            </select> */}
+                            <input
+                                type="text" name="phone"
+                                value={orderDistric || ""}
+                                onChange={(event) => {
+                                    setOrderPhone(event.target.value)
+                                }} required
+                                disabled
+                            ></input>
                         </div>
                     </div>
-            
+
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Address</div>
                         <div className="dashboard-right">
-                            <input 
-                                type="text" name="phone" 
+                            <input
+                                type="text" name="phone"
                                 value={orderAddress || ""}
-                                onChange={(event)=>{
+                                onChange={(event) => {
                                     setOrderAddress(event.target.value)
                                 }} required
-                                ></input>
+                                disabled
+                            ></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Items</div>
                         <div className="dashboard-right">
-                            <select 
+                            {/* <select 
                                 className="input"
                                 style={{height: '25px', marginBottom: '10px'}}
                                 value={""}
@@ -313,19 +364,19 @@ export default function DashboardOrderCreate(props) {
                                         >Name: {item.productName}, Price: {item.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</option>
                                     )
                                 })}
-                            </select>
-                            <div className="" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
-                                { productList && 
+                            </select> */}
+                            <div className="" style={{ overflowY: 'hidden', flexWrap: 'wrap' }}>
+                                {productList &&
                                     productList.map((item, index) => {
                                         return (
-                                            <div 
+                                            <div
                                                 key={index}
                                                 className="order-list-item"
                                             >
-                                                <img src={item.productColor[0].productImg[0]} alt=""></img>
-                                                <p style={{width: '55%'}}>{item.productName}</p>
-                                                <div style={{display: 'flex', alignItems: 'center'}}>
-                                                    <p 
+                                                <img src={item.productImg && item.productImg} alt=""></img>
+                                                <p style={{ width: '55%' }}>{item.productName}</p>
+                                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                                    {/* <p 
                                                         id={index}
                                                         className="count-btn flex-center"
                                                         onClick={(event)=>{
@@ -342,9 +393,9 @@ export default function DashboardOrderCreate(props) {
                                                             }
                                                             setProductList(arr)
                                                         }}
-                                                    >-</p>
+                                                    >-</p> */}
                                                     <p>{item.count}</p>
-                                                    <p 
+                                                    {/* <p 
                                                         id={index}
                                                         className="count-btn flex-center"
                                                         onClick={(event)=>{
@@ -357,9 +408,9 @@ export default function DashboardOrderCreate(props) {
                                                             }
                                                             setProductList(arr)
                                                         }}
-                                                    >+</p>
+                                                    >+</p> */}
                                                 </div>
-                                                <div 
+                                                {/* <div 
                                                     id={index}
                                                     className="delete-order-item flex-center"
                                                     onClick={(event)=>{
@@ -373,7 +424,7 @@ export default function DashboardOrderCreate(props) {
                                                         setProductList(arr)
                                                     }}>
                                                     <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         )
                                     })
@@ -384,25 +435,16 @@ export default function DashboardOrderCreate(props) {
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Payment method</div>
                         <div className="dashboard-right">
-                            <select 
-                                className="input"
-                                type="text"
-                                value={orderPaymentMethod || ""}
-                                onChange={(event)=>{
-                                    setOrderPaymentMethod(event.target.value)
-                                }} required
-                            >
-                                <option></option>
-                                <option value="thanh toan khi nhan hang">Cash On Delivery</option> 
-                                <option value="zalopay">ZaloPay</option>
-                            </select>
+                            {orderPaymentMethod}
                         </div>
                     </div>
-                    <div className="flex-center" style={{marginTop: '40px'}}>
-                        <button className="create-box-btn btn">
-                            Create order
-                        </button>
-                    </div>
+                    {order?.orderStatus == "Comfirming" &&
+                        <div className="flex-center" style={{ marginTop: '40px' }}>
+                            <button className="create-box-btn btn">
+                                Xác Nhận Đơn Hàng
+                            </button>
+                        </div>
+                    }
                 </form>
             </div>
         </div>

@@ -24,10 +24,10 @@ export default function DashboardNewsCreate(props) {
     const [newsDate, setNewsDate] = useState(shortedDate)
 
     const handleOnChange = (event) => {
-        setInputValue({...inputValue, [event.target.name]: event.target.value})
+        setInputValue({ ...inputValue, [event.target.name]: event.target.value })
     }
-    
-    useEffect(()=> {
+
+    useEffect(() => {
         // axios.get(`http://localhost:4000/news`)
         //         .then(res => {
         //             const test = Object.values(res.data.reduce((a, {newCate}) => {
@@ -37,7 +37,7 @@ export default function DashboardNewsCreate(props) {
         //             setCateList(test)
         //         }
         //     )
-    },[])
+    }, [])
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -65,7 +65,7 @@ export default function DashboardNewsCreate(props) {
     }
 
     const addNewCate = () => {
-        setCateList(cateList => [...cateList, {newCate: inputValue.cate}])
+        setCateList(cateList => [...cateList, { newCate: inputValue.cate }])
         cateInput.current.value = ""
     }
 
@@ -81,55 +81,55 @@ export default function DashboardNewsCreate(props) {
 
     return (
         <div className="DashboardProductInfo">
-            <div className="create-box"> 
+            <div className="create-box">
                 <div className="create-box-title flex">
                     <div className="create-box-title-text">
-                        News infomation
+                        Thông Tin Bài Viết
                     </div>
-                    <div  
+                    <div
                         className="create-box-title-close flex-center"
-                        onClick={()=>{
+                        onClick={() => {
                             props.setCloseCreateFunc(false);
                         }}
                     >
-                        <FontAwesomeIcon icon={faTimes}/>
+                        <FontAwesomeIcon icon={faTimes} />
                     </div>
                 </div>
                 <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Title</div>
+                        <div className="dashboard-left flex">Tiêu Đề</div>
                         <div className="dashboard-right">
                             <input type="text" name="title" onChange={handleOnChange} required></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Images </div>
+                        <div className="dashboard-left flex">Hình Ảnh</div>
                         <div className="dashboard-right">
-                            <input 
+                            <input
                                 onChange={(event) => {
                                     const files = event.target.files;
-                                    for (let i = 0; i< files.length; i++) {
-                                        setNewsImg(news=>[...news, URL.createObjectURL(files[i])])
+                                    for (let i = 0; i < files.length; i++) {
+                                        setNewsImg(news => [...news, URL.createObjectURL(files[i])])
                                     }
                                     const fileArr = Array.prototype.slice.call(files)
-                                    fileArr.forEach(item=>{
-                                        
-                                        setFile(file=>[...file, item])
+                                    fileArr.forEach(item => {
+
+                                        setFile(file => [...file, item])
                                     })
                                 }}
                                 type="file"
                                 name="newsImg"
                                 className="noborder"
                                 multiple="multiple"
-                                style={{height: '50px'}}
+                                style={{ height: '50px' }}
                             ></input>
-                            <div className="flex" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
-                                { newsImg && 
+                            <div className="flex" style={{ overflowY: 'hidden', flexWrap: 'wrap' }}>
+                                {newsImg &&
                                     newsImg.map((item, index) => {
                                         return (
                                             <div key={index} className="create-box-img">
                                                 <img key={index} src={item} alt=""></img>
-                                                <div 
+                                                <div
                                                     className="create-box-img-overlay"
                                                 >
                                                     <p
@@ -146,7 +146,7 @@ export default function DashboardNewsCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Category </div>
+                        <div className="dashboard-left flex">Thể Loại </div>
                         <div className="dashboard-right flex-center">
                             <select style={{ width: "350px" }}
                                 onChange={(event) => { setCateValue(event.target.value) }}
@@ -170,33 +170,31 @@ export default function DashboardNewsCreate(props) {
                                     <option value="Sách phân tích kỹ thuật">Sách phân tích kỹ thuật</option>
                                 </optgroup>
                             </select>
-                            <label style={{marginLeft:"10%", width:"30%"}}>Ngày xuất bản </label>
-                             <input type="date"  name="Ngày xuất bản" value={newsDate}  onChange={(event) => {setNewsDate(event.target.value)}}
-                              required  dateFormat="dd/mm/yyyy" dataDateFormat="DD MMMM YYYY" placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
+                            <label style={{ marginLeft: "10%", width: "30%" }}>Ngày xuất bản </label>
+                            <input type="date" name="Ngày xuất bản" value={newsDate} onChange={(event) => { setNewsDate(event.target.value) }}
+                                required dateFormat="dd/mm/yyyy" dataDateFormat="DD MMMM YYYY" placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
                         </div>
                     </div>
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Giới Thiệu</div>
                         <div className="dashboard-right">
-                                <textarea style={{width:"100%",height: "150px",padding: "10px"}}
-                                type="text" name="Intro" 
-                                value={newsIntro || ""}
-                                onChange={(event)=>{
-                                    setNewsIntro(event.target.value)
-                                }} required
-                                ></textarea>
+                            <div style={{ border: '1px #ddd solid' }}>
+                                <DashboardEditor
+                                    setNewsContent={setNewsIntro}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div style={{border: '1px #ddd solid'}}>
+                    <div style={{ border: '1px #ddd solid' }}>
                         <DashboardEditor
-                            setNewsContent= {setNewsContent}
+                            setNewsContent={setNewsContent}
                         />
                     </div>
-                    <div className="flex-center" style={{marginTop: '40px'}}>
-                    <button className="create-box-btn btn">
-                        Add news
-                    </button>
-                </div>
+                    <div className="flex-center" style={{ marginTop: '40px' }}>
+                        <button className="create-box-btn btn">
+                            Add news
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

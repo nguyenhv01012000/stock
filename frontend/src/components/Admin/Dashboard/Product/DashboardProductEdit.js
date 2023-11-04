@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import DashboardEditor from '../News/DashboardEditor';
+
 
 export default function DashboardProductEdit(props) {
 
@@ -22,89 +24,108 @@ export default function DashboardProductEdit(props) {
     const [productSale, setProductSale] = useState(0)
     const [productPrice, setProductPrice] = useState(0)
     const [productDes, setProductDes] = useState("")
-    const [productCate, setProductCate] = useState("")
-    const [productGroupCate, setProductGroupCate] = useState("")
-    const [productGroupCateList, setProductGroupCateList] = useState([])
-    const [productSize, setProductSize] = useState([])
-    const [productSex, setProductSex] = useState([])
+    const [productTitle, setProductTitle] = useState("")
+    const [productVideo, setProductVideo] = useState("")
+    const [learn, setLearn] = useState([""])
+    const [content, setContent] = useState([""])
+    const [subContent, setSubContent] = useState([[""]])
+    const [toDate, setToDate] = useState("")
+    const [fromDate, setFromDate] = useState("")
+    const [productTimeCourse, setProductTimeCourse] = useState("")
+    const [productBookNumber, setproductBookNumber] = useState("")
+    const [deleteImgId, setDeleteImgId] = useState(null)
 
-    const checkedSize = (event) => {
-        if (event.target.id === "1") {
-            if (isCheckedSmall) {
-                const size = productSize.filter((item)=> {
-                    return item !== 'Small'
-                })
-                setProductSize(size)
-                setIsCheckedSmall(false)
-            } else {
-                setProductSize(productSize=>[...productSize, 'Small'])
-                setIsCheckedSmall(true)
-            }
+
+    const handleOnChangeLearn = (event, index) => {
+        let learnClone = [...learn]
+        learnClone[index] = event.target.value;
+        setLearn(learnClone);
+    }
+
+    const handleOnAcionLearn = (number, position) => {
+        if (number == 1) {
+            setLearn([...learn, ""])
         }
-        if (event.target.id === "2") {
-            if (isCheckedMedium) {
-                const size = productSize.filter((item)=> {
-                    return item !== 'Medium'
-                })
-                setProductSize(size)
-                setIsCheckedMedium(false)
-            } else {
-                setProductSize(productSize=>[...productSize, 'Medium'])
-                setIsCheckedMedium(true)
-            }
+        else {
+            setLearn(learn.filter((item, index) => {
+                return index !== position
+            }))
         }
-        if (event.target.id === "3") {
-            const size = productSize.filter((item)=> {
-                return item !== 'Large'
+    }
+
+    const handleOnChangeContent = (event, index) => {
+        let contentClone = [...content]
+        contentClone[index] = event.target.value;
+        setContent(contentClone);
+    }
+
+    const handleOnAcionContent = (number, position) => {
+        if (number == 1) {
+            setContent([...content, ""])
+            setSubContent([...subContent, [""]])
+        }
+        else {
+            setContent(content.filter((item, index) => {
+                return index !== position
+            }))
+            setSubContent(subContent.filter((item, index) => {
+                return index !== position
+            }))
+        }
+    }
+
+    const handleOnChangeSubContent = (event, index, subIndex) => {
+        let subContentClone = [...subContent];
+        subContentClone[index][subIndex] = event.target.value;
+        setSubContent(subContentClone);
+    }
+
+    const handleOnAcionSubContent = (number, position, subPosition) => {
+        if (number == 1) {
+            let subContentClone = [...subContent];
+            subContentClone[position].push("");
+            setSubContent(subContentClone);
+        }
+        else {
+            let subContentClone = [...subContent];
+            subContentClone[position] = subContentClone[position].filter((item, index) => {
+                return index !== subPosition
             })
-            setProductSize(size)
-            if (isCheckedLarge) {
-                setIsCheckedLarge(false)
-            } else {
-                setProductSize(productSize=>[...productSize, 'Large'])
-                setIsCheckedLarge(true)
-            }
+            setSubContent(subContentClone);
         }
     }
 
-    const handleOnChange = (event) => {
-        setInputValue({...inputValue, [event.target.name]: event.target.value})
-    }
-    
-    useEffect(()=> { 
+    useEffect(() => {
         if (product) {
             setProductName(product.productName)
-            setProductImg(product.productImg)
+            setProductImg([product.productImg])
             setProductSale(product.productSale)
             setProductPrice(product.productPrice)
             setProductDes(product.productDes)
-            setProductCate(product.productCate)
-            setProductSex(product.productSex)
-            setProductSize(product.productSize)
-            setProductGroupCate(product.productGroupCate)
-            axios.get(`http://localhost:4000/category`)
-                .then(res => {
-                    setCate(res.data)
-                }
-            )
-            axios.get(`http://localhost:4000/products`)
-                .then(res => {
-                    const test = Object.values(res.data.reduce((a, {productGroupCate}) => {
-                        a[productGroupCate] = a[productGroupCate] || {productGroupCate};
-                        return a;
-                    }, Object.create(null)));
-                    setProductGroupCateList(test)
-                }
-            )
-            if (product.productSize) {
-                for (let i of product.productSize) {
-                    if(i === "Small") setIsCheckedSmall(true)
-                    if(i === "Medium") setIsCheckedMedium(true)
-                    if(i === "Large") setIsCheckedLarge(true)
-                }
-            }
+            setProductTitle(product.productTitle)
+            setProductVideo(product.productVideo)
+            setProductTimeCourse(product.productTimeCourse)
+            setproductBookNumber(product.productBookNumber)
+            setLearn(product.productLearn)
+            setContent(product.productContent)
+            setSubContent(product.productSubContent)
+            setToDate(convertDate(product.productToDate))
+            setFromDate(convertDate(product.productFromDate))
         }
-    },[product])
+    }, [product])
+
+    const convertDate = (dateString) => {
+        const date = new Date(dateString)
+        let day = '' + date.getDate();
+        let month = '' + (date.getMonth() + 1);
+        let year = date.getFullYear();
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        const shortedDate = year + '-' + month + '-' + day;
+        return shortedDate;
+    }
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -124,31 +145,27 @@ export default function DashboardProductEdit(props) {
         formData.append("productName", productName);
         formData.append("productSale", productSale);
         formData.append("productPrice", productPrice);
-        formData.append("productCate", productCate);
-        formData.append("productGroupCate", productGroupCate);
-        formData.append("productSize", productSize);
         formData.append("productDes", productDes);
-        formData.append("productSex", productSex);
-        formData.append("productDate", new Date());
+        formData.append("productTimeCourse", productTimeCourse);
+        formData.append("productBookNumber", productBookNumber);
+        formData.append("productLearn", learn.join("`"));
+        formData.append("productContent", content.join("`"));
+        formData.append("productFromDate", fromDate);
+        formData.append("productToDate", toDate);
+        formData.append("productTitle", productTitle);
+        formData.append("productVideo", productVideo);
+        let subContentClone = [...subContent];
+        let subContentString = "";
+        subContentClone.forEach(i => {
+            subContentString += i.join("`") + "``"
+        })
+        formData.append("productSubContent", subContentString);
+        formData.append("deleteImgId", deleteImgId);
+
         axios.post(`http://localhost:4000/products/update/${product._id}`, formData, config)
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
     }
-
-    const addNewCate = () => {
-        axios.post('http://localhost:4000/category', {
-            cateName: inputValue.cate
-        })
-        setCate(cate=>[...cate, {cateName: inputValue.cate}])
-        setProductCate(inputValue.cate)
-        cateInput.current.value = ""
-    }
- 
-    const addNewGroupCate = () => {
-        setProductGroupCate(inputValue.groupCate)
-        setProductGroupCateList(productGroupCateList => [...productGroupCateList, {productGroupCate: inputValue.groupCate}])
-        groupCateInput.current.value = ""
-    } 
 
     const deleteImg = (event) => {
         const id = event.target.id
@@ -159,9 +176,7 @@ export default function DashboardProductEdit(props) {
         const items = [...productImg]
         items.splice(id, 1)
         setProductImg(items)
-        axios.post(`http://localhost:4000/products/update/${product._id}`, {
-            deleteImgId: id
-        })
+        setDeleteImgId(1)
     }
 
     return (
@@ -169,58 +184,81 @@ export default function DashboardProductEdit(props) {
             <div className="create-box">
                 <div className="create-box-title flex">
                     <div className="create-box-title-text">
-                        Product infomation
+                        Thông Tin Khóa Học
                     </div>
-                    <div 
+                    <div
                         className="create-box-title-close flex-center"
-                        onClick={()=>{
+                        onClick={() => {
                             props.setCloseEditFunc(false);
                         }}
                     >
-                        <FontAwesomeIcon icon={faTimes}/>
+                        <FontAwesomeIcon icon={faTimes} />
                     </div>
                 </div>
-                { product && 
+                {product &&
                     <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
                         <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Name</div>
+                            <div className="dashboard-left flex">Tên</div>
                             <div className="dashboard-right">
-                                <input 
-                                    type="text" name="name" 
+                                <input
+                                    type="text" name="name"
                                     value={productName}
-                                    onChange={(event)=>{
+                                    onChange={(event) => {
                                         setProductName(event.target.value)
                                     }} required
                                 ></input>
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Images </div>
+                            <div className="dashboard-left flex">Tiêu đề</div>
                             <div className="dashboard-right">
-                                <input 
+                                <textarea style={{ width: "100%", height: "150px", padding: "10px" }}
+                                    type="text" name="title"
+                                    value={productTitle}
+                                    onChange={(event) => {
+                                        setProductTitle(event.target.value)
+                                    }}
+                                    required
+                                ></textarea>
+                            </div>
+                        </div>
+                        <div className="create-box-row flex">
+                            <div className="dashboard-left flex">Link video</div>
+                            <div className="dashboard-right">
+                                <input type="text" name="video"
+                                    value={productVideo}
+                                    onChange={(event) => {
+                                        setProductVideo(event.target.value)
+                                    }} required></input>
+                            </div>
+                        </div>
+                        <div className="create-box-row flex">
+                            <div className="dashboard-left flex">Hình Ảnh </div>
+                            <div className="dashboard-right">
+                                <input
                                     onChange={(event) => {
                                         const files = event.target.files;
-                                        for (let i = 0; i< files.length; i++) {
-                                            setProductImg(product=>[...product, URL.createObjectURL(files[i])])
+                                        for (let i = 0; i < files.length; i++) {
+                                            setProductImg([URL.createObjectURL(files[i])])
                                         }
                                         const fileArr = Array.prototype.slice.call(files)
-                                        fileArr.forEach(item=>{
-                                            setFile(file=>[...file, item])
+                                        fileArr.forEach(item => {
+                                            setFile(file => [...file, item])
                                         })
                                     }}
                                     type="file"
                                     name="productImg"
                                     className="noborder"
                                     multiple="multiple"
-                                    style={{height: '50px'}}
+                                    style={{ height: '50px' }}
                                 ></input>
-                                <div className="flex" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
-                                    { productImg && 
+                                <div className="flex" style={{ overflowY: 'hidden', flexWrap: 'wrap' }}>
+                                    {productImg &&
                                         productImg.map((item, index) => {
                                             return (
                                                 <div className="create-box-img">
                                                     <img key={index} src={item} alt=""></img>
-                                                    <div 
+                                                    <div
                                                         className="create-box-img-overlay"
                                                     >
                                                         <p
@@ -237,147 +275,166 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Defaut price </div>
+                            <div className="dashboard-left flex">Giá </div>
                             <div className="dashboard-right">
-                                <input 
-                                    type="number" name="price" 
-                                    placeholder="USD" 
+                                <input
+                                    type="number" name="price"
+                                    placeholder="VND"
                                     value={productPrice}
-                                    onChange={(event)=>{
+                                    onChange={(event) => {
                                         setProductPrice(event.target.value)
                                     }} required
                                 ></input>
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Sale off </div>
+                            <div className="dashboard-left flex">Giảm Giá </div>
                             <div className="dashboard-right flex-center">
-                                <input 
-                                    type="number" placeholder="%" 
-                                    style={{ width: "100px"}} 
-                                    name="sale" 
+                                <input
+                                    type="number" placeholder="%"
+                                    style={{ width: "100px" }}
+                                    name="sale"
                                     value={productSale}
-                                    onChange={(event)=>{
+                                    onChange={(event) => {
                                         setProductSale(event.target.value)
                                     }}
                                     required></input>
-                                <label>From: </label>
-                                <input type="date"  name="fromdate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
-                                <label>To: </label>
-                                <input type="date"  name="todate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
+                                <label>Từ: </label>
+                                <input type="date" name="fromdate"
+                                    value={fromDate}
+                                    onChange={(event) => {
+                                        setFromDate(event.target.value)
+                                    }} placeholder="dd/mm/yyyy"
+                                    pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
+                                <label>Đến: </label>
+                                <input type="date" name="todate"
+                                    value={toDate}
+                                    onChange={(event) => {
+                                        setToDate(event.target.value)
+                                    }} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Category group</div>
+                            <div className="dashboard-left flex">Thời Lượng </div>
                             <div className="dashboard-right flex-center">
-                                <select style={{ width: "350px"}} 
-                                    onChange={(event) => {setProductGroupCate(event.target.value)}}
-                                    value={productGroupCate}
-                                >
-                                    <option></option>
-                                    { productGroupCateList.length > 0 &&
-                                        productGroupCateList.map((item, index) => {
-                                            if (item.productGroupCate) {
-                                                return(
-                                                    <option key={index}>{item.productGroupCate}</option>
-                                                )
-                                            }
-                                            return null
-                                        })
-                                    }
-                                </select>
-                                <input type="text" name="groupCate" placeholder="New category group?" style={{  margin:'0 10px'}} onChange={handleOnChange} ref={groupCateInput}></input>
-                                <div className="btn" style={{
-                                    fontSize: '14px',
-                                    fontFamily: 'sans-serif',
-                                    fontWeight: '300',
-                                    padding: '0 10px',
-                                    cursor: 'pointer',
-                                    width: '350px',
-                                    height: '30px'
-                                }}
-                                onClick={addNewGroupCate}>
-                                    Add
-                                </div>
-                            </div>
-                        </div>
-                        <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Category </div>
-                            <div className="dashboard-right flex-center">
-                                <select style={{ width: "350px"}} 
-                                    onChange={(event) => {setProductCate(event.target.value)}}
-                                    value={productCate}
-                                >
-                                    <option></option>
-                                    { cate.length > 0 &&
-                                        cate.map((item, index) => {
-                                            return(
-                                                <option key={index}>{item.cateName}</option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                                <input type="text" name="cate" placeholder="New category?" style={{  margin:'0 10px'}} onChange={handleOnChange} ref={cateInput}></input>
-                                <div className="btn" style={{
-                                    fontSize: '14px',
-                                    fontFamily: 'sans-serif',
-                                    fontWeight: '300',
-                                    padding: '0 10px',
-                                    cursor: 'pointer',
-                                    width: '350px',
-                                    height: '30px'
-                                }}
-                                onClick={addNewCate}>
-                                    Add
-                                </div>
-                            </div>
-                        </div>
-                        <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Sex </div>
-                            <div className="dashboard-right flex">
-                                <select style={{ width: "200px"}} 
-                                    onChange={(event) => {setProductSex(event.target.value)}}
-                                    value={productSex}
-                                    required>
-                                    <option></option>
-                                    <option>Man</option>
-                                    <option>Woman</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Size </div>
-                            <div className="dashboard-right flex">
-                                <div 
-                                    className={isCheckedSmall ? "size-check isChecked" : "size-check"}
-                                    id="1" 
-                                    onClick={checkedSize}>Small</div>
-                                <div 
-                                    className={isCheckedMedium ? "size-check isChecked" : "size-check"}
-                                    id="2" 
-                                    onClick={checkedSize}>Medium</div>
-                                <div 
-                                    className={isCheckedLarge ? "size-check isChecked" : "size-check"}
-                                    id="3" 
-                                    onClick={checkedSize}>Large</div>
-                            </div>
-                        </div>
-                        <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Description </div>
-                            <div className="dashboard-right">
-                                <input 
-                                    type="text" 
-                                    name="des" 
-                                    value={productDes || ""}
-                                    onChange={(event)=>{
-                                        setProductDes(event.target.value)
-                                    }}required></input>
+                                <input required type="text" name="timeCourse" value={productTimeCourse}
+                                    onChange={(event) => {
+                                        setProductTimeCourse(event.target.value)
+                                    }} />
+                                <label style={{ marginLeft: "10%", width: "30%" }}>Số giáo trình </label>
+                                <input type="number" style={{ width: "100px" }}
+                                    value={productBookNumber}
+                                    onChange={(event) => {
+                                        setproductBookNumber(event.target.value)
+                                    }} name="numberBook" required></input>
                             </div>
                         </div>
 
-                        <div className="flex-center" style={{marginTop: '40px'}}>
+                        <div className="create-box-row flex">
+                            <div className="dashboard-left flex">Bạn Học Được Gì </div>
+                            <div className="dashboard-right">
+                                {learn &&
+                                    learn.map((item, index) => {
+                                        return (
+                                            <div className="flex">
+                                                <input required type="text" name="learn" value={item} onChange={event => handleOnChangeLearn(event, index)} style={{ marginRight: "10%", width: "60%", marginBottom: "10px" }} />
+                                                <div
+                                                    className="action-item flex-center action-blue"
+                                                    onClick={() => handleOnAcionLearn(1, index)}
+                                                >
+                                                    <FontAwesomeIcon icon={faPlus} />
+                                                </div>
+                                                {
+                                                    learn.length > 1 && <div
+                                                        className="action-item flex-center action-red"
+                                                        onClick={() => handleOnAcionLearn(-1, index)}
+                                                    >
+                                                        <FontAwesomeIcon icon={faTimes} />
+                                                    </div>
+                                                }
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+
+                        <div className="create-box-row flex">
+                            <div className="dashboard-left flex">Giới thiệu khóa học </div>
+                            <div className="dashboard-right">
+                                {/* <textarea style={{ width: "100%", height: "150px", padding: "10px" }}
+                                    type="text" name="des"
+                                    value={productDes || ""}
+                                    onChange={(event) => {
+                                        setProductDes(event.target.value)
+                                    }}
+                                    required
+                                ></textarea> */}
+                                <div style={{ border: '1px #ddd solid', padding: "10px" }}>
+                                    <DashboardEditor
+                                        newsContent={productDes}
+                                        setNewsContent={setProductDes}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="create-box-row flex">
+                            <div className="dashboard-left flex">Nội dung khóa học </div>
+                            <div className="dashboard-right">
+                                {content &&
+                                    content.map((item, index) => {
+                                        return (
+                                            <div>
+                                                <div className="flex">
+                                                    <input required type="text" name="learn" value={item} onChange={event => handleOnChangeContent(event, index)} style={{ marginRight: "5%", width: "80%", marginBottom: "10px" }} />
+                                                    <div
+                                                        className="action-item flex-center action-blue"
+                                                        onClick={() => handleOnAcionContent(1, index)}
+                                                    >
+                                                        <FontAwesomeIcon icon={faPlus} />
+                                                    </div>
+                                                    {
+                                                        content.length > 1 && <div
+                                                            className="action-item flex-center action-red"
+                                                            onClick={() => handleOnAcionContent(-1, index)}
+                                                        >
+                                                            <FontAwesomeIcon icon={faTimes} />
+                                                        </div>
+                                                    }
+                                                </div>
+                                                {subContent &&
+                                                    subContent[index].map((subItem, subIndex) => {
+                                                        return (<div className="flex">
+                                                            <input type="text" name="learn" value={subItem} onChange={event => handleOnChangeSubContent(event, index, subIndex)} style={{ marginLeft: "15%", marginRight: "5%", width: "60%", marginBottom: "10px" }} required />
+                                                            <div
+                                                                className="action-item flex-center action-blue"
+                                                                onClick={() => handleOnAcionSubContent(1, index, subIndex)}
+                                                            >
+                                                                <FontAwesomeIcon icon={faPlus} />
+                                                            </div>
+                                                            {subContent[index] &&
+                                                                subContent[index].length > 1 && <div
+                                                                    className="action-item flex-center action-red"
+                                                                    onClick={() => handleOnAcionSubContent(-1, index, subIndex)}
+                                                                >
+                                                                    <FontAwesomeIcon icon={faTimes} />
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+
+                        <div className="flex-center" style={{ marginTop: '40px' }}>
                             <button className="create-box-btn btn">
-                                Update product
+                                Cập nhập khóa học
                             </button>
                         </div>
                     </form>

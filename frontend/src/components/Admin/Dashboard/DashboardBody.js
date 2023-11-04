@@ -152,7 +152,7 @@ export default function DashboardBody(props) {
                 />
             }
             <DashboardHeader
-                itemName= {props.menuItems[tabId-1].name}
+                itemName= {props.menuItems.filter(i => i.id == tabId-1).name}
                 setOpenMenuOnClick = {props.setOpenMenuOnClick}
                 openMenu = {props.openMenu}
                 orderNotice = {props.orderNotice}

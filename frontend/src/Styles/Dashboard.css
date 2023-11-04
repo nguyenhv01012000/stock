@@ -921,9 +921,9 @@ display: none !important;
 .table-user-title:first-child {
     width: 100px;
 }
-.table-order-title:first-child {
+/* .table-order-title:first-child {
     width: 20% !important;
-}
+} */
 .table-title:last-child {
     width: 80px;
 }
@@ -1122,16 +1122,26 @@ select {
     background-color: green;
     color: #fff;
 }
+.action-blue {
+    background-color: #0e6abb;
+    transition: .5s;
+    cursor: pointer;
+}
+.action-blue:hover {
+    background-color:#0e5cbb;
+}
 .action-green {
     background-color: #50c35f;
     transition: .5s;
+    cursor: pointer;
 }
 .action-green:hover {
-    background-color:#40a33f;
+    background-color:#3fa35b;
 }
 .action-red {
     background-color: #fc4455;
     transition: .5s;
+    cursor: pointer;
 }
 .action-red:hover {
     background-color: #fc0005;

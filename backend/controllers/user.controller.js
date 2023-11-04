@@ -76,7 +76,7 @@ module.exports.updateUser = async function(req, res) {
 	if (req.files.length > 0) {
 		const imgArr = [];
 		req.files.map((item)=>{
-			imgArr.push(`http://localhost:4000/images/${item.filename}`)
+			imgArr.push(BACKEND + `/images/${item.filename}`)
 		})
 		const img = {
 			userAvt: imgArr[0]

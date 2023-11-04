@@ -19,6 +19,7 @@ import Introduction from './Pages/Introduction';
 import AccountInfo from './Pages/AccountInfo';
 import Course from './Pages/Course';
 import CourseDetail from './Pages/CourseDetail';
+import CourseCategoryList from './Pages/CourseCategoryList';
 
 function App(props) { 
   
@@ -32,6 +33,8 @@ function App(props) {
           <Route path="/introduction" exact component={Introduction}></Route> 
           <Route path="/course" exact component={Course}></Route> 
           <Route path="/course/:id" exact component={CourseDetail}></Route> 
+          <Route path="/course-category/:id" exact component={CourseCategoryList}></Route> 
+
           <Route path="/news/category/:id" exact component={News}></Route> 
 
 
@@ -41,7 +44,7 @@ function App(props) {
           <Route path="/login" exact component={Login}></Route> 
           <Route path="/admin" exact component={AdminLogin}></Route> 
           <Route path="/account" exact component={AccountInfo}></Route> 
-          <Route path="/checkout" exact component={Checkout}></Route> 
+          <Route path="/checkout/:id" exact component={Checkout}></Route> 
           <Route path="/admin/dashboard" exact component={Dashboard}></Route> 
           <Route path="/admin/dashboard/:id" exact component={Dashboard}></Route> 
         </div> 

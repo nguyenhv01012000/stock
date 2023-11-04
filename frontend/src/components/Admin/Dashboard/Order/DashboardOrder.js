@@ -8,54 +8,17 @@ export default function DashboardOrder(props) {
     const [table, setTable] = useState([])
 
     useEffect(()=>{ 
-        if (window.innerWidth <= 600) {
-            setTable([
-                "ID",
-                "ShippingInfo",
-                "Date",
-                "PaymentMethod",
-                "Items",
-                "Total Money",
-                "Action"
-            ])
-        } else {
-            setTable([
-                "Order Info",
-                "ShippingInfo",
-                "Date",
-                "PaymentMethod",
-                "Items",
-                "Total Money",
-                "Action"
-            ])
-        }
-        function handleResize() {
-            if (window.innerWidth <= 600) {
-                setTable([
-                    "ID",
-                    "ShippingInfo",
-                    "Date",
-                    "PaymentMethod",
-                    "Items",
-                    "Total Money",
-                    "Action"
-                ])
-            } else {
-                setTable([
-                    "Order Info",
-                    "ShippingInfo",
-                    "Date",
-                    "PaymentMethod",
-                    "Items",
-                    "Total Money",
-                    "Action"
-                ])
-            }
-        }
-        window.addEventListener("resize", handleResize);
-        return (()=>{
-            window.removeEventListener("resize", handleResize);
-        })
+        setTable([
+            "Mã Đơn Hàng",
+            "Email",
+            "Số điện thoại",
+            "Ngày Mua",
+            "Phương Thức Thanh Toán",
+            "Số lượng",
+            "Số Tiền",
+            "Trạng Thái",
+            ""
+        ])
     }, [])
     
 
@@ -63,7 +26,7 @@ export default function DashboardOrder(props) {
         <div className="dashboard-product">
             <div className={props.toast ? "toast toast-show" : "toast"} style={{top: '20px'}}>
                 <FontAwesomeIcon icon={faCheckCircle} className="icon"/>
-                Update order successfully
+                Cập Nhập Đơn Hàng Thàng Công!
             </div>
             <DashboardProductTable
                 icon = {faFileInvoice}

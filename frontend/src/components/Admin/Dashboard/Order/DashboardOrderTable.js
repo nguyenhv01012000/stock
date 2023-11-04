@@ -186,7 +186,7 @@ export default function DashboardUserTable(props) {
                     <p>{props.title}</p>
                 </div>
                 <div className="topfive-content flex-col">
-                    <div className="dashboard-addnew flex">
+                    {/* <div className="dashboard-addnew flex">
                         <div 
                             className="dashboard-addnew-btn btn"
                             onClick={props.setOpenCreateFunc}
@@ -200,7 +200,7 @@ export default function DashboardUserTable(props) {
                                 ></input>
                             </form>
                         </div>
-                    </div>
+                    </div> */}
                     <table className="dashboard-table" style={{tableLayout: 'fixed'}}>
                         <tbody>
                             <tr className="dashboard-order">
@@ -212,7 +212,7 @@ export default function DashboardUserTable(props) {
                                                 onClick={(event)=>{
                                                     sortTable(event)
                                                 }} 
-                                                id={`Order${item.split(" ").join("")}`}
+                                                //id={`Order${item.split(" ").join("")}`}
                                             >
                                                 {item}
                                             </th>
@@ -232,20 +232,16 @@ export default function DashboardUserTable(props) {
                                     }
                                     return (
                                         <tr key={index} className="mobile-table">
-                                            <td className="mobile-table-orderinfo">
-                                                <ul style={{margin: '10px 0'}}>
-                                                    <li className="flex">
-                                                        <p style={{marginRight: '5px', fontWeight: 'bold'}}>#{item.orderId}</p> 
-                                                        <p className="mobile-table-name">by {item.orderName}</p>
-                                                    </li>
-                                                </ul>    
+                                            <td>
+                                                
+                                                <p style={{marginRight: '5px', fontWeight: 'bold'}}>{item.orderId}</p> 
+
                                             </td>
-                                            <td className="mobile-table-shippinginfo"> 
-                                                <div className="flex" style={{alignItems: 'center',margin: '10px 0'}}>
-                                                    <p 
-                                                        style={{wordWrap: 'break-word', WebkitLineClamp: '3'}}
-                                                    >{item.orderAddress}, {item.orderHuyen}, {item.orderTinh}</p>
-                                                </div> 
+                                            <td > 
+                                                {item.orderEmail}
+                                            </td>
+                                            <td>
+                                                <p>{item.orderPhone}</p>
                                             </td>
                                             <td>
                                                 <p>{day}-{month}-{year}</p>
@@ -263,6 +259,10 @@ export default function DashboardUserTable(props) {
                                             </td>
                                             <td className="mobile-table-totalmoney">
                                                 <p>{item.orderTotal} đ</p>
+                                            </td>
+                                            <td>
+                                                {item.orderStatus =="Comfirming" && <p style={{color:"red"}}>Chờ xác nhận</p>}
+                                                {item.orderStatus =="Comfirmed" && <p style={{color:"#34aa40"}}>Đã xác nhận</p>}
                                             </td>
                                             <td>
                                                 <div className="action-table flex">

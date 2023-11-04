@@ -18,36 +18,36 @@ function Dashboard(props) {
             name: "Dashboard",
             icon: faHome
         },
-        {
-            id: "2",
-            name: "Live Chat",
-            icon: faInbox
-        }, 
+        // {
+        //     id: "2",
+        //     name: "Live Chat",
+        //     icon: faInbox
+        // }, 
         {
             id: "3",
-            name: "Orders",
+            name: "Đơn Mua",
             icon: faFileInvoice
         },
         {
             id: "4",
-            name: "Products",
+            name: "Khóa Học",
             icon: faTshirt
         },
         {
             id: "5",
-            name: "Blog",
+            name: "Bài viết",
             icon: faNewspaper
         },
         {
             id: "6",
-            name: "Users",
+            name: "Tài Khoản",
             icon: faUser
         }, 
-        {
-            id: "7",
-            name: "Subscribers",
-            icon: faEnvelope
-        },
+        // {
+        //     id: "7",
+        //     name: "Subscribers",
+        //     icon: faEnvelope
+        // },
     ]
     const [tabId, setTabId] = useState(props.match.params.id ? props.match.params.id : "1");
     const [openMenu, setOpenMenu] = useState(true); 

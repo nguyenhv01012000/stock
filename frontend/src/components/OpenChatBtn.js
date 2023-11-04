@@ -7,8 +7,9 @@ import socketIOClient from "socket.io-client"
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { UserContext } from '../contexts/User';
+import { BACKEND } from '../env'
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = BACKEND;
  
 function OpenChatBtn(props) {
     const messageRef = useRef();
@@ -40,7 +41,7 @@ function OpenChatBtn(props) {
         if (!sessionStorage.getItem('chat-id')) {
             sessionStorage.setItem('chat-id', Math.floor(Math.random() * 190000000) + 100000000);
         }
-        axios.get(`http://localhost:4000/chat/${sessionStorage.getItem('chat-id')}`)
+        axios.get(BACKEND + `/chat/${sessionStorage.getItem('chat-id')}`)
             .then(res => {
                 if (res.data.length > 0)
                     setChatList(res.data[0].chatContent)

@@ -22,6 +22,7 @@ export default function NewsContent(props) {
 
     const [newsList, setNewsList] = useState([])
     const [test, setTest] = useState("")
+    const [intro, setIntro] = useState("")
     const [date, setDate] = useState("")
 
     useEffect(() => {
@@ -33,6 +34,10 @@ export default function NewsContent(props) {
             const month = date.getMonth()
             const year = date.getFullYear()
             setDate(`${day}-${monthNames[month]}-${year}`)
+        }
+        if (news && news.newIntro) {
+            let a = EditorState.createWithContent(convertFromRaw(JSON.parse(news.newIntro)))
+            setIntro(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center"))
         }
     }, [props.news])
 
@@ -54,7 +59,7 @@ export default function NewsContent(props) {
                         <div className="col-lg-8">
                             {/* News Detail Start */}
                             <div className="position-relative mb-3">
-                                <img className="img-fluid w-100 news-content-img" src={news.newImg} style={{ objectFit: 'cover' }} />
+                                <img className="img-fluid w-100" src={news.newImg} />
                                 <div className="overlay position-relative bg-light">
                                     <div className="mb-3">
                                         <a href>{news.newCate}</a>
@@ -63,24 +68,23 @@ export default function NewsContent(props) {
                                     </div>
                                     <div>
                                         <h3 className="mb-3">{news.newTitle}</h3>
-                                        <p>{news.newIntro}</p>
-
+                                        <div className="newscontent-text"
+                                            dangerouslySetInnerHTML={{ __html: intro }}
+                                        >
+                                        </div>
                                         <div className="mb-5">
                                             <h3>Đọc thêm Bài viết XỊN:</h3>
                                             {
                                                 newsView.map((item, index) => {
                                                     return (
                                                         <div>
-                                                        <Link href="https://cophieux.com/tan-man-ve-dinh-gia-co-phieu-nhung-dieu-can-luu-y/">{item.newTitle}</Link>
-                                                        <br/>
+                                                            <Link to={"/news/detail/" + item._id}>{item.newTitle}</Link>
+                                                            <br />
                                                         </div>
                                                     )
                                                 })
                                             }
-                                    
-                                        </div>
-                                        <div className="mb-3 pb-3">
-                                            <a href><img className="img-fluid" src="https://cophieux.com/wp-content/uploads/2023/05/BANNER-KHOA-HOC-2023-GIF.gif" alt="" /></a>
+
                                         </div>
                                         {
                                             news &&

@@ -327,8 +327,11 @@ function AccountInfo(props) {
                         <table className="dashboard-table">
                            <tbody>
                               <tr className="dashboard-order"> 
+                                <th className="table-new-title table-order-title"> 
+                                    Mã đơn hàng
+                                 </th> 
                                  <th className="table-new-title table-order-title"> 
-                                    Thông tin ship
+                                    Thông tin đơn hàng
                                  </th> 
                                  <th className="table-new-title table-order-title"> 
                                     Ngày
@@ -354,7 +357,10 @@ function AccountInfo(props) {
                                           totalItem += item.orderList[i].amount
                                     }
                                     return (
-                                          <tr key={index} className="mobile-table"> 
+                                          <tr key={index} className="mobile-table">
+                                            <td>
+                                                <p>{item.orderId}</p>
+                                             </td> 
                                              <td> 
                                                 <div className="flex" style={{alignItems: 'center',margin: '10px 0'}}>
                                                       <p 

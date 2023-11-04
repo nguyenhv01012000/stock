@@ -19,7 +19,7 @@ module.exports.postOrder = async function(req, res) {
 		Order.findOne().sort('-orderId').exec(async function(err, item) {
 			const data = {
 				orderId: item.orderId + 1,
-				orderAvatar: req.body.orderAvatar || "http://localhost:4000/images/16f9bbf512b66a228f7978e34d8fb163",
+				orderAvatar: req.body.orderAvatar || BACKEND + "/images/16f9bbf512b66a228f7978e34d8fb163",
 				orderName: req.body.orderName,
 				orderEmail: req.body.orderEmail,
 				orderPhone: req.body.orderPhone,
@@ -29,7 +29,8 @@ module.exports.postOrder = async function(req, res) {
 				orderList: req.body.orderList,
 				orderTotal: req.body.orderTotal,
 				orderPaymentMethod: req.body.orderPaymentMethod,
-				orderDate: req.body.orderDate
+				orderDate: req.body.orderDate,
+				orderStatus: "Comfirming"
 			}
 			const orderList = req.body.orderList;
 			for (let i in orderList) {
@@ -49,13 +50,13 @@ module.exports.postOrder = async function(req, res) {
 				noticeTime: new Date()
 			}
 			await Notice.create(notice)
-			res.status(200).send("ok");
+			res.status(200).send("" + data.orderId);
 		});
 	} else {
 		const data = {
-			orderId: 1,
+			orderId: 10001,
 			orderName: req.body.orderName,
-			orderAvatar: req.body.orderAvatar || "http://localhost:4000/images/16f9bbf512b66a228f7978e34d8fb163",
+			orderAvatar: req.body.orderAvatar || BACKEND + "/images/16f9bbf512b66a228f7978e34d8fb163",
 			orderEmail: req.body.orderEmail,
 			orderPhone: req.body.orderPhone,
 			orderAddress: req.body.orderAddress,
@@ -64,7 +65,8 @@ module.exports.postOrder = async function(req, res) {
 			orderList: req.body.orderList,
 			orderTotal: req.body.orderTotal,
 			orderPaymentMethod: req.body.orderPaymentMethod,
-			orderDate: req.body.orderDate
+			orderDate: req.body.orderDate,
+			orderStatus: "Comfirming"
 		}
 		const orderList = req.body.orderList;
 		for (let i in orderList) {
@@ -78,7 +80,7 @@ module.exports.postOrder = async function(req, res) {
 			})
 		}
 		await Order.create(data);
-		res.status(200).send("ok");
+		res.status(200).send("" + data.orderId);
 	}
 }
 

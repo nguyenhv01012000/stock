@@ -21,12 +21,15 @@ export default function ProductReview(props) {
         if (userInfo) {
             setReviewName(userInfo.userEmail)
         }
-        if (props.product) { 
-            setProduct(props.product)
+    },[userInfo])  
+
+    useEffect(()=>{
+        setProduct(props.product)
+        if (props.product && props.product.productVote) { 
             const arr = props.product.productVote.sort((a,b)=> new Date(b.ratingDate) - new Date(a.ratingDate));
             setProductVote(arr);  
         }
-    },[userInfo])  
+    },[props.product])
 
     const reviewStarConfig = {
         size: 24,

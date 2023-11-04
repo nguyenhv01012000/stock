@@ -12,7 +12,8 @@ var orderSchema = new mongoose.Schema({
 	orderList: Array,
 	orderTotal: Number,
 	orderPaymentMethod: String,
-	orderDate: String
+	orderDate: String,
+	orderStatus:String
 	},
     {
     	versionKey: false

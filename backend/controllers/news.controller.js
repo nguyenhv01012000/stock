@@ -1,3 +1,4 @@
+const { BACKEND } = require("../env.js");
 var News = require("../models/news.model.js");
 
 module.exports.index = async function(req, res) {
@@ -30,12 +31,15 @@ module.exports.index = async function(req, res) {
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
 		count = await News.count({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}});
-	}else {
+	}else if(sort){
 		news = await News.find({ newCate: req.query.sort})
 			.sort({ newDate: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit); 
 		count = await News.count({ newCate: req.query.sort});
+	}else{
+		news = await News.find();
+		count = await News.count();
 	}
 	res.json({news: news, count:count});
 };
@@ -56,7 +60,7 @@ module.exports.cate = function(req, res) {
 module.exports.postNews = async function(req, res) {
 	const imgArr = [];
 	req.files.map((item)=>{
-		imgArr.push(`http://localhost:4000/images/${item.filename}`)
+		imgArr.push( BACKEND + `/images/${item.filename}`)
 	})
 	const data = {
 		newImg: imgArr[0],
@@ -84,12 +88,6 @@ module.exports.updateNews = async function(req, res) {
 			}
 		)
 	} else {
-		if (req.body.deleteImgId) {
-			const deletedData = {
-				newImg: "",
-			}
-			await News.findByIdAndUpdate(id, deletedData)
-		}
 		
 		const data = {
 			newCate: req.body.newCate,
@@ -103,13 +101,13 @@ module.exports.updateNews = async function(req, res) {
 		const imgArr = [];
 		if (req.files) {
 			req.files.map((item)=>{
-				imgArr.push(`http://localhost:4000/images/${item.filename}`)
+				imgArr.push( BACKEND + `/images/${item.filename}`)
 			})
 		}
 		const img = {
 			newImg: imgArr[0]
 		}
-		if(imgArr[0])
+		if(imgArr.length && imgArr[0])
 		News.findByIdAndUpdate(
 			{_id: id},
 			{$set: img},

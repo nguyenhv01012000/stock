@@ -19,8 +19,8 @@ export default function DashboardProductTable(props) {
     useEffect(()=>{
         axios.get(`http://localhost:4000/products`)
             .then(res => {
-                setProducts(res.data)
-                setConstProducts(res.data)
+                setProducts(res.data.products)
+                setConstProducts(res.data.products)
             }
         )
     },[props.isChange]) 
@@ -233,7 +233,7 @@ export default function DashboardProductTable(props) {
                         <div 
                             className="dashboard-addnew-btn btn"
                             onClick={props.setOpenCreateFunc}
-                        >Add new</div>
+                        >Thêm Khóa Học</div>
                         <div className="dashboard-addnew-search">
                             <form onSubmit={searchOnSubmit}>
                                 <input type="text" placeholder="Search records"
@@ -286,7 +286,7 @@ export default function DashboardProductTable(props) {
                                             </td>
                                             <td className="table-mobile-productimages" style={{display: 'flex'}}>
                                                {item.productImg && <img 
-                                                    src={item.productImg[0]} 
+                                                    src={item.productImg} 
                                                     width="70px" height="80px"
                                                     style={{padding: '5px 0'}}
                                                     alt=""

@@ -29,8 +29,8 @@ export default function DashboardMain() {
     useEffect(()=>{
         axios.get(`http://localhost:4000/products`)
             .then(res => {
-                setProducts(res.data)
-                let virtualProducts = [...res.data]
+                setProducts(res.data.products)
+                let virtualProducts = [...res.data.products]
                 virtualProducts.sort((a,b) =>  b.productSold - a.productSold)
                 let virtualProducts2 = []
                 for (let i in virtualProducts) {

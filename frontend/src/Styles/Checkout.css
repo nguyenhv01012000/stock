@@ -18,8 +18,8 @@
     cursor: pointer;
 }
 .checkout-tab-item-active {
-    border-bottom: #007fc8 3px solid;
-    color: #007fc8; 
+    border-bottom: #34aa40 3px solid;
+    color: #34aa40; 
 }
 .checkout-tab-item-active:before {
     top: 100%;
@@ -30,7 +30,7 @@
     width: 0;
     position: absolute;
     pointer-events: none;
-    border-top-color: #007fc8;
+    border-top-color: #34aa40;
     border-width: 10px;
     margin-left: -10px;
 }
@@ -39,7 +39,7 @@
 }
 .checkout-info-title {
     font-size: 22px;
-    color: #007fc8;
+    color: #34aa40;
     margin-top: 20px;
 } 
 .checkout-info, .checkout-info-form, .checkout-info-row {
@@ -65,7 +65,6 @@
     color: #FFF;
     text-align: center;
     background-color: #fc2754;
-    width: 200px;
     border-radius: 10px;
     cursor: pointer;
 }
