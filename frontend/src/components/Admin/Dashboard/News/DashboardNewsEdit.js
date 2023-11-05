@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import DashboardEditor from './DashboardEditor';
+import { BACKEND } from '../../../../env';
 
 export default function DashboardNewsCreate(props) {
 
@@ -70,7 +71,7 @@ export default function DashboardNewsCreate(props) {
         formData.append("newIntro", newsIntro);
         formData.append("deleteImgId", deleteImgId);
 
-        axios.post(`http://localhost:4000/news/update/${news._id}`, formData, config)
+        axios.post(BACKEND + `/news/update/${news._id}`, formData, config)
             .then(() => {
                 props.setCloseEditFunc(false);
                 props.setToastFunc(true);

@@ -6,8 +6,7 @@ import socketIOClient from "socket.io-client"
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-
-const ENDPOINT = "http://localhost:4000";
+import { BACKEND } from '../../../../env'
 
 export default function DashboardInbox(props) {
     
@@ -18,7 +17,7 @@ export default function DashboardInbox(props) {
     const [chatInput, setChatInput] = useState("")
     const [searchInput, setSearchInput] = useState("")
 
-    const socket = socketIOClient(ENDPOINT);
+    const socket = socketIOClient(BACKEND);
 
     useEffect(() => {
         socket.emit('join', {
@@ -63,7 +62,7 @@ export default function DashboardInbox(props) {
         }
         socket.emit('messageSend-admin', data)
 
-        axios.get(`http://localhost:4000/chat`)
+        axios.get(BACKEND + `/chat`)
             .then(res => {
                 setAllChatData(res.data)
                 setConstAllChatData(res.data)

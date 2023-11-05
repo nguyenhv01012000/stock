@@ -4,6 +4,7 @@ import '../../App.css'
 import ReactStars from "react-rating-stars-component";
 import { UserContext } from '../../contexts/User';
 import axios from 'axios'
+import { BACKEND } from '../../env';
 
 export default function ProductReview(props) { 
 
@@ -53,7 +54,7 @@ export default function ProductReview(props) {
                 ratingStart: reviewStar,
                 ratingAvt: userInfo.userAvt
             }
-            axios.post(`http://localhost:4000/products/review/${product._id}`, data)
+            axios.post(BACKEND + `/products/review/${product._id}`, data)
             .then((res)=>{
                 console.log(res)
                 setProductVote(productVote=>[data, ...productVote])
@@ -68,7 +69,7 @@ export default function ProductReview(props) {
                 ratingStart: reviewStar, 
                 ratingAvt: "https://icon-library.com/images/avatar-icon-png/avatar-icon-png-8.jpg"
             }
-            axios.post(`http://localhost:4000/products/review/${product._id}`, data)
+            axios.post(BACKEND + `/products/review/${product._id}`, data)
             .then((res)=>{ 
                 setProductVote(productVote=>[data, ...productVote])
                 setReviewName("")

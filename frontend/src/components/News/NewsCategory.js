@@ -6,6 +6,7 @@ import NewsAds from './NewsAds'
 import Axios from 'axios';
 import News from '../News/News';
 import { Link } from 'react-router-dom/cjs/react-router-dom'
+import { BACKEND } from '../../env'
 
 function NewsCategory(props) {
 
@@ -25,7 +26,7 @@ function NewsCategory(props) {
                 sort: category
             },
         }
-        Axios.get(`http://localhost:4000/news`, config)
+        Axios.get(BACKEND + `/news`, config)
             .then(res => {
                 const arr = [...res.data.news]
                 setNewsView(arr)

@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import { BACKEND } from '../../../../env';
 
 export default function DashboardUserCreate(props) {
 
@@ -26,7 +27,7 @@ export default function DashboardUserCreate(props) {
         formData.append("userPassword", userPassword);
         formData.append("userRole", userRole);
         
-        axios.post('http://localhost:4000/users/register', formData, config)
+        axios.post(BACKEND + '/users/register', formData, config)
         props.setCloseCreateFunc(false);
         props.setToastFunc(true);
     }

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import DashboardEditor from './DashboardEditor';
+import { BACKEND } from '../../../../env';
 
 export default function DashboardNewsCreate(props) {
 
@@ -59,7 +60,7 @@ export default function DashboardNewsCreate(props) {
         formData.append("newContent", newsContent);
         formData.append("newDate", newsDate);
         formData.append("newIntro", newsIntro);
-        axios.post('http://localhost:4000/news', formData, config)
+        axios.post(BACKEND + '/news', formData, config)
         props.setCloseCreateFunc(false);
         props.setToastFunc(true);
     }

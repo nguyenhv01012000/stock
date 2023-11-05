@@ -8,8 +8,7 @@ import { faEnvelope, faFileInvoice, faHome, faInbox, faNewspaper, faTshirt, faUs
 import socketIOClient from "socket.io-client" 
 import Axios from 'axios'
 import { withRouter } from 'react-router-dom'
-
-const ENDPOINT = "http://localhost:4000";
+import { BACKEND } from '../../../env'
 
 function Dashboard(props) {
     const menuItems = [
@@ -54,14 +53,14 @@ function Dashboard(props) {
     const [openMenuMobile, setOpenMenuMobile] = useState(true); 
     const [productId, setProductId] = useState("")
 
-    const socket = socketIOClient(ENDPOINT);
+    const socket = socketIOClient(BACKEND);
 
     const [orderNotice, setOrderNotice] = useState(null) 
     const [userInfo, setUserInfo] = useState(null)
 
     useEffect(()=>{
         if (localStorage.getItem('token')) {
-            Axios.get(`http://localhost:4000/users/${localStorage.getItem('user-id')}`, { 
+            Axios.get(BACKEND + `/users/${localStorage.getItem('user-id')}`, { 
                 headers: {"authorization" : `Bearer ${localStorage.getItem('token')}`}
             })
             .then(res => {

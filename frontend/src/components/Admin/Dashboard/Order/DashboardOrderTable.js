@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'
+import { BACKEND } from '../../../../env';
 
 export default function DashboardUserTable(props) {
 
@@ -14,7 +15,7 @@ export default function DashboardUserTable(props) {
     const [constOrder, setConstOrder] = useState([])
     
     useEffect(()=>{
-        axios.get(`http://localhost:4000/order`)
+        axios.get(BACKEND + `/order`)
             .then(res => {
                 setOrder(res.data)
                 setConstOrder(res.data)
@@ -101,7 +102,7 @@ export default function DashboardUserTable(props) {
 
     const deleteOnClick = (event) => {
         const id = event.target.id
-        axios.post(`http://localhost:4000/order/delete/:${id}`, {
+        axios.post(BACKEND + `/order/delete/:${id}`, {
             id: id
         }).then(()=>{ 
             setOrder(order.filter((item)=>{

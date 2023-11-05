@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import DashboardEditor from '../News/DashboardEditor';
+import { BACKEND } from '../../../../env';
 
 export default function DashboardProductCreate(props) {
 
@@ -125,13 +126,13 @@ export default function DashboardProductCreate(props) {
         formData.append("productSubContent", subContentString);
 
 
-        axios.post('http://localhost:4000/products', formData, config)
+        axios.post(BACKEND + '/products', formData, config)
         props.setCloseCreateFunc(false);
         props.setToastFunc(true);
     }
 
     const addNewCate = () => {
-        axios.post('http://localhost:4000/category', {
+        axios.post(BACKEND + '/category', {
             cateName: inputValue.cate
         })
         setCate(cate => [...cate, { cateName: inputValue.cate }])

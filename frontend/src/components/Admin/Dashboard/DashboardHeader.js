@@ -4,6 +4,7 @@ import '../../../Styles/Dashboard.css'
 import { faBell, faEllipsisV, faListUl, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Axios from 'axios'
+import { BACKEND } from '../../../env'
 
 export default function DashboardHeader(props) {
 
@@ -12,7 +13,7 @@ export default function DashboardHeader(props) {
     const [unreadedNotice, setUnreadedNotice] = useState(0)
 
     useEffect(()=>{
-        Axios.get(`http://localhost:4000/notice`)
+        Axios.get(BACKEND + `/notice`)
             .then(res => {
                 setNotice((res.data).reverse())
                 let count = 0;
@@ -30,7 +31,7 @@ export default function DashboardHeader(props) {
         if (openNotice) {
             setOpenNotice(false)
         } else {
-            Axios.post(`http://localhost:4000/notice/update`, {
+            Axios.post(BACKEND + `/notice/update`, {
                 readAll: true
             })
             setUnreadedNotice(0)

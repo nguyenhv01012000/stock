@@ -14,8 +14,8 @@ import socketIOClient from "socket.io-client"
 import Header from '../components/Home/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { BACKEND } from '../env';
 
-const ENDPOINT = "http://localhost:4000";
 
 function Checkout(props) {
 
@@ -27,7 +27,7 @@ function Checkout(props) {
         cartItems,
         total
     } = useContext(CartContext);
-    const socket = socketIOClient(ENDPOINT)
+    const socket = socketIOClient(BACKEND)
 
     const [tinh, setTinh] = useState([])
     const [huyen, setHuyen] = useState([])
@@ -58,7 +58,7 @@ function Checkout(props) {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        Axios.get(`http://localhost:4000/products/` + props.match.params.id)
+        Axios.get(BACKEND + `/products/` + props.match.params.id)
             .then(res => {
                 setCourse(res.data)
             }
@@ -76,7 +76,7 @@ function Checkout(props) {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        Axios.get(`http://localhost:4000/users/${localStorage.getItem('user-id')}`, {
+        Axios.get(BACKEND + `/users/${localStorage.getItem('user-id')}`, {
             headers: { "authorization": `Bearer ${localStorage.getItem('token')}` }
         })
             .then(res => {
@@ -90,7 +90,7 @@ function Checkout(props) {
                 setUserProvince(userInfo.userTinh)
                 setUserAddress(userInfo.userAddress)
                 if (userInfo.userDistrict !== "") {
-                    Axios.get(`http://localhost:4000/vietnam`)
+                    Axios.get(BACKEND + `/vietnam`)
                         .then(res => {
                             setTinh(res.data[0].tinh)
                             setHuyen(res.data[0].huyen)
@@ -108,7 +108,7 @@ function Checkout(props) {
                     setUserDistrict(userInfo.userHuyen)
                 }
             })
-        Axios.get(`http://localhost:4000/vietnam`)
+        Axios.get(BACKEND + `/vietnam`)
             .then(res => {
                 setTinh(res.data[0].tinh)
                 setHuyen(res.data[0].huyen)
@@ -201,7 +201,7 @@ function Checkout(props) {
                 }, 3000)
                 return
             } else {
-                Axios.post('http://localhost:4000/order', data)
+                Axios.post(BACKEND + `/order`, data)
                 setTimeout(() => {
                     localStorage.removeItem('total')
                     localStorage.removeItem('cart')
@@ -212,7 +212,7 @@ function Checkout(props) {
             }
         } else {
             setIsHandle(true)
-            Axios.post('http://localhost:4000/order', data).then( res => {
+            Axios.post(BACKEND + `/order`, data).then( res => {
                 setIsPay(res.data)   
                 setIsHandle(false)
                 setTimeout(() => {

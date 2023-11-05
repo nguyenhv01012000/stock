@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import { BACKEND } from '../../../../env';
 
 export default function DashboardSubscriberCreate(props) {
 
@@ -11,7 +12,7 @@ export default function DashboardSubscriberCreate(props) {
 
     const onSubmit = (event) => {
         event.preventDefault()
-        axios.post('http://localhost:4000/email', {
+        axios.post(BACKEND + '/email', {
             subscriber: subscriberEmail
         }).then((res)=>{ 
             props.setCloseCreateFunc(false);

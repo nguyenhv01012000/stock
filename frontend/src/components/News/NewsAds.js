@@ -4,6 +4,7 @@ import '../../App.css'
 import '../../Styles/News.css'
 import Axios from 'axios';
 import NewsSmall from '../News/NewsSmall';
+import { BACKEND } from '../../env';
 
 function NewsAds(props) {
 
@@ -18,7 +19,7 @@ function NewsAds(props) {
         sort: "latest"
       },
     }
-    Axios.get(`http://localhost:4000/news`, config)
+    Axios.get(BACKEND + `/news`, config)
       .then(res => {
          const arr = [...res.data.news]
         setNewsLatest(arr)
@@ -31,7 +32,7 @@ function NewsAds(props) {
         sort: "view"
       },
     }
-    Axios.get(`http://localhost:4000/news`, config)
+    Axios.get(BACKEND + `/news`, config)
       .then(res => {
          const arr = [...res.data.news]
         setNewsView(arr)

@@ -5,6 +5,7 @@ import NewsAds from '../News/NewsAds'
 import { Link, withRouter } from 'react-router-dom'
 import Axios from 'axios';
 import CourseItem from './CourseItem'
+import { BACKEND } from '../../env'
 
 export default function CourseList(props) {
 
@@ -22,7 +23,7 @@ export default function CourseList(props) {
         sort: "view"
       },
     }
-    Axios.get(`http://localhost:4000/products`, config)
+    Axios.get(BACKEND + `/products`, config)
       .then(res => {
         const arr = [...res.data.products]
         setCourseView(arr)
@@ -35,7 +36,7 @@ export default function CourseList(props) {
         sort: "latest"
       },
     }
-    Axios.get(`http://localhost:4000/products`, config)
+    Axios.get(BACKEND + `/products`, config)
       .then(res => {
         const arr = [...res.data.products]
         setCourseLatest(arr)

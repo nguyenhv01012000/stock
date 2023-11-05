@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'
+import { BACKEND } from '../../../../env';
 
 export default function DashboardSubscriberTable(props) {
 
@@ -13,7 +14,7 @@ export default function DashboardSubscriberTable(props) {
     const [constEmail, setConstEmail] = useState([])
     
     useEffect(()=>{
-        axios.get(`http://localhost:4000/email`)
+        axios.get(BACKEND + `/email`)
             .then(res => {
                 setEmail(res.data)
                 setConstEmail(res.data)
@@ -99,7 +100,7 @@ export default function DashboardSubscriberTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://localhost:4000/email/delete/:${event.target.id}`, {
+        axios.post(BACKEND + `/email/delete/:${event.target.id}`, {
             id: event.target.id
         })
         setEmail(email.filter((item)=>{

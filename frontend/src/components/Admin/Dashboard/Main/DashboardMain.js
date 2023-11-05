@@ -11,6 +11,7 @@ import DashboardChart from './DashboardChart'
 import DashboardTodoList from './DashboardTodoList'
 import DashboardChartPie from './DashboardChartPie'
 import DashboardChartLine from './DashboardChartLine'
+import { BACKEND } from '../../../../env'
 
 export default function DashboardMain() {
 
@@ -27,7 +28,7 @@ export default function DashboardMain() {
     const [incomeMonthPercent, setIncomeMonthPercent] = useState({}) 
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/products`)
+        axios.get(BACKEND + `/products`)
             .then(res => {
                 setProducts(res.data.products)
                 let virtualProducts = [...res.data.products]
@@ -43,17 +44,17 @@ export default function DashboardMain() {
                 setTopProductSales(virtualProducts2)
             }
         )
-        axios.get(`http://localhost:4000/users/list`)
+        axios.get(BACKEND + `/users/list`)
             .then(res => {
                 setUser(res.data)
             }
         ) 
-        axios.get(`http://localhost:4000/email`)
+        axios.get(BACKEND + `/email`)
             .then(res => {
                 setEmail(res.data)
             }
         ) 
-        axios.get(`http://localhost:4000/order`)
+        axios.get(BACKEND + `/order`)
             .then(res => {
                 setOrder(res.data)
                 const topCustomer2 = Object.values(res.data.reduce((a, {orderEmail, orderName, orderTotal, orderAvatar}) => {

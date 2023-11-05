@@ -6,6 +6,7 @@ import Axios from 'axios';
 import NewsAds from '../News/NewsAds';
 import CourseItem from './CourseItem';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+import { BACKEND } from '../../env';
 
 function CourseCategory(props) {
 
@@ -25,7 +26,7 @@ function CourseCategory(props) {
                 sort: category
             },
         }
-        Axios.get(`http://localhost:4000/products`, config)
+        Axios.get(BACKEND + `/products`, config)
             .then(res => {
                 const arr = [...res.data.products]
                 setCourseView(arr)

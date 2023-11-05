@@ -6,6 +6,7 @@ import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import NewsSmall from '../News/NewsSmall';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+import { BACKEND } from '../../env';
 
 function Banner(props) {
     const [newsLatest, setNewsLatest] = useState([]);
@@ -17,7 +18,7 @@ function Banner(props) {
                 sort: "latest"
             },
         }
-        Axios.get(`http://localhost:4000/news`, config)
+        Axios.get(BACKEND + `/news`, config)
             .then(res => {
                  const arr = [...res.data.news]
                 setNewsLatest(arr)

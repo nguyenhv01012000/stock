@@ -9,6 +9,7 @@ import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt, faHome, faSignOutAlt, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { BACKEND } from '../../env';
 
 function AccountInfo(props) {
 
@@ -42,7 +43,7 @@ function AccountInfo(props) {
             setUserPhone(userInfo.userPhone)
             setUserAvt(userInfo.userAvt)
             setUserAddress(userInfo.userAddress) 
-            axios.get(`http://localhost:4000/vietnam`)
+            axios.get( BACKEND + `/vietnam`)
             .then(res => {
                 setTinh(res.data[0].tinh)
                 setHuyen(res.data[0].huyen)
@@ -56,7 +57,7 @@ function AccountInfo(props) {
             ) 
             setUserTinh(userInfo.userTinh)
             setUserHuyen(userInfo.userHuyen)
-            axios.get(`http://localhost:4000/order`)
+            axios.get(BACKEND + `/order`)
                 .then(res => {
                 const orderList2 = []
                 for (let i in res.data) {
@@ -73,7 +74,7 @@ function AccountInfo(props) {
     },[userInfo])
 
     useEffect(()=> {
-        axios.get(`http://localhost:4000/users/${localStorage.getItem('user-id')}`, { 
+        axios.get(BACKEND + `/users/${localStorage.getItem('user-id')}`, { 
             headers: {"authorization" : `Bearer ${localStorage.getItem('token')}`}
         })
         .then(res => { 
@@ -104,7 +105,7 @@ function AccountInfo(props) {
         formData.append("userHuyen", userHuyen);
         formData.append("userAddress", userAddress);
         localStorage.removeItem('token')
-        axios.post(`http://localhost:4000/users/update/${userInfo._id}`, formData, config)
+        axios.post(BACKEND + `/users/update/${userInfo._id}`, formData, config)
         .then(res => {
             //alert("Sửa thành công!")
             setUserInfoFunc(userInfo => res.data.user);

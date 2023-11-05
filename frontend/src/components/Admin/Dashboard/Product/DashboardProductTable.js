@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'
+import { BACKEND } from '../../../../env';
 
 export default function DashboardProductTable(props) {
 
@@ -17,7 +18,7 @@ export default function DashboardProductTable(props) {
     const [isSortBySold, setIsSortBySold] = useState(false)
     
     useEffect(()=>{
-        axios.get(`http://localhost:4000/products`)
+        axios.get(BACKEND + `/products`)
             .then(res => {
                 setProducts(res.data.products)
                 setConstProducts(res.data.products)
@@ -103,7 +104,7 @@ export default function DashboardProductTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://localhost:4000/products/delete/:${event.target.id}`, {
+        axios.post(BACKEND + `/products/delete/:${event.target.id}`, {
             productId: event.target.id
         })
         setProducts(products.filter((item)=>{

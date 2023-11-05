@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import DashboardEditor from '../News/DashboardEditor';
+import { BACKEND } from '../../../../env';
 
 
 export default function DashboardProductEdit(props) {
@@ -162,7 +163,7 @@ export default function DashboardProductEdit(props) {
         formData.append("productSubContent", subContentString);
         formData.append("deleteImgId", deleteImgId);
 
-        axios.post(`http://localhost:4000/products/update/${product._id}`, formData, config)
+        axios.post(BACKEND + `/products/update/${product._id}`, formData, config)
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
     }

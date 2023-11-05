@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import News from '../News/News';
 import NewsSmall from '../News/NewsSmall';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+import { BACKEND } from '../../env';
 
 export default function Features(props) {
 
@@ -21,7 +22,7 @@ export default function Features(props) {
                 sort: "view"
             },
         }
-        Axios.get(`http://localhost:4000/news`, config)
+        Axios.get(BACKEND + `/news`, config)
             .then(res => {
                  const arr = [...res.data.news]
                 setNewsView(arr)
@@ -34,7 +35,7 @@ export default function Features(props) {
                 sort: "hot"
             },
         }
-        Axios.get(`http://localhost:4000/news`, config)
+        Axios.get(BACKEND + `/news`, config)
             .then(res => {
                  const arr = [...res.data.news]
                 setNewsHot(arr)

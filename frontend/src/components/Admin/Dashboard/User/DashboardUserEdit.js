@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import { BACKEND } from '../../../../env';
 
 export default function DashboardUserCreate(props) {
 
@@ -36,7 +37,7 @@ export default function DashboardUserCreate(props) {
         formData.append("userRole", userRole);
         formData.append("fromAdmin", true)
 
-        axios.post(`http://localhost:4000/users/update/${user._id}`, formData, config)
+        axios.post(BACKEND + `/users/update/${user._id}`, formData, config)
 
         props.setCloseEditFunc(false);
         props.setToastFunc(true);

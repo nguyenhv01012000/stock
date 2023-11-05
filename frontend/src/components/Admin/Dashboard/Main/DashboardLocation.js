@@ -4,6 +4,7 @@ import '../../../../Styles/Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import { BACKEND } from '../../../../env'
 
 export default function DashboardLocation(props) {
 
@@ -13,7 +14,7 @@ export default function DashboardLocation(props) {
     const [location, setLocation] = useState([])
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/vietnam`)
+        axios.get(BACKEND + `/vietnam`)
             .then(res => {
                 setLocation(res.data[0].tinh)
             }

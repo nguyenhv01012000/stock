@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'
+import { BACKEND } from '../../../../env';
 
 export default function DashboardUserTable(props) {
 
@@ -13,7 +14,7 @@ export default function DashboardUserTable(props) {
     const [constUser, setConstUser] = useState([])
     
     useEffect(()=>{
-        axios.get(`http://localhost:4000/users/list`)
+        axios.get(BACKEND + `/users/list`)
             .then(res => {
                 setUser(res.data)
                 setConstUser(res.data)
@@ -99,7 +100,7 @@ export default function DashboardUserTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://localhost:4000/users/delete/:${event.target.id}`, {
+        axios.post(BACKEND + `/users/delete/:${event.target.id}`, {
             id: event.target.id
         })
         setUser(user.filter((item)=>{

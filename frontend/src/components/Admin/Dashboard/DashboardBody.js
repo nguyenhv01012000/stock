@@ -21,6 +21,7 @@ import DashboardOrderCreate from './Order/DashboardOrderCreate';
 import DashboardSubscriberCreate from './Subscriber/DashboardSubscriberCreate';
 import DashboardSubscriberEdit from './Subscriber/DashboardSubscriberEdit';
 import DashboardSubscriber from './Subscriber/DashboardSubscriber';
+import { BACKEND } from '../../../env';
 
 export default function DashboardBody(props) {
 
@@ -45,27 +46,27 @@ export default function DashboardBody(props) {
     }
 
     useEffect(()=> {
-        Axios.get(`http://localhost:4000/products/${props.productId}`)
+        Axios.get(BACKEND + `/products/${props.productId}`)
             .then(res => {
                 setProduct(res.data)
             } 
         )
-        Axios.get(`http://localhost:4000/news/${props.productId}`)
+        Axios.get(BACKEND + `/news/${props.productId}`)
             .then(res => {
                 setNews(res.data)
             } 
         )
-        Axios.get(`http://localhost:4000/users/list/${props.productId}`)
+        Axios.get(BACKEND + `/users/list/${props.productId}`)
             .then(res => {
                 setUser(res.data)
             } 
         )
-        Axios.get(`http://localhost:4000/order/${props.productId}`)
+        Axios.get(BACKEND + `/order/${props.productId}`)
             .then(res => {
                 setOrder(res.data)
             } 
         ) 
-        Axios.get(`http://localhost:4000/email/${props.productId}`)
+        Axios.get(BACKEND + `/email/${props.productId}`)
             .then(res => {
                 setEmail(res.data)
             } 

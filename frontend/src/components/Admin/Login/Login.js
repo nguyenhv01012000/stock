@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import '../../../App.css'
 import '../../../Styles/Admin.css'
+import { BACKEND } from '../../../env';
 
 export default function Login(props) {
 
@@ -23,7 +24,7 @@ export default function Login(props) {
 
     const handleOnSubmit = (event) => {
         event.preventDefault(); 
-        Axios.post('http://localhost:4000/users/login', {
+        Axios.post(BACKEND + `/users/login`, {
             loginEmail: email,
             loginPassword: password
         })

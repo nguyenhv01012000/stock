@@ -5,6 +5,7 @@ import NewsContent from '../components/News/NewsContent';
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { BACKEND } from '../env';
 
 function NewsDetail(props) {
 
@@ -13,7 +14,7 @@ function NewsDetail(props) {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        Axios.get(`http://localhost:4000/news/` + props.match.params.id)
+        Axios.get(BACKEND + `/news/` + props.match.params.id)
             .then(res => {
                 setNews(res.data)
             }
@@ -28,7 +29,7 @@ function NewsDetail(props) {
                 sort: "view"
             },
         }
-        Axios.get(`http://localhost:4000/news`, config)
+        Axios.get(BACKEND + `/news`, config)
             .then(res => {
                  const arr = [...res.data.news]
                 setNewsView(arr)
