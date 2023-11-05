@@ -1,6 +1,7 @@
 var Order = require("../models/order.model");
 var Notice = require("../models/notice.model");
 var Product = require("../models/product.model");
+const { BACKEND } = require("../env");
 
 module.exports.index = async function(req, res) {
 	var order = await Order.find();

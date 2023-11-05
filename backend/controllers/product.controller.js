@@ -3,6 +3,7 @@ var Email = require("../models/email.model");
 var mongoose = require('mongoose');
 
 var nodemailer = require('nodemailer');
+const { BACKEND } = require("../env.js");
 
 // Login with admin email
 // var transporter = nodemailer.createTransport({

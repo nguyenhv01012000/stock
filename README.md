@@ -30,3 +30,7 @@ docker run -i -t -p 3003:3000  stock-frontend
 ```
 
 ## Shalom!
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi -f $(docker images -aq)
