@@ -22,11 +22,11 @@ npm start
 
 ```
 docker build -t stock-backend .
-docker container run -p 4004:4000  stock-backend  
+docker container run -p 4004:4000 --name "stock-backend" stock-backend  
 
 ```
 docker build -t stock-frontend .
-docker run -i -t -p 3003:3000  stock-frontend   
+docker run -i -t -p 3003:3000 --name "stock-frontend" stock-frontend   
 ```
 
 ## Shalom!

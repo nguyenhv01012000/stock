@@ -46,8 +46,43 @@ export default function Footer(props) {
             </div>
 
             <div className="list-shortcut-desktop">
-                <a className="zalo" href="https://zalo.me/0979794334"></a>
                 <a href="#" className="back-to-top"><img src="/img/40.png" alt="" title="" height="48px" /></a>
+            </div>
+
+            <div className="list-shortcut-desktop">
+                <a href="#" className="back-to-top"><img src="img/40.png" alt="" title height="48px" /></a>
+            </div>
+            <div className="adlinkvntools-widget auto-ads-ml-desktop auto-ads-ml-has-powered-by hidden-xs">
+                <div className="style1">
+                    <div className="float-btn-group button-bottom-left open">
+                        <div className="btn-list">
+                            <div id="btn-google_map" className="btn-float-container tooltip">
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXzbFDNQQvshZ6rI3OdIXWMrfjRXvSv-_UxVWtpdw8HMwolQ/viewform" target="_blank" className="fancybox btn-float menu-feedback"><span className="button_tap" /></a>
+                                <div className="widget-tooltiptext tooltiptext-style1-bottom-right">Hòm thư Góp ý</div></div>
+                            <div id="btn-download_doc" className="btn-float-container tooltip">
+                                <a href="https://dautucophieu.net/dang-ky-mo-tai-khoan-chung-khoan/" className="fancybox btn-float download-doc-color menu-download-doc"><span className="button_tap" /></a>
+                                <div className="widget-tooltiptext tooltiptext-style1-bottom-right">Đăng ký Mở tài khoản Chứng khoán</div></div>
+                            <div id="btn-contact_form" className="btn-float-container tooltip">
+                                <a href="http://zalo.me/0395081346" className="btn-float menu-zalo"><span className="button_tap" /></a>
+                                <div className="widget-tooltiptext tooltiptext-style1-bottom-right">Để lại lời nhắn cho chúng tôi Zalo</div></div>
+                            <div id="btn-facebook" className="btn-float-container tooltip">
+                                <a href="https://m.me/dominostock" className="btn-float facebook-color menu-facebook"><span className="button_tap" /></a>
+                                <div className="widget-tooltiptext tooltiptext-style1-bottom-right">Nhắn tin cho chúng tôi qua Facebook</div></div>
+                            <div id="btn-click_to_call" className="btn-float-container tooltip">
+                                <a href="tel:0395081346" className="btn-float click-to-call-color menu-click-to-call"><span className="button_tap" /></a>
+                                <div className="widget-tooltiptext tooltiptext-style1-bottom-right">Gọi ngay cho chúng tôi</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="float-btn-group button-bottom-right open adlinkvntools-Mobile visible-xs">
+                <div className="btn-list mobile-background">
+                    <div id="btn-click_to_call" className="btn-float-container tooltip"><a href="tel:0395081346" className="btn-float click-to-call-color menu-click-to-call"><span className="button_tap" /></a><span>Gọi ngay</span></div>
+                    <div id="btn-facebook" className="btn-float-container tooltip"><a href="https://m.me/dominostock" className="btn-float facebook-color menu-facebook"><span className="button_tap" /></a><span>Messenger</span></div>
+                    <div id="btn-contact_form" className="btn-float-container tooltip"><a href="http://zalo.me/0395081346" className="btn-float menu-zalo"><span className="button_tap" /></a><span>Zalo chát</span></div>
+                    <div id="btn-download_doc" className="btn-float-container tooltip"><a href="https://dautucophieu.net/dang-ky-mo-tai-khoan-chung-khoan/" className="fancybox btn-float download-doc-color menu-download-doc"><span className="button_tap" /></a><span>Mở tài khoản</span></div>
+                    <div id="btn-google_map" className="btn-float-container tooltip"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfXzbFDNQQvshZ6rI3OdIXWMrfjRXvSv-_UxVWtpdw8HMwolQ/viewform" target="_blank" className="fancybox btn-float menu-feedback"><span className="button_tap" /></a><span>Góp ý</span></div>
+                </div>
             </div>
 
             <div className="container-fluid bg-light pt-5 px-sm-3 px-md-5">
@@ -55,7 +90,7 @@ export default function Footer(props) {
                     <div className="row">
                         <div className="col-lg-4">
                             <h4 className="font-weight-bold mb-4" style={{ color: "#34aa40" }}>THÔNG TIN LIÊN HỆ</h4>
-                            <p><strong>Skype:</strong> langtubuonnuocmam<br /><strong>Mobile/Zalo:</strong> 0985811065<br /><strong>Hỗ trợ khách hàng:</strong> mở tài khoản chứng khoán,môi giới tư vấn tại các chi nhánh tại các công ty chứng khoán SHS, HSC, VNDIRECT, VPS, MBS, SSI, KB, VCBS, TCBS, Mirae Asset,&nbsp;AIS …&nbsp; trên toàn quốc</p>
+                            <p><strong>Skype:</strong> langtubuonnuocmam<br /><strong>Mobile/Zalo:</strong> 0395081346<br /><strong>Hỗ trợ khách hàng:</strong> mở tài khoản chứng khoán,môi giới tư vấn tại các chi nhánh tại các công ty chứng khoán SHS, HSC, VNDIRECT, VPS, MBS, SSI, KB, VCBS, TCBS, Mirae Asset,&nbsp;AIS …&nbsp; trên toàn quốc</p>
                         </div>
                         <div className="col-lg-4">
                             <h4 className="font-weight-bold mb-4" style={{ color: "#34aa40" }}>ĐĂNG KÝ KHÁCH HÀNG</h4>
