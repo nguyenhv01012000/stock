@@ -60,7 +60,7 @@ export default function Footer(props) {
                                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXzbFDNQQvshZ6rI3OdIXWMrfjRXvSv-_UxVWtpdw8HMwolQ/viewform" target="_blank" className="fancybox btn-float menu-feedback"><span className="button_tap" /></a>
                                 <div className="widget-tooltiptext tooltiptext-style1-bottom-right">Hòm thư Góp ý</div></div>
                             <div id="btn-download_doc" className="btn-float-container tooltip">
-                                <a href="https://dautucophieu.net/dang-ky-mo-tai-khoan-chung-khoan/" className="fancybox btn-float download-doc-color menu-download-doc"><span className="button_tap" /></a>
+                                <a href="https://openaccount.vps.com.vn/open-account?MKTID=C243" className="fancybox btn-float download-doc-color menu-download-doc"><span className="button_tap" /></a>
                                 <div className="widget-tooltiptext tooltiptext-style1-bottom-right">Đăng ký Mở tài khoản Chứng khoán</div></div>
                             <div id="btn-contact_form" className="btn-float-container tooltip">
                                 <a href="http://zalo.me/0395081346" className="btn-float menu-zalo"><span className="button_tap" /></a>
@@ -80,7 +80,7 @@ export default function Footer(props) {
                     <div id="btn-click_to_call" className="btn-float-container tooltip"><a href="tel:0395081346" className="btn-float click-to-call-color menu-click-to-call"><span className="button_tap" /></a><span>Gọi ngay</span></div>
                     <div id="btn-facebook" className="btn-float-container tooltip"><a href="https://m.me/dominostock" className="btn-float facebook-color menu-facebook"><span className="button_tap" /></a><span>Messenger</span></div>
                     <div id="btn-contact_form" className="btn-float-container tooltip"><a href="http://zalo.me/0395081346" className="btn-float menu-zalo"><span className="button_tap" /></a><span>Zalo chát</span></div>
-                    <div id="btn-download_doc" className="btn-float-container tooltip"><a href="https://dautucophieu.net/dang-ky-mo-tai-khoan-chung-khoan/" className="fancybox btn-float download-doc-color menu-download-doc"><span className="button_tap" /></a><span>Mở tài khoản</span></div>
+                    <div id="btn-download_doc" className="btn-float-container tooltip"><a href="https://openaccount.vps.com.vn/open-account?MKTID=C243" className="fancybox btn-float download-doc-color menu-download-doc"><span className="button_tap" /></a><span>Mở tài khoản</span></div>
                     <div id="btn-google_map" className="btn-float-container tooltip"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfXzbFDNQQvshZ6rI3OdIXWMrfjRXvSv-_UxVWtpdw8HMwolQ/viewform" target="_blank" className="fancybox btn-float menu-feedback"><span className="button_tap" /></a><span>Góp ý</span></div>
                 </div>
             </div>
