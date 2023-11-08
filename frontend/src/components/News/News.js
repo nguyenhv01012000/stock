@@ -17,7 +17,7 @@ function News(props) {
             "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
         ];
         if (news) {
-            const date = new Date(news.newTime)
+            const date = new Date(news.newDate)
             const day = date.getDate()
             const month = date.getMonth()
             const year = date.getFullYear()
@@ -25,7 +25,7 @@ function News(props) {
         }
         if (news && news.newIntro) {
             let a = EditorState.createWithContent(convertFromRaw(JSON.parse(news.newIntro)))
-            setIntro(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center"))
+            setIntro(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center").replaceAll("height: 500px;width: 800px", "height: auto;width: 100%"))
         }
     },[news])
 

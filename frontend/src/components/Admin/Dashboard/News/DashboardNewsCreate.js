@@ -173,24 +173,21 @@ export default function DashboardNewsCreate(props) {
                             </select>
                             <label style={{ marginLeft: "10%", width: "30%" }}>Ngày xuất bản </label>
                             <input type="date" name="Ngày xuất bản" value={newsDate} onChange={(event) => { setNewsDate(event.target.value) }}
-                                required dateFormat="dd/mm/yyyy" dataDateFormat="DD MMMM YYYY" placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
+                                required dateFormat="DD MMMM YYYY" dataDateFormat="DD MMMM YYYY" placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
                         </div>
                     </div>
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Giới Thiệu</div>
                         <div className="dashboard-right">
-                            <div style={{ border: '1px #ddd solid' }}>
                                 <DashboardEditor
+                                    small = {1}
                                     setNewsContent={setNewsIntro}
                                 />
-                            </div>
                         </div>
                     </div>
-                    <div style={{ border: '1px #ddd solid' }}>
                         <DashboardEditor
                             setNewsContent={setNewsContent}
                         />
-                    </div>
                     <div className="flex-center" style={{ marginTop: '40px' }}>
                         <button className="create-box-btn btn">
                             Add news

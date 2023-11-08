@@ -288,12 +288,11 @@ export default function DashboardProductCreate(props) {
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Giới thiệu khóa học </div>
                         <div className="dashboard-right">
-                            <div style={{ border: '1px #ddd solid', padding: "10px" }}>
-                                    <DashboardEditor
-                                        newsContent={productDes}
-                                        setNewsContent={setProductDes}
-                                    />
-                                </div>
+                            <DashboardEditor
+                                small = {1}
+                                newsContent={productDes}
+                                setNewsContent={setProductDes}
+                            />
                         </div>
                     </div>
 

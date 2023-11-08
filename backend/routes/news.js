@@ -11,5 +11,6 @@ router.get("/:id", controller.news);
 router.post("/delete/:id", controller.deleteNews);
 router.post("/update/:id", upload.array("newImg", 12), controller.updateNews); 
 router.post("/",  upload.array("newImg", 12), controller.postNews);
+router.post("/upload-image",  upload.array("newImg", 12), controller.uploadImg);
  
 module.exports = router;

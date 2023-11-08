@@ -363,20 +363,11 @@ export default function DashboardProductEdit(props) {
                         <div className="create-box-row flex">
                             <div className="dashboard-left flex">Giới thiệu khóa học </div>
                             <div className="dashboard-right">
-                                {/* <textarea style={{ width: "100%", height: "150px", padding: "10px" }}
-                                    type="text" name="des"
-                                    value={productDes || ""}
-                                    onChange={(event) => {
-                                        setProductDes(event.target.value)
-                                    }}
-                                    required
-                                ></textarea> */}
-                                <div style={{ border: '1px #ddd solid', padding: "10px" }}>
                                     <DashboardEditor
+                                        small = {1}
                                         newsContent={productDes}
                                         setNewsContent={setProductDes}
                                     />
-                                </div>
                             </div>
                         </div>
 

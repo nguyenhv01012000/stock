@@ -16,7 +16,7 @@ function NewsSmall(props) {
             "7", "8", "9", "10", "11", "12"
         ];
         if (news) {
-            const date = new Date(news.newTime)
+            const date = new Date(news.newDate)
             const day = date.getDate()
             const month = date.getMonth()
             const year = date.getFullYear()

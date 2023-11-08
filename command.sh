@@ -6,6 +6,7 @@ then
     git push
 elif [ $1 == '2' ]
 then 
+    git pull
     cd ./backend
     docker build -t stock-backend .
     docker container run -p 4004:4000 --name "stock-backend" stock-backend  
@@ -16,6 +17,7 @@ then
     docker image rm stock-backend
 elif [ $1 == '4' ]
 then 
+    git pull
     cd ./frontend
     docker build -t stock-frontend .
     docker container run -p 3003:3000 --name "stock-frontend" stock-frontend  

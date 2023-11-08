@@ -14,7 +14,7 @@ export default function CourseInfo(props) {
   useEffect(() => {
     if (course && course.productDes) {
       let a = EditorState.createWithContent(convertFromRaw(JSON.parse(course.productDes)))
-      setTest(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center"))
+      setTest(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center").replaceAll("height: 500px;width: 800px", "height: auto;width: 100%"))
     }
   }, [props.course])
 

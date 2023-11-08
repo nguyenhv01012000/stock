@@ -10,33 +10,34 @@ module.exports.index = async function(req, res) {
 	var sort = req.query.sort;
 	var news = [];
 	var count = 0;
+	let currentDate = new Date();
 
 	if(sort == "view" || sort == "BÀI VIẾT ĐỌC NHIỀU"){
-		news = await News.find()
+		news = await News.find({"newDate": { $lte: currentDate }})
 			.sort({ newView: "desc" })
 			.sort({ newDate: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
-		count = await News.count();
+		count = await News.count({"newDate": { $lte: currentDate }});
 	}else if(sort == "latest" || sort == "TIN MỚI NHÂT") {
-		news = await News.find()
+		news = await News.find({"newDate": { $lte: currentDate }})
 			.sort({ newDate: "desc" })
 			.sort({ newView: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
-		count = await News.count();
+		count = await News.count({"newDate": { $lte: currentDate }});
 	}else if(sort == "hot") {
-		news = await News.find({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}})
+		news = await News.find({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}, "newDate": { $lte: currentDate }})
 			.sort({ newDate: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
-		count = await News.count({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}});
+		count = await News.count({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}, "newDate": { $lte: currentDate }});
 	}else if(sort){
-		news = await News.find({ newCate: req.query.sort})
+		news = await News.find({ newCate: req.query.sort, "newDate": { $lte: currentDate }})
 			.sort({ newDate: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit); 
-		count = await News.count({ newCate: req.query.sort});
+		count = await News.count({ newCate: req.query.sort, "newDate": { $lte: currentDate }});
 	}else{
 		news = await News.find();
 		count = await News.count();
@@ -57,6 +58,15 @@ module.exports.cate = function(req, res) {
 		res.json(news);
 	});
 }
+
+module.exports.uploadImg = function(req, res) {
+	const imgArr = [];
+	req.files.map((item)=>{
+		imgArr.push( BACKEND + `/images/${item.filename}`)
+	})
+	res.status(200).send(imgArr[0]);
+}
+
 module.exports.postNews = async function(req, res) {
 	const imgArr = [];
 	req.files.map((item)=>{

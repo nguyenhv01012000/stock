@@ -9,6 +9,7 @@ import { stateToHTML } from "draft-js-export-html";
 import { convertToHTML } from 'draft-convert';
 import { Link, NavLink } from 'react-router-dom/cjs/react-router-dom';
 import NewsAds from './NewsAds';
+import { BACKEND } from '../../env';
 
 
 export default function NewsContent(props) {
@@ -28,8 +29,8 @@ export default function NewsContent(props) {
     useEffect(() => {
         if (news && news.newContent) {
             let a = EditorState.createWithContent(convertFromRaw(JSON.parse(news.newContent)))
-            setTest(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center"))
-            const date = new Date(news.newTime)
+            setTest(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center").replaceAll("height: 500px;width: 800px", "height: auto;width: 100%"))
+            const date = new Date(news.newDate)
             const day = date.getDate()
             const month = date.getMonth()
             const year = date.getFullYear()
@@ -37,7 +38,12 @@ export default function NewsContent(props) {
         }
         if (news && news.newIntro) {
             let a = EditorState.createWithContent(convertFromRaw(JSON.parse(news.newIntro)))
-            setIntro(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center"))
+            setIntro(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center").replaceAll("height: 500px;width: 800px", "height: auto;width: 100%"))
+        }
+        if (news._id) {
+            Axios.post(BACKEND + `/news/update/${news._id}`, {
+                countId: news._id
+            })
         }
     }, [props.news])
 
@@ -66,34 +72,32 @@ export default function NewsContent(props) {
                                         <span className="px-1">/</span>
                                         <span>{date}</span>
                                     </div>
-                                    <div>
-                                        <h3 className="mb-3">{news.newTitle}</h3>
+                                    <h3 className="mb-3">{news.newTitle}</h3>
+                                    <div className="newscontent-text"
+                                        dangerouslySetInnerHTML={{ __html: intro }}
+                                    >
+                                    </div>
+                                    <div className="mb-5">
+                                        <h3>Đọc thêm Bài viết XỊN:</h3>
+                                        {
+                                            newsView.map((item, index) => {
+                                                return (
+                                                    <div>
+                                                        <Link to={"/news/detail/" + item._id}>{item.newTitle}</Link>
+                                                        <br />
+                                                    </div>
+                                                )
+                                            })
+                                        }
+
+                                    </div>
+                                    {
+                                        news &&
                                         <div className="newscontent-text"
-                                            dangerouslySetInnerHTML={{ __html: intro }}
+                                            dangerouslySetInnerHTML={{ __html: test }}
                                         >
                                         </div>
-                                        <div className="mb-5">
-                                            <h3>Đọc thêm Bài viết XỊN:</h3>
-                                            {
-                                                newsView.map((item, index) => {
-                                                    return (
-                                                        <div>
-                                                            <Link to={"/news/detail/" + item._id}>{item.newTitle}</Link>
-                                                            <br />
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-
-                                        </div>
-                                        {
-                                            news &&
-                                            <div className="newscontent-text"
-                                                dangerouslySetInnerHTML={{ __html: test }}
-                                            >
-                                            </div>
-                                        }
-                                    </div>
+                                    }
                                 </div>
                             </div>
                             {/* News Detail End */}

@@ -199,23 +199,20 @@ export default function DashboardNewsCreate(props) {
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Giới Thiệu</div>
                         <div className="dashboard-right">
-                            <div style={{ border: '1px #ddd solid', padding: "10px" }}>
-                                <DashboardEditor
-                                    newsContent={newsIntro}
-                                    setNewsContent={setNewsIntro}
-                                />
-                            </div>
+                            <DashboardEditor
+                                small = {1}
+                                newsContent={newsIntro}
+                                setNewsContent={setNewsIntro}
+                            />
                         </div>
                     </div>
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Nội Dung </div>
                     </div>
-                    <div style={{ border: '1px #ddd solid', padding: "10px" }}>
                         <DashboardEditor
                             newsContent={newsContent}
                             setNewsContent={setNewsContent}
                         />
-                    </div>
                     <div className="flex-center" style={{ marginTop: '40px' }}>
                         <button className="create-box-btn btn">
                             Edit news
