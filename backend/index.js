@@ -133,3 +133,8 @@ io.on('connection', async function (socket) {
 })
 
 server.listen(4000, () => console.log(`Listening on port ${4000}`));
+
+process.on('uncaughtException', function (err) {
+  console.error(err);
+  console.log("ERROR...");
+})
