@@ -10,7 +10,9 @@ import { convertToHTML } from 'draft-convert';
 import { Link, NavLink } from 'react-router-dom/cjs/react-router-dom';
 import NewsAds from './NewsAds';
 import { BACKEND } from '../../env';
-
+import draftToMarkdown from 'draftjs-to-markdown';
+import ReactQuill from 'react-quill';
+import TOC from './TOC';
 
 export default function NewsContent(props) {
 
@@ -21,25 +23,18 @@ export default function NewsContent(props) {
     const news = props.news
     const newsView = props.newsView
 
-    const [newsList, setNewsList] = useState([])
-    const [test, setTest] = useState("")
-    const [intro, setIntro] = useState("")
     const [date, setDate] = useState("")
 
+
     useEffect(() => {
-        if (news && news.newContent) {
-            let a = EditorState.createWithContent(convertFromRaw(JSON.parse(news.newContent)))
-            setTest(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center").replaceAll("height: 500px;width: 800px", "height: auto;width: 100%"))
+        if (news) {
             const date = new Date(news.newDate)
             const day = date.getDate()
             const month = date.getMonth()
             const year = date.getFullYear()
             setDate(`${day}-${monthNames[month]}-${year}`)
         }
-        if (news && news.newIntro) {
-            let a = EditorState.createWithContent(convertFromRaw(JSON.parse(news.newIntro)))
-            setIntro(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center").replaceAll("height: 500px;width: 800px", "height: auto;width: 100%"))
-        }
+
         if (news._id) {
             Axios.post(BACKEND + `/news/update/${news._id}`, {
                 countId: news._id
@@ -59,7 +54,7 @@ export default function NewsContent(props) {
                 </div>
             </div>
 
-            <div className="container-fluid py-3">
+            <div className="news123 container-fluid py-3">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8">
@@ -68,14 +63,14 @@ export default function NewsContent(props) {
                                 <img className="img-fluid w-100" src={news.newImg} />
                                 <div className="overlay position-relative bg-light">
                                     <div className="mb-3">
-                                        <a href>{news.newCate}</a>
+                                        <a href style={{fontSize:"16px"}}>{news.newCate}</a>
                                         <span className="px-1">/</span>
-                                        <span>{date}</span>
+                                        <span style={{fontSize:"16px"}}>{date}</span>
                                     </div>
                                     <h3 className="mb-3">{news.newTitle}</h3>
                                     <div className="newscontent-text"
-                                        dangerouslySetInnerHTML={{ __html: intro }}
                                     >
+                                        <ReactQuill value={news.newIntro} readOnly theme={"bubble"} />
                                     </div>
                                     <div className="mb-5">
                                         <h3>Đọc thêm Bài viết XỊN:</h3>
@@ -91,13 +86,12 @@ export default function NewsContent(props) {
                                         }
 
                                     </div>
-                                    {
-                                        news &&
-                                        <div className="newscontent-text"
-                                            dangerouslySetInnerHTML={{ __html: test }}
-                                        >
-                                        </div>
-                                    }
+                                    <TOC selector=".ql-editor" data={news}/>
+                                    <div className="newscontent-text"
+                                    >
+                                        <ReactQuill value={news.newContent} readOnly theme={"bubble"} />
+                                    </div>
+
                                 </div>
                             </div>
                             {/* News Detail End */}
@@ -172,6 +166,6 @@ export default function NewsContent(props) {
             </div>
 
 
-        </div>
+        </div >
     )
 }

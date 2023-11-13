@@ -1,0 +1,148 @@
+/* Mobie */
+
+.menu-mobile {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-mobile-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.menu-mobile-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100%;
+    background-color: #fff;
+}
+
+.menu-mobile-search {
+    margin: 20px;
+    margin-top: 10px;
+}
+
+.menu-mobile-login {
+    margin: 0 20px;
+    align-items: center;
+    height: 70px;
+    cursor: pointer;
+    border-top: 1px #ddd solid;
+}
+
+.menu-mobile-login .icon {
+    font-size: 18px;
+}
+
+.menu-mobile-login p {
+    margin-top: 1px;
+    margin-left: 20px;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.menu-mobile-list {
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.menu-mobile-item {
+    /* height: 40px; */
+    font-weight: bold;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px 20px;
+    margin: 10px 0;
+    align-items: center;
+    border-left: 3px #fff solid;
+    justify-content: space-between;
+    overflow: hidden;
+    transition: 1s;
+}
+
+.menu-mobile-sub {}
+
+.menu-item-sub-item {
+    font-size: 14px;
+    font-weight: 400;
+    color: #777;
+    margin: 15px 0 15px 20px;
+}
+
+.menu-item-sub-item:last-child,
+.menu-item-sub-item2:last-child {
+    margin-bottom: 0;
+}
+
+.menu-item-sub-item2 {
+    margin: 10px 0 10px 20px;
+}
+
+.menu_mobile_item_active {
+    border-left: 3px #000 solid;
+}
+
+.menu_mobile_item_active_home {
+    border-left: 3px #000 solid;
+}
+
+.openMenuMobile {
+    animation-name: openMenuMobile;
+    animation-duration: .7s;
+}
+
+@keyframes openMenuMobile {
+    from {
+        transform: translateX(-350px);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.closeMenuMobile {
+    animation-name: closeMenuMobile;
+    animation-duration: .7s;
+    transform: translateX(-350px);
+}
+
+.closeMenuMobile_white {
+    color: #fff !important;
+}
+
+@keyframes closeMenuMobile {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-350px);
+    }
+}
+
+.menu-mobile-right {
+    flex-grow: 1;
+    height: 100%;
+    background-color: rgba(1, 1, 1, 0.4);
+    cursor: url(../assets/close.png), auto;
+}
+
+.input {
+    outline: none;
+    border: none;
+    padding: 5px 5px;
+    border-bottom: 2px #ddd solid;
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif;
+  }
+  .input:focus, 
+  .input:hover {
+    border-bottom: 2px #777 solid;
+  }

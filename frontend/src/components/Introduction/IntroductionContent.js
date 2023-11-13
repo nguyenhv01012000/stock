@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
@@ -6,13 +6,35 @@ import "slick-carousel/slick/slick-theme.css"
 
 function IntroductionContent(props) {
 
+  const [settingSlider, setSettingSlider] = useState({})
+  const [moblie, setMoblie] = useState(true)
+
+
   const settings = {
     infinite: true,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000
-}
+  }
+
+  const settingsMobile = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000
+  }
+
+  useEffect(() => {
+    if (window.innerWidth <= 700) {
+      setSettingSlider(settingsMobile)
+      setMoblie(true)
+    }else {
+      setSettingSlider(settings)
+      setMoblie(false);
+    }
+},[])
 
     return (
         <div>
@@ -28,7 +50,7 @@ function IntroductionContent(props) {
                 <h1><span className="block-7">SMARTTRADING</span></h1>
                 <style dangerouslySetInnerHTML={{__html: "\n                        #text-1501799246 {\n                            font-size: 1.6rem;\n                            color: #fff\n                        }\n\n                        #text-1501799246>* {\n                            color: #fff\n                        }\n                    " }} />
               </div>
-              <p style={{padding: '0% 10%'}}>Đầu tư thực chiến, chia sẻ kiến thức cho Nhà đầu tư chứng khoán, Nhà đầu tư
+              <p style={{padding: '0% 20%'}}>Đầu tư thực chiến, chia sẻ kiến thức cho Nhà đầu tư chứng khoán, Nhà đầu tư
                 F0, Nhà đầu tư tài chính với 10 năm kinh nghiệm đầu tư thành công từ Smarttrading</p>
             </div>
           </div>
@@ -97,8 +119,8 @@ function IntroductionContent(props) {
                   của quý khách</p>
               </div>
             </div>
-            <div className="row">
-              <div className="slick-slide slick-current slick-active col-lg-4" data-slick-index={0} aria-hidden="false" style={{width: '377px',display:'flex'}}>
+            <div className={moblie ? "" : "row"}>
+              <div className={moblie ? "slick-slide slick-current slick-active":"slick-slide slick-current slick-active col-lg-4"} data-slick-index={0} aria-hidden="false" style={{width: moblie ? '100%' : '377px',display:'flex'}}>
                 <div>
                   <div className="col" style={{width: '100%', display: 'inline-block'}}>
                     <div className="col-inner">
@@ -133,7 +155,7 @@ function IntroductionContent(props) {
                   </div>
                 </div>
               </div>
-              <div className="slick-slide slick-active col-lg-4" data-slick-index={1} aria-hidden="false" style={{width: '377px', display:'flex'}}>
+             {!moblie && <div className="slick-slide slick-active col-lg-4" data-slick-index={1} aria-hidden="false" style={{width:'377px', display:'flex'}}>
                 <div>
                   <div className="col" style={{width: '100%', display: 'inline-block'}}>
                     <div className="col-inner">
@@ -168,8 +190,8 @@ function IntroductionContent(props) {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="slick-slide slick-active col-lg-4" data-slick-index={2} aria-hidden="false" style={{width: '377px', display:'flex'}}>
+              </div>}
+              {!moblie && <div className="slick-slide slick-active col-lg-4" data-slick-index={1} aria-hidden="false" style={{width:'377px', display:'flex'}}>
                 <div>
                   <div className="col" style={{width: '100%', display: 'inline-block'}}>
                     <div className="col-inner">
@@ -177,8 +199,8 @@ function IntroductionContent(props) {
                       <div className="product-small box has-hover box-normal box-text-bottom">
                         <div className="box-image">
                           <div className="image-cover">
-                            <a href="https://smtfx.vn/khoa-hoc-master-wyckoff-tu-chung-khoan-den-forex/" aria-label="Khóa học Master Wyckoff từ Chứng khoán đến Forex" tabIndex={0}>
-                              <img width={940} height={528} src="https://smtfx.vn/wp-content/uploads/2023/06/business-man-holding-phone-260nw-1049641082.png" className="attachment-original size-original" alt="Business Man Holding Phone 260nw 1049641082" decoding="async" loading="lazy" /> </a>
+                            <a href="https://smtfx.vn/master-ve-forex-3/" aria-label="Khóa học VSA & Volume Master" tabIndex={0}>
+                              <img width={742} height={556} src="https://smtfx.vn/wp-content/uploads/2023/06/img-box-1.png" className="attachment-original size-original" alt="Img Box 1" decoding="async" loading="lazy" /> </a>
                           </div>
                           <div className="image-tools top right show-on-hover" />
                           <div className="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover">
@@ -188,24 +210,23 @@ function IntroductionContent(props) {
                           <p className="category uppercase is-smaller no-text-overflow product-cat op-7">
                             Khóa học</p>
                           <div className="title-wrapper">
-                            <p className="name product-title woocommerce-loop-product__title" style={{height: '19px'}}><a href="https://smtfx.vn/khoa-hoc-master-wyckoff-tu-chung-khoan-den-forex/" className="woocommerce-LoopProduct-link woocommerce-loop-product__link" tabIndex={0}>Khóa học Master Wyckoff từ Chứng khoán đến Forex</a>
-                            </p>
+                            <p className="name product-title woocommerce-loop-product__title" style={{height: '19px'}}><a href="https://smtfx.vn/master-ve-forex-3/" className="woocommerce-LoopProduct-link woocommerce-loop-product__link" tabIndex={0}>Khóa học VSA &amp; Volume Master</a></p>
                           </div>
                           <div className="price-wrapper" style={{height: '18px'}}>
-                            <span className="price"><del aria-hidden="true"><span className="woocommerce-Price-amount amount"><bdi>75,000,000<span className="woocommerce-Price-currencySymbol">₫</span></bdi></span></del>
-                              <ins><span className="woocommerce-Price-amount amount"><bdi>50,000,000<span className="woocommerce-Price-currencySymbol">₫</span></bdi></span></ins></span>
+                            <span className="price"><del aria-hidden="true"><span className="woocommerce-Price-amount amount"><bdi>20,000,000<span className="woocommerce-Price-currencySymbol">₫</span></bdi></span></del>
+                              <ins><span className="woocommerce-Price-amount amount"><bdi>12,000,000<span className="woocommerce-Price-currencySymbol">₫</span></bdi></span></ins></span>
                           </div>
                           <p className="box-excerpt is-small" style={{height: '54px'}}>
                             We guide our clients through difficult issues, bringing insight and judgment
                             to each situation. Our innovative approaches create original solutions to
                             our clients’ most complex domestic &amp; multi juristictional deals and
-                            disputes.</p><a href="https://smtfx.vn/khoa-hoc-master-wyckoff-tu-chung-khoan-den-forex/" className="button btn-xemtl" tabIndex={0}>Đăng ký ngay</a>
+                            disputes.</p><a href="https://smtfx.vn/master-ve-forex-3/" className="button btn-xemtl" tabIndex={0}>Đăng ký ngay</a>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>}
             </div>
           </div>
         </div>
@@ -405,7 +426,7 @@ function IntroductionContent(props) {
               <div id="text-777610592" className="text text-title">
                 <h3>Đối tác – Khách hàng</h3>
               </div>
-              <Slider {...settings}>
+              <Slider {...settingSlider}>
                     <div className="slider-item">
                     <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/Logo-Cong-Ty-Cp-Chung-Khoan-MB-H.webp" alt="Logo Cong Ty Cp Chung Khoan Mb H" decoding="async" loading="lazy" />
                     </div>
@@ -422,13 +443,6 @@ function IntroductionContent(props) {
                     <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767.jpg" alt="Maxresdefault" decoding="async" loading="lazy" srcSet="https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767.jpg 1280w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-300x119.jpg 300w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-768x305.jpg 768w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-1024x407.jpg 1024w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-510x203.jpg 510w" sizes="(max-width: 1280px) 100vw, 1280px" />
                     </div>
                 </Slider>
-              {/* <div className="owl-carousel owl-carousel-2 carousel-item-5 position-relative mb-4">
-                <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/Logo-Cong-Ty-Cp-Chung-Khoan-MB-H.webp" alt="Logo Cong Ty Cp Chung Khoan Mb H" decoding="async" loading="lazy" />
-                <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/logo2-02-e1692157517246.jpg" alt="Logo2 02" decoding="async" loading="lazy" />
-                <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/logo_VND2015-view.png" alt="Logo Vnd2015 View" decoding="async" loading="lazy" />
-                <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530.jpg" alt="Logovps Nctz" decoding="async" loading="lazy" srcSet="https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530.jpg 660w, https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530-300x157.jpg 300w, https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530-510x267.jpg 510w" sizes="(max-width: 660px) 100vw, 660px" />
-                <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767.jpg" alt="Maxresdefault" decoding="async" loading="lazy" srcSet="https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767.jpg 1280w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-300x119.jpg 300w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-768x305.jpg 768w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-1024x407.jpg 1024w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-510x203.jpg 510w" sizes="(max-width: 1280px) 100vw, 1280px" />
-              </div> */}
             </div>
           </div>
         </div>

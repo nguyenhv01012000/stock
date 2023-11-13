@@ -4,6 +4,9 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import DashboardEditor from './DashboardEditor';
 import { BACKEND } from '../../../../env';
+import DashboardQuill from './DashboardQuill';
+import "./DashboardQuill.css";
+
 
 export default function DashboardNewsCreate(props) {
 
@@ -179,15 +182,10 @@ export default function DashboardNewsCreate(props) {
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Giới Thiệu</div>
                         <div className="dashboard-right">
-                                <DashboardEditor
-                                    small = {1}
-                                    setNewsContent={setNewsIntro}
-                                />
+                                <DashboardQuill setBlog={setNewsIntro}/>
                         </div>
                     </div>
-                        <DashboardEditor
-                            setNewsContent={setNewsContent}
-                        />
+                        <DashboardQuill setBlog={setNewsContent}/>
                     <div className="flex-center" style={{ marginTop: '40px' }}>
                         <button className="create-box-btn btn">
                             Add news

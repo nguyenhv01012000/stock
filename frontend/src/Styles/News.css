@@ -263,6 +263,7 @@
     padding-bottom: 50px;
     margin-bottom: 50px;
     border-bottom: 1px #ddd solid;
+    width: 100%;
 }
 .line {
     width: 100%;

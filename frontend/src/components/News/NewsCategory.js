@@ -68,7 +68,7 @@ function NewsCategory(props) {
         </div>
         {/* Breadcrumb End */}
         <div className="container-fluid py-3">
-            <div className="container">
+            <div className="container-lg">
                 <div className="row">
                     <div className="col-lg-8">
                         <div className="row">

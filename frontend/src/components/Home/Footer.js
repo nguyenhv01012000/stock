@@ -45,13 +45,10 @@ export default function Footer(props) {
                 </div>
             </div>
 
-            <div className="list-shortcut-desktop">
-                <a href="#" className="back-to-top"><img src="/img/40.png" alt="" title="" height="48px" /></a>
+            <div className="list-shortcut-desktop back-to-top">
+                <a href="#"><img src="/img/40.png" alt="" title="" height="48px" /></a>
             </div>
 
-            <div className="list-shortcut-desktop">
-                <a href="#" className="back-to-top"><img src="img/40.png" alt="" title height="48px" /></a>
-            </div>
             <div className="adlinkvntools-widget auto-ads-ml-desktop auto-ads-ml-has-powered-by hidden-xs">
                 <div className="style1">
                     <div className="float-btn-group button-bottom-left open">

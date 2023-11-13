@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import '../../App.css'
 import '../../Styles/News.css'
-import draftToHtml from "draftjs-to-html";
-import { EditorState, ContentState, convertToRaw, convertFromHTML, convertFromRaw } from "draft-js";
 function News(props) {
 
     const news = props.news 
 
     const [date, setDate] = useState("")
-    const [intro, setIntro] = useState("")
 
     useEffect(()=>{
         const monthNames = [
@@ -22,10 +19,6 @@ function News(props) {
             const month = date.getMonth()
             const year = date.getFullYear()
             setDate(`${day} ${monthNames[month]} ${year}`)
-        }
-        if (news && news.newIntro) {
-            let a = EditorState.createWithContent(convertFromRaw(JSON.parse(news.newIntro)))
-            setIntro(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center").replaceAll("height: 500px;width: 800px", "height: auto;width: 100%"))
         }
     },[news])
 
@@ -49,7 +42,7 @@ function News(props) {
                 <div className="news-title">{news.newTitle}</div>
             }
             {news &&
-                <div className="news-content">{intro.replace(/<[^>]+>/g, '')}</div>
+                <div className="news-content">{news.newIntro.replace(/<[^>]+>/g, '')}</div>
             }
             {news &&
                 <div className="news-readmore">Đọc Thêm...</div>
