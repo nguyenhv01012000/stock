@@ -135,7 +135,7 @@ function Header(props) {
                     <div className="col-12 col-md-8 text-white">
                         <span>
                             <img src="/img/icon_email.png" />
-                            nguyenhuungo@gmail
+                            hungnh.src@gmail.com
                         </span>
                         <span className="ml-4">
                             <img src="/img/icon_hotline.png" />
@@ -151,7 +151,7 @@ function Header(props) {
                     <Link to="/" className="navbar-brand d-block">
                         <h1 className="m-0 display-5 text-uppercase">
                             <img style={{ height: "45px" }} src="https://scontent.fhan3-5.fna.fbcdn.net/v/t1.15752-9/370016223_1460259698038526_3393128236471153605_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeHfvfSLREhvF07sYoa-838qjt6dDNsXYy6O3p0M2xdjLtoIc6yFv07FD6vqlZVC9EInRWDDUYRWZvFt7GBiQna-&_nc_ohc=DRRISp89_4UAX9oV9co&_nc_ht=scontent.fhan3-5.fna&oh=03_AdTwcyle2jxCBLwdBQycvdl0WLBYY2k-cP-S2KdYbjodtg&oe=6573298E" />
-                            <span className="text-primary">X</span>COPHIEU</h1>
+                            <span className="text-primary">DOMINO</span>STOCK</h1>
                     </Link>
                     <button type="button" className="navbar-toggler" onClick={() => setOpenMobileMenu(!openMobileMenu)}>
                         <span className="navbar-toggler-icon"></span>

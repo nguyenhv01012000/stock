@@ -47,11 +47,11 @@ function IntroductionContent(props) {
             <div className="text-inner text-center">
               <div id="text-1501799246" className="text text-title">
                 <h3>CHÀO MỪNG BẠN ĐẾN VỚI</h3>
-                <h1><span className="block-7">SMARTTRADING</span></h1>
+                <h1><span className="block-7">DOMINO STOCK</span></h1>
                 <style dangerouslySetInnerHTML={{__html: "\n                        #text-1501799246 {\n                            font-size: 1.6rem;\n                            color: #fff\n                        }\n\n                        #text-1501799246>* {\n                            color: #fff\n                        }\n                    " }} />
               </div>
               <p style={{padding: '0% 20%'}}>Đầu tư thực chiến, chia sẻ kiến thức cho Nhà đầu tư chứng khoán, Nhà đầu tư
-                F0, Nhà đầu tư tài chính với 10 năm kinh nghiệm đầu tư thành công từ Smarttrading</p>
+                F0, Nhà đầu tư tài chính với 10 năm kinh nghiệm đầu tư thành công từ DOMINO STOCK</p>
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@ function IntroductionContent(props) {
                   </div>
                   <p>Với đội ngũ các chuyên gia điều hành nhiều năm làm việc tại các tổ chức tài chính trong và
                     ngoài nước và kinh nghiệm đầu tư dày dặn, kiến thức sâu rộng và độ am hiểu về hoạt động
-                    doanh nghiệp, Smarttrading định hướng chiến lược đầu tư vào các doanh nghiệp đầu ngành</p>
+                    doanh nghiệp, DOMINO STOCK định hướng chiến lược đầu tư vào các doanh nghiệp đầu ngành</p>
                   <div className="row" id="row-2099975083">
                     <div id="col-1809089182" className="col col-text-run small-12 large-12" data-animate="bounceIn" data-animated="true">
                       <div className="col-inner">
@@ -113,9 +113,9 @@ function IntroductionContent(props) {
           <img className="video-banner" src="https://smtfx.vn/wp-content/uploads/2023/06/Group-148-e1685774742406.png" decoding="async" />
           <div className="overlay-center">
             <div className="col-inner text-center">
-              <div id="text-609430387" className="text text-title" style={{color: '#fff'}}>
+              <div id="text-609430387" className="text text-title" style={{color: '#fff', marginBottom:"30px"}}>
                 <h3 style={{color: '#fff'}}>Khóa học nổi bật</h3>
-                <p>Smarttrading mang tới những khóa học từ cơ bản tới nâng cao nhằm đồng hành trên quá trình đầu tư
+                <p>DOMINO STOCK mang tới những khóa học từ cơ bản tới nâng cao nhằm đồng hành trên quá trình đầu tư
                   của quý khách</p>
               </div>
             </div>
@@ -146,7 +146,7 @@ function IntroductionContent(props) {
                           </div>
                           <p className="box-excerpt is-small" style={{height: '54px'}}>
                             Khóa Học Chứng Khoán MIỄN PHÍ Bắt đầu hành trình giao dịch hiệu quả cùng
-                            Smarttrading Hiện nay, chứng khoán đang là kênh đầu tư “hút” tiền số 1 tại
+                            DOMINO STOCK Hiện nay, chứng khoán đang là kênh đầu tư “hút” tiền số 1 tại
                             Việt Nam, người người nhà nhà đều đầu tư chứng khoán. Để tham gia thị
                             trường, bạn cần phải có mentor (người hướng dẫn) hoặc...</p><a href="https://smtfx.vn/khoa-hoc-chung-khoan-free/" className="button btn-xemtl" tabIndex={0}>Đăng ký ngay</a>
                         </div>
