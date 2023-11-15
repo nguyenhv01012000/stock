@@ -2,6 +2,7 @@ import React, { useRef, useState, useMemo, useEffect } from "react";
 import ReactQuill, { Quill } from "react-quill"; // ES6
 import "react-quill/dist/quill.snow.css"; // ES6
 import ImageResize from "quill-image-resize-module-react";
+import VideoResize from 'quill-video-resize-module2'
 import "./DashboardQuill.css";
 
 const fontSizeArr = ["14px", "16px", "18px"];
@@ -18,6 +19,7 @@ export default function DashboardQuill(props) {
     Size.whitelist = fontSizeArr;
     Quill.register(Font, true)
     Quill.register("modules/imageResize", ImageResize);
+    Quill.register('modules/VideoResize', VideoResize);
     //Quill.register(Size, true);
   }, []);
 
@@ -77,7 +79,11 @@ export default function DashboardQuill(props) {
           },
           imageResize: {
             modules: ["Resize", "DisplaySize"]
-          }
+          },
+          VideoResize: {
+            modules: [ 'Resize', 'DisplaySize'],
+            tagName: 'iframe', // iframe | video
+      }
         }}
         // formats={[
         //   "header",

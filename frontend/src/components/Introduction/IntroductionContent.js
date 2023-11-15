@@ -63,11 +63,11 @@ function IntroductionContent(props) {
               <div className="col-lg-7">
                 <div className="col-inner" style={{paddingRight: '30px'}}>
                   <div className="img has-hover x md-x lg-x y md-y lg-y" id="image_1932253147">
-                    <div className="img-inner dark">
-                      <img src="https://smtfx.vn/wp-content/uploads/2023/06/logo-smattrading.png" style={{width: '200px'}} alt="Logo Smattrading" decoding="async" fetchpriority="high" />
+                    <div className="img-inner dark"  >
+                      {/* <img src="https://smtfx.vn/wp-content/uploads/2023/06/logo-smattrading.png" style={{width: '200px'}} alt="Logo Smattrading" decoding="async" fetchpriority="high" /> */}
                     </div>
                   </div>
-                  <div id="text-1302763023" className="text sub-title">
+                  <div id="text-1302763023" className="text sub-title" style={{marginTop: '60px'}}>
                     <h1>Thái độ tạo nên giá trị</h1>
                   </div>
                   <div id="text-1461884634" className="text text-title">

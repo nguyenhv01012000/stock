@@ -108,6 +108,7 @@ export default function TOC(props) {
             <li className="ez-toc-page-1 ez-toc-heading-level-1">
               {headings.map((heading) => {
                 const tagLevel = heading.tagName.match(/(\d+)/)?.[0] || "1";
+                if(heading.innerHTML != "<br>")
                 return (<div>
 
                   {

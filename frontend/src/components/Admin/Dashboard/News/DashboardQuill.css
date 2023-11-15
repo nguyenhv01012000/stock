@@ -11,6 +11,11 @@
   .ql-editor img {
     max-width: 100%;
   }
+
+  .quill-editor iframe,
+  .quill-editor video {
+      pointer-events: none;
+  }
   
   .ql-toolbar {
     text-align: center;
