@@ -33,7 +33,7 @@ function Banner(props) {
                 <div className="col-lg-8">
                     <div className="position-relative mb-3 mb-lg-0">
                         <div className="position-relative overflow-hidden cover-image">
-                            <img className="img-fluid h-100" src="https://cophieux.com/wp-content/uploads/2023/05/BANNER-KHOA-HOC-2023-GIF.gif" style={{objectFit: "cover"}}/>
+                            <img className="img-fluid h-100" src="../img/BANNER-KHOA-HOC-2023-GIF.gif" style={{objectFit: "cover"}}/>
                         </div>
                     </div>
                 </div>

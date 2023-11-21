@@ -97,7 +97,7 @@ function Header(props) {
                 },
                 {
                     dropdownTitle: "Góc Nhìn Và Thị Trường",
-                    dropdownList: ["Tin tức vĩ mô","Nhận định thị trường"]
+                    dropdownList: ["Tin tức vĩ mô","Nhận định thị trường","Phân Tích Cổ Phiếu"] 
                 },
                 {
                     dropdownTitle: "Sách Hay Sưu Tầm",
@@ -321,6 +321,9 @@ function Header(props) {
                                             <Link to="/news/category/Nhận định thị trường"
                                                 className={props.location.pathname.indexOf('Nhận định thị trường') != -1 ? "nav-link active" : "nav-link"}>
                                                 Nhận định thị trường</Link>
+                                            <Link to="/news/category/Phân Tích Cổ Phiếu"
+                                                className={props.location.pathname.indexOf('Phân Tích Cổ Phiếu') != -1 ? "nav-link active" : "nav-link"}>
+                                                Phân Tích Cổ Phiếu</Link>
                                         </div>
                                         <div className="col-lg-4" style={{ marginTop: "15px" }}>
                                             <b style={{ color: "black" }}>Sách Hay Sưu Tầm</b>

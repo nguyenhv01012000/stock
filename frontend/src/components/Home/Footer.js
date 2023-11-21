@@ -98,6 +98,7 @@ export default function Footer(props) {
                             <h4 className="font-weight-bold mb-4" style={{ color: "#34aa40" }}>MẠNG XÃ HỘI</h4>
                             <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdominostock&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=571590990729180" width="340" height="130" style={{border:"none",overflow:"hidden"}} scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>                           
                              <p><a href="https://www.youtube.com/@chungkhoandomino" target="_blank" rel="noopener"><img className="alignnone size-full wp-image-4158" src="/img/follow-us-on-youtube.png" alt="" width="256" height="76" /></a></p>
+                             <div className="visible-xs" style={{marginBottom:"70px"}}></div>
                         </div>
                     </div>
                 </div>

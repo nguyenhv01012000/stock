@@ -44,12 +44,12 @@ function NewsAds(props) {
     <div className="col-lg-4 pt-3 pt-lg-0">
       {/* Ads Start */}
       <div className="mb-3 pb-3">
-        <a href><img className="img-fluid" src="https://cophieux.com/wp-content/uploads/2023/05/BANNER-KHOA-HOC-2023-GIF.gif" alt="" /></a>
+        <a href><img className="img-fluid" src="../../img/BANNER-KHOA-HOC-2023-GIF.gif" alt="" /></a>
       </div>
       {/* Ads End */}
       {/* Ads Start */}
       <div className="mb-3 pb-3">
-        <a href><img className="img-fluid" src="https://cophieux.com/wp-content/uploads/2022/05/Tu-van-dau-tu-0522-gif.gif" alt="" /></a>
+        <a href><img className="img-fluid" src="../../img/Tu-van-dau-tu-0522-gif.gif" alt="" /></a>
       </div>
       {/* Ads End */}
       {/* Popular News Start */}

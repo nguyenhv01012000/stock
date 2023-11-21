@@ -168,6 +168,7 @@ export default function DashboardNewsCreate(props) {
                                 <optgroup label="GÓC NHÌN VÀ THỊ TRƯỜNG">
                                     <option value="Tin tức vĩ mô">Tin tức vĩ mô</option>
                                     <option value="Nhận định thị trường">Nhận định thị trường</option>
+                                    <option value="Phân Tích Cổ Phiếu">Phân Tích Cổ Phiếu</option>
                                 </optgroup>
                                 <optgroup label="SÁCH HAY SƯU TẦM">
                                     <option value="Sách phân tích cơ bản">Sách phân tích cơ bản</option>
@@ -184,6 +185,9 @@ export default function DashboardNewsCreate(props) {
                         <div className="dashboard-right">
                                 <DashboardQuill setBlog={setNewsIntro}/>
                         </div>
+                    </div>
+                    <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Nội Dung</div>
                     </div>
                         <DashboardQuill setBlog={setNewsContent}/>
                     <div className="flex-center" style={{ marginTop: '40px' }}>

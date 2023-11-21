@@ -4,6 +4,7 @@ import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import DashboardEditor from '../News/DashboardEditor';
 import { BACKEND } from '../../../../env';
+import DashboardQuill from '../News/DashboardQuill';
 
 
 export default function DashboardProductEdit(props) {
@@ -224,7 +225,7 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Link video</div>
+                            <div className="dashboard-left flex">Link Video Youtube</div>
                             <div className="dashboard-right">
                                 <input type="text" name="video"
                                     value={productVideo}
@@ -277,18 +278,28 @@ export default function DashboardProductEdit(props) {
                         </div>
                         <div className="create-box-row flex">
                             <div className="dashboard-left flex">Giá </div>
-                            <div className="dashboard-right">
+                            <div className="dashboard-right flex-center">
                                 <input
                                     type="number" name="price"
+                                    style={{ width: "100%" }}
                                     placeholder="VND"
                                     value={productPrice}
                                     onChange={(event) => {
                                         setProductPrice(event.target.value)
                                     }} required
                                 ></input>
+                                <label style={{ width: "20%" }}>Giảm Giá: </label>
+                                <input
+                                    type="number" placeholder="%"
+                                    name="sale"
+                                    value={productSale}
+                                    onChange={(event) => {
+                                        setProductSale(event.target.value)
+                                    }}
+                                    required></input>
                             </div>
                         </div>
-                        <div className="create-box-row flex">
+                        {/* <div className="create-box-row flex">
                             <div className="dashboard-left flex">Giảm Giá </div>
                             <div className="dashboard-right flex-center">
                                 <input
@@ -314,7 +325,7 @@ export default function DashboardProductEdit(props) {
                                         setToDate(event.target.value)
                                     }} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
                             </div>
-                        </div>
+                        </div> */}
                         <div className="create-box-row flex">
                             <div className="dashboard-left flex">Thời Lượng </div>
                             <div className="dashboard-right flex-center">
@@ -363,11 +374,7 @@ export default function DashboardProductEdit(props) {
                         <div className="create-box-row flex">
                             <div className="dashboard-left flex">Giới thiệu khóa học </div>
                             <div className="dashboard-right">
-                                    <DashboardEditor
-                                        small = {1}
-                                        newsContent={productDes}
-                                        setNewsContent={setProductDes}
-                                    />
+                                <DashboardQuill blog={productDes} setBlog={setProductDes}/>
                             </div>
                         </div>
 

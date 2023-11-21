@@ -5,6 +5,7 @@ import NewsAds from '../News/NewsAds'
 import { Link, withRouter } from 'react-router-dom'
 import draftToHtml from "draftjs-to-html";
 import { EditorState, ContentState, convertToRaw, convertFromHTML, convertFromRaw } from "draft-js";
+import ReactQuill from 'react-quill'
 export default function CourseInfo(props) {
 
   const course = props.course
@@ -12,10 +13,7 @@ export default function CourseInfo(props) {
   const [test, setTest] = useState("")
 
   useEffect(() => {
-    if (course && course.productDes) {
-      let a = EditorState.createWithContent(convertFromRaw(JSON.parse(course.productDes)))
-      setTest(draftToHtml(convertToRaw(a.getCurrentContent())).replaceAll("none", "center").replaceAll("height: 500px;width: 800px", "height: auto;width: 100%"))
-    }
+   
   }, [props.course])
 
   return (
@@ -79,8 +77,7 @@ export default function CourseInfo(props) {
               <div className="u-detail-block-left">
                 <div className="u-video">
                   <div className="embed-responsive embed-responsive-16by9" style={{}}>
-                    <iframe id="iframe-video-intro" className="embed-responsive-item img-responsive" src={course.productVideo} width="100%" height="auto" style={{}} scrolling="no" frameBorder={0} allowFullScreen>
-                    </iframe>
+                    <div dangerouslySetInnerHTML={{__html: course.productVideo}}></div>
                   </div>
                 </div>
                 <div className="hidden-lg">
@@ -147,10 +144,7 @@ export default function CourseInfo(props) {
                 </div>
                 <div className="u-des-course" id="u-des-course" style={{ fontSize: '15px' }}>
                   <p className="detail_h2_title">Giới thiệu khóa học</p>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: test }}
-                  >
-                  </div>
+                  <ReactQuill value={course.productDes} readOnly theme={"bubble"} />
                 </div>
                 <div className="u-list-course" id="u-list-course">
                   <p className="detail_h2_title">Nội dung khóa học</p>

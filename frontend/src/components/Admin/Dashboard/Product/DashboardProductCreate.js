@@ -4,6 +4,7 @@ import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import DashboardEditor from '../News/DashboardEditor';
 import { BACKEND } from '../../../../env';
+import DashboardQuill from '../News/DashboardQuill';
 
 export default function DashboardProductCreate(props) {
 
@@ -183,7 +184,7 @@ export default function DashboardProductCreate(props) {
                             ></textarea>                        </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Link video</div>
+                        <div className="dashboard-left flex">Link Video Youtube</div>
                         <div className="dashboard-right">
                             <input type="text" name="video" onChange={handleOnChange} required></input>
                         </div>
@@ -233,11 +234,13 @@ export default function DashboardProductCreate(props) {
                     </div>
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Giá </div>
-                        <div className="dashboard-right">
-                            <input type="number" name="price" placeholder="VND" onChange={handleOnChange} required></input>
+                        <div className="dashboard-right flex-center">
+                            <input type="number" name="price" placeholder="VND" onChange={handleOnChange} required style={{ width: "100%" }}></input>
+                            <label style={{ width: "20%" }}>Giảm Giá: </label>
+                            <input type="number" placeholder="%" onChange={handleOnChange} name="sale" required></input>
                         </div>
                     </div>
-                    <div className="create-box-row flex">
+                    {/* <div className="create-box-row flex">
                         <div className="dashboard-left flex">Giảm giá </div>
                         <div className="dashboard-right flex-center">
                             <input type="number" placeholder="%" style={{ width: "100px" }} onChange={handleOnChange} name="sale" required></input>
@@ -246,7 +249,7 @@ export default function DashboardProductCreate(props) {
                             <label>Đến: </label>
                             <input type="date" name="todate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
                         </div>
-                    </div>
+                    </div> */}
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Thời Lượng </div>
                         <div className="dashboard-right flex-center">
@@ -288,11 +291,7 @@ export default function DashboardProductCreate(props) {
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Giới thiệu khóa học </div>
                         <div className="dashboard-right">
-                            <DashboardEditor
-                                small = {1}
-                                newsContent={productDes}
-                                setNewsContent={setProductDes}
-                            />
+                             <DashboardQuill setBlog={setProductDes}/>
                         </div>
                     </div>
 

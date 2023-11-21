@@ -41,7 +41,7 @@ function IntroductionContent(props) {
                     {/* Main News Slider Start */}
         <div style={{marginTop: '80px', height: '726.8px'}} className="position-relative">
           <video className="video-banner" preload playsInline autoPlay muted loop>
-            <source src="https://smtfx.vn/wp-content/uploads/2023/06/Market-Loop-Background-Video-High-Resolution.mp4" type="video/mp4" />
+            <source src="../img/Market-Loop-Background-Video-High-Resolution.mp4" type="video/mp4" />
           </video>
           <div className="text-box-content text dark overlay-center">
             <div className="text-inner text-center">
@@ -100,7 +100,7 @@ function IntroductionContent(props) {
                 <div className="box has-hover has-hover box-label box-text-bottom position-relative" style={{height: '428px'}}>
                   <div className="box-image">
                     <div className>
-                      <img style={{objectFit: 'cover', width: '100%', height: '100%'}} src="https://smtfx.vn/wp-content/uploads/2023/06/01-1.png" decoding="async" />
+                      <img style={{objectFit: 'cover', width: '100%', height: '100%'}} src="../img/01-1.png" decoding="async" />
                     </div>
                   </div>
                 </div>
@@ -110,7 +110,7 @@ function IntroductionContent(props) {
         </div>
         {/* News With Sidebar End 	*/}
         <div className="position-relative course">
-          <img className="video-banner" src="https://smtfx.vn/wp-content/uploads/2023/06/Group-148-e1685774742406.png" decoding="async" />
+          <img className="video-banner" src="../img/Group-148-e1685774742406.png" decoding="async" />
           <div className="overlay-center">
             <div className="col-inner text-center">
               <div id="text-609430387" className="text text-title" style={{color: '#fff', marginBottom:"30px"}}>
@@ -129,7 +129,7 @@ function IntroductionContent(props) {
                         <div className="box-image">
                           <div className="image-cover">
                             <a href="https://smtfx.vn/khoa-hoc-chung-khoan-free/" aria-label="Khóa học Chứng khoán Free" tabIndex={0}>
-                              <img width={1191} height={1191} src="https://smtfx.vn/wp-content/uploads/2023/06/z4486508269138_8fced4ced0e9a6cf38aaf8c002cf0642.jpg" className="attachment-original size-original" alt="Z4486508269138 8fced4ced0e9a6cf38aaf8c002cf0642" decoding="async" /> </a>
+                              <img width={1191} height={1191} src="../img/z4486508269138_8fced4ced0e9a6cf38aaf8c002cf0642.jpg" className="attachment-original size-original" alt="Z4486508269138 8fced4ced0e9a6cf38aaf8c002cf0642" decoding="async" /> </a>
                           </div>
                           <div className="image-tools top right show-on-hover" />
                           <div className="image-tools grid-tools text-center hide-for-small bottom hover-slide-in show-on-hover">
@@ -236,15 +236,15 @@ function IntroductionContent(props) {
               <div className="col-lg-5">
                 <div className="col-inner text-center">
                   <p>
-                    <a href="https://smtfx.vn/khoa-hoc-chung-khoan-free/" aria-label="Khóa học Chứng khoán Free" tabIndex={0}>
-                      <img style={{objectFit: 'cover', width: '100%', height: '100%'}} src="https://smtfx.vn/wp-content/uploads/2023/06/business-man-holding-phone-260nw-1049641082.png" alt="Z4486508269138 8fced4ced0e9a6cf38aaf8c002cf0642" decoding="async" /> </a>
+                    <a aria-label="Khóa học Chứng khoán Free" tabIndex={0}>
+                      <img style={{objectFit: 'cover', width: '100%', height: '100%'}} src="../img/business-man-holding-phone-260nw-1049641082.png" alt="Z4486508269138 8fced4ced0e9a6cf38aaf8c002cf0642" decoding="async" /> </a>
                   </p>
                   <p  style={{marginTop:"10px"}}>
-                    <a className="button primary lowercase btn-type-1">
+                    <a className="button primary lowercase btn-type-1" href='http://zalo.me/0395081346'>
                       <span>Đăng ký nhận tư vấn</span>
                     </a>
                   </p>
-                  <p>Hoặc liên hệ hotline: 0979.794.334</p>
+                  <p>Hoặc liên hệ hotline: 039.508.1346</p>
                 </div>
               </div>
               <div className="col-lg-7">
@@ -270,7 +270,7 @@ function IntroductionContent(props) {
                     <div className="box has-hover   has-hover box-vertical box-text-bottom-1">
                       <div className="box-image" style={{width: '20%'}}>
                         <div className>
-                          <img style={{height: '60px', width: '60px'}} src="https://smtfx.vn/wp-content/uploads/2023/06/in-liquid-icon-8.png" className="attachment-original size-original" alt="In Liquid Icon 8" decoding="async" loading="lazy" />
+                          <img style={{height: '60px', width: '60px'}} src="../img/in-liquid-icon-8.png" className="attachment-original size-original" alt="In Liquid Icon 8" decoding="async" loading="lazy" />
                         </div>
                       </div>
                       <div className="text-left" style={{width: '80%'}}>
@@ -282,7 +282,7 @@ function IntroductionContent(props) {
                     <div className="box has-hover   has-hover box-vertical box-text-bottom-1">
                       <div className="box-image" style={{width: '20%'}}>
                         <div className>
-                          <img style={{height: '60px', width: '60px'}} src="https://smtfx.vn/wp-content/uploads/2023/06/in-liquid-icon-81.png" className="attachment-original size-original" alt="In Liquid Icon 81" decoding="async" loading="lazy" />
+                          <img style={{height: '60px', width: '60px'}} src="../img/in-liquid-icon-81.png" className="attachment-original size-original" alt="In Liquid Icon 81" decoding="async" loading="lazy" />
                         </div>
                       </div>
                       <div className="text-left">
@@ -294,7 +294,7 @@ function IntroductionContent(props) {
                     <div className="box has-hover   has-hover box-vertical box-text-bottom-1">
                       <div className="box-image" style={{width: '20%'}}>
                         <div className>
-                          <img style={{height: '60px', width: '60px'}} src="https://smtfx.vn/wp-content/uploads/2023/06/Group-149.png" className="attachment-original size-original" alt="Group 149" decoding="async" loading="lazy" />
+                          <img style={{height: '60px', width: '60px'}} src="../img/Group-149.png" className="attachment-original size-original" alt="Group 149" decoding="async" loading="lazy" />
                         </div>
                       </div>
                       <div className="text-left">
@@ -306,7 +306,7 @@ function IntroductionContent(props) {
                     <div className="box has-hover   has-hover box-vertical box-text-bottom-1">
                       <div className="box-image" style={{width: '20%'}}>
                         <div className>
-                          <img style={{height: '60px', width: '60px'}} src="https://smtfx.vn/wp-content/uploads/2023/06/in-liquid-icon-83.png" className="attachment-original size-original" alt="In Liquid Icon 83" decoding="async" loading="lazy" />
+                          <img style={{height: '60px', width: '60px'}} src="../img/in-liquid-icon-83.png" className="attachment-original size-original" alt="In Liquid Icon 83" decoding="async" loading="lazy" />
                         </div>
                       </div>
                       <div className="text-left">
@@ -322,7 +322,7 @@ function IntroductionContent(props) {
           </div>
         </div>
         <div className="position-relative kyluat">
-          <img className="video-banner" src="https://smtfx.vn/wp-content/uploads/2023/06/Group-130-e1685782787135.png" decoding="async" />
+          <img className="video-banner" src="../img/Group-130-e1685782787135.png" decoding="async" />
           <div className="overlay-center">
             <div className="container-fluid py-3">
               <div className="container">
@@ -345,7 +345,7 @@ function IntroductionContent(props) {
                   </div>
                   <div className="col-lg-5">
                     <div className="img-inner dark">
-                      <img style={{objectFit: 'cover', width: '100%', height: '100%'}} src="https://smtfx.vn/wp-content/uploads/2023/06/symbol-trading-on-stock-market-260nw-1914701269.png" alt="Symbol Trading On Stock Market 260nw 1914701269" decoding="async" loading="lazy" />
+                      <img style={{objectFit: 'cover', width: '100%', height: '100%'}} src="../img/symbol-trading-on-stock-market-260nw-1914701269.png" alt="Symbol Trading On Stock Market 260nw 1914701269" decoding="async" loading="lazy" />
                     </div>
                   </div>
                 </div>
@@ -428,19 +428,19 @@ function IntroductionContent(props) {
               </div>
               <Slider {...settingSlider}>
                     <div className="slider-item">
-                    <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/Logo-Cong-Ty-Cp-Chung-Khoan-MB-H.webp" alt="Logo Cong Ty Cp Chung Khoan Mb H" decoding="async" loading="lazy" />
+                    <img style={{width: '220px', height: '73px'}} src="../img/Logo-Cong-Ty-Cp-Chung-Khoan-MB-H.webp" alt="Logo Cong Ty Cp Chung Khoan Mb H" decoding="async" loading="lazy" />
                     </div>
                     <div className="slider-item">
-                    <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/logo2-02-e1692157517246.jpg" alt="Logo2 02" decoding="async" loading="lazy" />
+                    <img style={{width: '220px', height: '73px'}} src="../img/logo2-02-e1692157517246.jpg" alt="Logo2 02" decoding="async" loading="lazy" />
                     </div>
                     <div className="slider-item">
-                    <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/logo_VND2015-view.png" alt="Logo Vnd2015 View" decoding="async" loading="lazy" />
+                    <img style={{width: '220px', height: '73px'}} src="../img/logo_VND2015-view.png" alt="Logo Vnd2015 View" decoding="async" loading="lazy" />
                     </div>
                     <div className="slider-item">
-                    <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530.jpg" alt="Logovps Nctz" decoding="async" loading="lazy" srcSet="https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530.jpg 660w, https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530-300x157.jpg 300w, https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530-510x267.jpg 510w" sizes="(max-width: 660px) 100vw, 660px" />
+                    <img style={{width: '220px', height: '73px'}} src="../img/logovps_NCTZ-1-e1692157134530.jpg" alt="Logovps Nctz" decoding="async" loading="lazy" srcSet="https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530.jpg 660w, https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530-300x157.jpg 300w, https://smtfx.vn/wp-content/uploads/2023/08/logovps_NCTZ-1-e1692157134530-510x267.jpg 510w" sizes="(max-width: 660px) 100vw, 660px" />
                     </div>
                     <div className="slider-item">
-                    <img style={{width: '220px', height: '73px'}} src="https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767.jpg" alt="Maxresdefault" decoding="async" loading="lazy" srcSet="https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767.jpg 1280w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-300x119.jpg 300w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-768x305.jpg 768w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-1024x407.jpg 1024w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-510x203.jpg 510w" sizes="(max-width: 1280px) 100vw, 1280px" />
+                    <img style={{width: '220px', height: '73px'}} src="../img/maxresdefault-1-e1692157673767.jpg" alt="Maxresdefault" decoding="async" loading="lazy" srcSet="https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767.jpg 1280w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-300x119.jpg 300w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-768x305.jpg 768w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-1024x407.jpg 1024w, https://smtfx.vn/wp-content/uploads/2023/08/maxresdefault-1-e1692157673767-510x203.jpg 510w" sizes="(max-width: 1280px) 100vw, 1280px" />
                     </div>
                 </Slider>
             </div>

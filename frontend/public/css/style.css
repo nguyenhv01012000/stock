@@ -368,7 +368,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h1, .h1 {
-  font-size: 2.5rem;
+  /* font-size: 2.5rem; */
 }
 
 @media (max-width: 1200px) {
@@ -9755,6 +9755,7 @@ h6,
   pointer-events: all;
   color: white !important;
   text-decoration: none !important;
+  font-size: x-large;
 }
 
 .dialog-content {
@@ -10422,7 +10423,7 @@ ins {
 }
 
 .row-kyluat .col:hover .col-inner:before {
-  background-image: url(https://smtfx.vn/wp-content/uploads/2023/06/Mask-Group-9.png);
+  background-image: url(../img/Mask-Group-9.png);
   z-index: 0
 }
 
