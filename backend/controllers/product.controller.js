@@ -61,9 +61,16 @@ module.exports.product = function (req, res) {
 
 module.exports.postProduct = async function (req, res) {
 	const imgArr = [];
-	req.files.map((item) => {
-		imgArr.push(BACKEND + `/images/${item.filename}`)
-	})
+	if (req.files.productImg)
+		req.files.productImg.map((item) => {
+			imgArr.push(BACKEND + `/images/${item.filename}`)
+		})
+	const imgArr_1 = [];
+	if (req.files.teacherImg)
+		req.files.teacherImg.map((item) => {
+			imgArr_1.push(BACKEND + `/images/${item.filename}`)
+		})
+
 	let subContent = req.body.productSubContent.split("``");
 	subContent.pop();
 	subContent.map((item, index) => {
@@ -73,10 +80,10 @@ module.exports.postProduct = async function (req, res) {
 		productName: req.body.productName,
 		productSale: req.body.productSale,
 		productPrice: req.body.productPrice,
-		productFinalPrice: req.body.productPrice - (req.body.productPrice * (req.body.productSale / 100)),
+		productFinalPrice: Math.ceil(req.body.productPrice - (req.body.productPrice * (req.body.productSale / 100))),
 		productGroupCate: req.body.productGroupCate,
 		productDate: req.body.productDate,
-		productImg: imgArr[0],
+		productImg: imgArr.length ? imgArr[0] : null,
 		productDes: req.body.productDes,
 		productSold: 0,
 		productTitle: req.body.productTitle,
@@ -88,6 +95,8 @@ module.exports.postProduct = async function (req, res) {
 		productSubContent: subContent,
 		productFromDate: req.body.productFromDate,
 		productToDate: req.body.productToDate,
+		teacherName: req.body.teacherName,
+		teacherImg: imgArr_1.length ? imgArr_1[0] : null,
 	}
 	await Product.create(data)
 
@@ -146,7 +155,7 @@ module.exports.updateProduct = async function (req, res) {
 		productName: req.body.productName,
 		productSale: req.body.productSale,
 		productPrice: req.body.productPrice,
-		productFinalPrice: req.body.productPrice - (req.body.productPrice * (req.body.productSale / 100)),
+		productFinalPrice: Math.ceil(req.body.productPrice - (req.body.productPrice * (req.body.productSale / 100))),
 		productDes: req.body.productDes,
 		productTitle: req.body.productTitle,
 		productVideo: req.body.productVideo,
@@ -159,19 +168,37 @@ module.exports.updateProduct = async function (req, res) {
 		productToDate: req.body.productToDate,
 	}
 	const imgArr = [];
-	if (req.files) {
-		req.files.map((item) => {
+	if (req.files && req.files.productImg) {
+		req.files.productImg.map((item) => {
 			imgArr.push(BACKEND + `/images/${item.filename}`)
 		})
 	}
+	const imgArr_1 = [];
+	if (req.files && req.files.teacherImg) {
+		req.files.teacherImg.map((item) => {
+			imgArr_1.push(BACKEND + `/images/${item.filename}`)
+		})
+	}
 	const img = {
-		productImg: imgArr[0]
+		productImg: imgArr[0],
 	}
 
 	if (imgArr[0])
 		Product.findByIdAndUpdate(
 			{ _id: id },
 			{ $set: img },
+			function (error) {
+			}
+		)
+
+	const img_1 = {
+		teacherImg: imgArr_1[0],
+	}
+
+	if (imgArr_1[0])
+		Product.findByIdAndUpdate(
+			{ _id: id },
+			{ $set: img_1 },
 			function (error) {
 			}
 		)

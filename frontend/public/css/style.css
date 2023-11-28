@@ -10281,6 +10281,11 @@ ins {
 
 
 @media (max-width: 480px) {
+
+  .size-original{
+    width: 100% !important;
+  }
+
   .u-list-course .col { padding: 10px 15px !important; }
 
   .block-buy { top:  unset !important; padding: 10px 10px 5px 10px !important; border-radius: 0 !important;}
@@ -10361,7 +10366,7 @@ ins {
 }
 
 .kyluat {
-  height:1800px !important;
+  height:1900px !important;
 }
 
 }
@@ -10472,7 +10477,7 @@ ins {
 .price-c { font-weight: bold; color: #f00; }
 .total-money-combo-detail{font-size: 24px}
 .total-money-combo-v2{width: 65%;float: left;padding-top: 18px;}
-.img-course img { border-radius: 3px 3px 0 0; }
+.img-course img { border-radius: 3px 3px 0 0; width: 280px;}
 .rate-combo {  line-height: 18px; height: 20px; overflow: hidden; float: left;}
 .rate-combo p { float: left; margin-right: 5px; }
 .co-or { color: #eb8a2f; }
@@ -11528,6 +11533,7 @@ display:unset!important
     transform:rotateZ(-360deg)
 }
 @media (max-width: 480px) {
+  .img-course img{width: 100% !important;}
     .float-btn-group .tooltip{opacity: 1}
     .visible-xs {
       display:block!important
@@ -11944,4 +11950,14 @@ div#ez-toc-container {
   height: 30px;
   justify-content: center;
   direction: ltr
+}
+.triangle1::after {
+content: 'FREE';
+color: red;
+font-size: 10px;
+text-transform: uppercase;
+right: 0vmax;
+/* top: 2vmax; */
+position: absolute;
+transform: rotate(45deg);
 }

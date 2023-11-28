@@ -37,9 +37,8 @@ export default function CourseInfo(props) {
             </h1>
             <div className="u-detail-desc" itemProp="description">{course.productTitle}</div>
             <div className="u-detail-tea" itemProp="author">
-              {/* <img className="picture-teacher-circle" src="https://unica.vn/uploads//March262019340pm_mai-xuan-huy-huy-quan-hoa_thumb.jpg" align loading="lazy" />
-              <a href="teacher/mai-xuan-huy-huy-quan-hoa"> <span itemProp="name">Mai Xuân Huy (Huy Quần
-                Hoa)</span></a> */}
+              <img className="picture-teacher-circle" src={course.teacherImg} align loading="lazy" />
+              <a href="teacher/mai-xuan-huy-huy-quan-hoa"> <span itemProp="name">{course.teacherName}</span></a>
             </div>
             {/* <div className="u-detail-rate">
               <span className="star-rate"><i className="fa fa-star co-or" aria-hidden="true" /><i className="fa fa-star co-or" aria-hidden="true" /><i className="fa fa-star co-or" aria-hidden="true" /><i className="fa fa-star co-or" aria-hidden="true" /><i className="fa fa-star co-or" aria-hidden="true" /></span>

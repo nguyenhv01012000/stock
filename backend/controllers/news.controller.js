@@ -8,6 +8,7 @@ module.exports.index = async function(req, res) {
 	}
 
 	var sort = req.query.sort;
+	var search = req.query.search;
 	var news = [];
 	var count = 0;
 	let currentDate = new Date();
@@ -16,6 +17,7 @@ module.exports.index = async function(req, res) {
 		news = await News.find({"newDate": { $lte: currentDate }})
 			.sort({ newView: "desc" })
 			.sort({ newDate: "desc" })
+			.sort({ newTime: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
 		count = await News.count({"newDate": { $lte: currentDate }});
@@ -23,18 +25,31 @@ module.exports.index = async function(req, res) {
 		news = await News.find({"newDate": { $lte: currentDate }})
 			.sort({ newDate: "desc" })
 			.sort({ newView: "desc" })
+			.sort({ newTime: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
 		count = await News.count({"newDate": { $lte: currentDate }});
 	}else if(sort == "hot") {
 		news = await News.find({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}, "newDate": { $lte: currentDate }})
 			.sort({ newDate: "desc" })
+			.sort({ newTime: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
 		count = await News.count({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}, "newDate": { $lte: currentDate }});
-	}else if(sort){
+	}else if(search){
+		news = await News.find({ newTitle: { $regex: '.*' + search + '.*' }, "newDate": { $lte: currentDate }})
+			.sort({ newDate: "desc" })
+			.sort({ newTime: "desc" })
+			.sort({ newTime: "desc" });
+			// .skip(pageOptions.page * pageOptions.limit)
+			// .limit(pageOptions.limit);
+		count = await News.count({ newTitle: { $regex: '.*' + search + '.*' }, "newDate": { $lte: currentDate }});
+	}
+	else if(sort){
 		news = await News.find({ newCate: req.query.sort, "newDate": { $lte: currentDate }})
 			.sort({ newDate: "desc" })
+			.sort({ newTime: "desc" })
+			.sort({ newTime: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit); 
 		count = await News.count({ newCate: req.query.sort, "newDate": { $lte: currentDate }});

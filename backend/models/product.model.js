@@ -20,6 +20,8 @@ var productSchema = new mongoose.Schema({
 	productSubContent: Array, 
 	productFromDate: String,
 	productToDate: String,
+	teacherName: String,
+    teacherImg: String, 
 	},
     {
     	versionKey: false

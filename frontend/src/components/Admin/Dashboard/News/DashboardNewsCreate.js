@@ -174,6 +174,11 @@ export default function DashboardNewsCreate(props) {
                                     <option value="Sách phân tích cơ bản">Sách phân tích cơ bản</option>
                                     <option value="Sách phân tích kỹ thuật">Sách phân tích kỹ thuật</option>
                                 </optgroup>
+                                <optgroup label="Mở Tài Khoản">
+                                    <option value="Tài khoản chứng khoán VPS">Tài khoản chứng khoán VPS</option>
+                                    <option value="Tài khoản chứng khoán AIS">Tài khoản chứng khoán AIS</option>
+                                    <option value="Tài khoản chứng khoán MBS">Tài khoản chứng khoán MBS</option>
+                                </optgroup>
                             </select>
                             <label style={{ marginLeft: "10%", width: "30%" }}>Ngày xuất bản </label>
                             <input type="date" name="Ngày xuất bản" value={newsDate} onChange={(event) => { setNewsDate(event.target.value) }}

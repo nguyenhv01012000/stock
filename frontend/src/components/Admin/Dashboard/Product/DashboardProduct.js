@@ -7,6 +7,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 export default function DashboardProduct(props) {
 
     const table = [
+        "Giáo Viên",
         "Tên",
         "Hình Ảnh",
         "Giá",
@@ -15,7 +16,7 @@ export default function DashboardProduct(props) {
         // "Category",    
         // "Size",
         "Ngày Tạo",    
-        "Số Sao",
+        // "Số Sao",
         ""
     ]
 

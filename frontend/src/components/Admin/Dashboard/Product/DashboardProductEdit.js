@@ -37,6 +37,12 @@ export default function DashboardProductEdit(props) {
     const [productBookNumber, setproductBookNumber] = useState("")
     const [deleteImgId, setDeleteImgId] = useState(null)
 
+    const [teacherImg, setTeacherImg] = useState([])
+    const [teacherName, setTeacherName] = useState("")
+    const [teacherFile, setTeacherFile] = useState([])
+    const [deleteTeacherImgId, setDeleteTeacherImgId] = useState(null)
+
+
 
     const handleOnChangeLearn = (event, index) => {
         let learnClone = [...learn]
@@ -113,6 +119,8 @@ export default function DashboardProductEdit(props) {
             setSubContent(product.productSubContent)
             setToDate(convertDate(product.productToDate))
             setFromDate(convertDate(product.productFromDate))
+            setTeacherName(product.teacherName)
+            setTeacherImg([product.teacherImg])
         }
     }, [product])
 
@@ -144,6 +152,11 @@ export default function DashboardProductEdit(props) {
             formData.append('productImg', image);
         });
 
+        const imageArr_1 = Array.from(teacherFile);
+        imageArr_1.forEach(image => {
+            formData.append('teacherImg', image);
+        });
+
         formData.append("productName", productName);
         formData.append("productSale", productSale);
         formData.append("productPrice", productPrice);
@@ -164,6 +177,9 @@ export default function DashboardProductEdit(props) {
         formData.append("productSubContent", subContentString);
         formData.append("deleteImgId", deleteImgId);
 
+        formData.append("teacherName", teacherName);
+
+
         axios.post(BACKEND + `/products/update/${product._id}`, formData, config)
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
@@ -179,6 +195,18 @@ export default function DashboardProductEdit(props) {
         items.splice(id, 1)
         setProductImg(items)
         setDeleteImgId(1)
+    }
+
+    const deleteTeacherImg = (event) => {
+        const id = event.target.id
+        const virutalFile = [...file]
+        virutalFile.splice(id, 1)
+        setTeacherFile(virutalFile)
+
+        const items = [...productImg]
+        items.splice(id, 1)
+        setTeacherImg(items)
+        setDeleteTeacherImgId(1)
     }
 
     return (
@@ -200,7 +228,61 @@ export default function DashboardProductEdit(props) {
                 {product &&
                     <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
                         <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Tên</div>
+                            <div className="dashboard-left flex">Tên Giáo Viên</div>
+                            <div className="dashboard-right">
+                                <input
+                                    type="text" name="name"
+                                    value={teacherName}
+                                    onChange={(event) => {
+                                        setTeacherName(event.target.value)
+                                    }} required
+                                ></input>
+                            </div>
+                        </div>
+                        <div className="create-box-row flex">
+                            <div className="dashboard-left flex">Hình Ảnh Giáo Viên</div>
+                            <div className="dashboard-right">
+                                <input
+                                    onChange={(event) => {
+                                        const files = event.target.files;
+                                        for (let i = 0; i < files.length; i++) {
+                                            setTeacherImg([URL.createObjectURL(files[i])])
+                                        }
+                                        const fileArr = Array.prototype.slice.call(files)
+                                        fileArr.forEach(item => {
+                                            setTeacherFile(file => [...file, item])
+                                        })
+                                    }}
+                                    type="file"
+                                    name="productImg"
+                                    className="noborder"
+                                    multiple="multiple"
+                                    style={{ height: '50px' }}
+                                ></input>
+                                <div className="flex" style={{ overflowY: 'hidden', flexWrap: 'wrap' }}>
+                                    {teacherImg &&
+                                        teacherImg.map((item, index) => {
+                                            return (
+                                                <div className="create-box-img">
+                                                    <img key={index} src={item} alt=""></img>
+                                                    <div
+                                                        className="create-box-img-overlay"
+                                                    >
+                                                        <p
+                                                            id={index}
+                                                            onClick={deleteTeacherImg}
+                                                            className="icon">X
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="create-box-row flex">
+                            <div className="dashboard-left flex">Tên Khóa Học</div>
                             <div className="dashboard-right">
                                 <input
                                     type="text" name="name"
@@ -212,7 +294,7 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Tiêu đề</div>
+                            <div className="dashboard-left flex">Tiêu Đề Khóa Học</div>
                             <div className="dashboard-right">
                                 <textarea style={{ width: "100%", height: "150px", padding: "10px" }}
                                     type="text" name="title"

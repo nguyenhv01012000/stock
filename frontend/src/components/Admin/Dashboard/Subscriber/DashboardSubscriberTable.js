@@ -162,7 +162,7 @@ export default function DashboardSubscriberTable(props) {
                         <div 
                             className="dashboard-addnew-btn btn"
                             onClick={props.setOpenCreateFunc}
-                        >Add new</div>
+                        >Thêm Tài Khoản Ngân Hàng</div>
                         <div className="dashboard-addnew-search">
                             <form 
                                 onSubmit={searchOnSubmit}
@@ -184,7 +184,8 @@ export default function DashboardSubscriberTable(props) {
                                                 onClick={(event)=>{
                                                     sortTable(event)
                                                 }}
-                                                id={`Subscriber${item}`}
+                                                id={`Subscriber${item}`} 
+                                                style={{width:"25%"}}
                                             >
                                                 {item}
                                             </th>
@@ -203,13 +204,13 @@ export default function DashboardSubscriberTable(props) {
                                     return (
                                         <tr key={index}>
                                             <td className="table-mobile-subscribername">
-                                                <p>{item.subscriberEmail}</p>
+                                                <p>{item.bankAccount}</p>
                                             </td>
                                             <td className="table-mobile-subscribersent">
-                                                <p>{item.sendedEmail.length}</p>
+                                                <p>{item.bankName}</p>
                                             </td>
                                             <td className="table-mobile-subscriberread">
-                                                <p>{count}</p>
+                                                <p>{item.accountName}</p>
                                             </td>
                                             <td>
                                                 <div className="action-table flex">
@@ -218,14 +219,14 @@ export default function DashboardSubscriberTable(props) {
                                                         onClick={props.setOpenEditFunc}
                                                         id={item._id}
                                                         >
-                                                        <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faPencilAlt}/>
+                                                        <FontAwesomeIcon style={{pointerEvents: 'none',cursor:"pointer"}} icon={faPencilAlt}/>
                                                     </div>
                                                     <div 
                                                         className="action-item flex-center action-red"
                                                         onClick={deleteOnClick}
                                                         id={item._id}
                                                         >
-                                                        <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
+                                                        <FontAwesomeIcon style={{pointerEvents: 'none',cursor:"pointer"}} icon={faTimes}/>
                                                     </div>
                                                 </div>
                                             </td>

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 var controller = require("../controllers/email.controller");
+var middleware = require("../middlewares/token.middleware")
 
 router.get("/:idUser/:idEmail", controller.index);
 // router.get("/", controller.getAllEmail);

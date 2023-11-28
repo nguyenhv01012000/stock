@@ -14,14 +14,14 @@ function CourseItem(props) {
           <Link to={"/course/" + course._id} className="course-box-slider pop">
             <span className="sale-off">-{course.productSale}%</span>
             <div className="img-course">
-              <img className="img-responsive " src={course.productImg} alt={course.productName} style={{ width: '100%' }} loading="lazy" />
+              <img className="img-responsive " src={course.productImg} alt={course.productName} style={{ height:'140px'}} loading="lazy" />
             </div>
             <div className="content-course">
               <h3 className="title-course">
                 <p>{course.productName}</p>
               </h3>
               <div className="name-gv">
-                {/* <b style={{ float: 'left' }}>Mai Xuân Huy (Huy Quần Hoa)</b> */}
+                <b style={{ float: 'left' }}>{course.teacherName}</b>
                 <span className="price-b">{course.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}<sup>đ</sup></span>
               </div>
             </div>

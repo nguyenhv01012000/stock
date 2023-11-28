@@ -25,6 +25,8 @@ export default function DashboardProductCreate(props) {
     const [subContent, setSubContent] = useState([[""]])
     const [productDes, setProductDes] = useState("")
 
+    const [teacherImg, setTeacherImg] = useState([])
+    const [teacherFile, setTeacherFile] = useState([])
 
 
     const handleOnChange = (event) => {
@@ -105,6 +107,11 @@ export default function DashboardProductCreate(props) {
             formData.append('productImg', image);
         });
 
+        const imageArr_1 = Array.from(teacherFile);
+        imageArr_1.forEach(image => {
+            formData.append('teacherImg', image);
+        });
+
         formData.append("productName", inputValue.name);
         formData.append("productTitle", inputValue.title);
         formData.append("productVideo", inputValue.video);
@@ -118,6 +125,8 @@ export default function DashboardProductCreate(props) {
         formData.append("productContent", content.join("`"));
         formData.append("productFromDate", inputValue.fromdate);
         formData.append("productToDate", inputValue.todate);
+        formData.append("teacherName", inputValue.teacherName);
+
 
         let subContentClone = [...subContent];
         let subContentString = "";
@@ -151,6 +160,16 @@ export default function DashboardProductCreate(props) {
         setProductImg(items)
     }
 
+    const deleteTeacherImg = (event) => {
+        const virutalFile = [...file]
+        virutalFile.splice(event.target.id, 1)
+        setTeacherFile(virutalFile)
+
+        const items = [...productImg]
+        items.splice(event.target.id, 1)
+        setTeacherImg(items)
+    }
+
     return (
         <div className="DashboardProductInfo">
             <div className="create-box">
@@ -169,13 +188,62 @@ export default function DashboardProductCreate(props) {
                 </div>
                 <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Tên</div>
+                        <div className="dashboard-left flex">Tên Giáo Viên</div>
+                        <div className="dashboard-right">
+                            <input type="text" name="teacherName" onChange={handleOnChange} required></input>
+                        </div>
+                    </div>
+                    <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Hình Ảnh Của Giáo Viên </div>
+                        <div className="dashboard-right">
+                            <input
+                                onChange={(event) => {
+                                    const files = event.target.files;
+                                    for (let i = 0; i < files.length; i++) {
+                                        setTeacherImg([URL.createObjectURL(files[i])])
+                                    }
+                                    const fileArr = Array.prototype.slice.call(files)
+                                    fileArr.forEach(item => {
+
+                                        setTeacherFile(file => [...file, item])
+                                    })
+                                }}
+                                type="file"
+                                name="productImg"
+                                className="noborder"
+                                multiple="multiple"
+                                style={{ height: '50px' }}
+                            ></input>
+                            <div className="flex" style={{ overflowY: 'hidden', flexWrap: 'wrap' }}>
+                                {teacherImg &&
+                                    teacherImg.map((item, index) => {
+                                        return (
+                                            <div key={index} className="create-box-img">
+                                                <img key={index} src={item} alt=""></img>
+                                                <div
+                                                    className="create-box-img-overlay"
+                                                >
+                                                    <p
+                                                        id={index}
+                                                        onClick={deleteTeacherImg}
+                                                        className="icon">X
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Tên Khóa Học</div>
                         <div className="dashboard-right">
                             <input type="text" name="name" onChange={handleOnChange} required></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Tiêu đề</div>
+                        <div className="dashboard-left flex">Tiêu Đề Khóa Học</div>
                         <div className="dashboard-right">
                             <textarea style={{ width: "100%", height: "150px", padding: "10px" }}
                                 type="text" name="title"

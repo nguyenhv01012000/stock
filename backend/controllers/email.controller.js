@@ -1,8 +1,10 @@
 var Email = require("../models/email.model");
+var User = require("../models/user.model");
 
 var nodemailer = require('nodemailer');
 const simpleParser = require('mailparser').simpleParser;
 var mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 // Login with admin email
 // var transporter = nodemailer.createTransport({
@@ -51,7 +53,16 @@ module.exports.info = function(req, res) {
 		res.json(email);
 	});
 };
-module.exports.updateEmail = function(req, res) {
+module.exports.updateEmail =async function(req, res) {
+    const token = req.headers.authorization.split(' ')[1];
+
+    const verified = jwt.verify(token, 'hahaha');
+    var user = await User.findOne({ userEmail: verified.user.userEmail });
+ 
+    if (!user || user.userRole != "admin") {
+        return res.status(400).send('Ban ko co quyen!');
+    }
+
     var id = req.params.id;
     Email.findByIdAndUpdate(id, req.body, function(error) {
         if (error) {
@@ -63,20 +74,28 @@ module.exports.updateEmail = function(req, res) {
 
 module.exports.postEmail = async function(req, res) {
 
-    var email = req.body.subscriber;
-	var emailData = await Email.findOne({ subscriberEmail: email });
-	if (emailData) {
-		return res.status(400).send('Email already subscriber!');
+    // var email = req.body.subscriber;
+	// var emailData = await Email.findOne({ subscriberEmail: email });
+	// if (emailData) {
+	// 	return res.status(400).send('Email already subscriber!');
+	// }
+
+    const token = req.headers.authorization.split(' ')[1];
+
+    const verified = jwt.verify(token, 'hahaha');
+    var user = await User.findOne({ userEmail: verified.user.userEmail });
+ 
+    if (!user || user.userRole != "admin") {
+        return res.status(400).send('Ban ko co quyen!');
+    }
+
+    const data = {
+		bankAccount: req.body.bankAccount,
+		bankName: req.body.bankName,
+		accountName: req.body.accountName,
 	}
-    await Email.create({ 
-        subscriberEmail: email,
-        sendedEmail: [
-            {
-                emailId: new mongoose.mongo.ObjectId(),
-                isSeen: false
-            }
-        ]
-    })
+	await Email.create(data)
+	res.status(200).send("ok");
 
     // var mailOptions = {
     //     from: '18521118@gm.uit.edu.vn', 
@@ -93,7 +112,7 @@ module.exports.postEmail = async function(req, res) {
     //     }
     // }) 
 
-	res.status(200).send('Subscriber for news successful!');
+	// res.status(200).send('Subscriber for news successful!');
 }
 module.exports.deleteSubscriber = async function(req, res) {
 	await Email.findByIdAndRemove({_id: req.body.id})

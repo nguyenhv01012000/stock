@@ -414,7 +414,7 @@
         height: 200px;
     }
     .news { 
-        width: calc(100% - 20px);
+        width: calc(100%);
     } 
     .news-content { 
         height: 65px; 

@@ -262,8 +262,10 @@ export default function DashboardUserTable(props) {
                                                 <p>{item.orderTotal} đ</p>
                                             </td>
                                             <td>
-                                                {item.orderStatus =="Comfirming" && <p style={{color:"red"}}>Chờ xác nhận</p>}
-                                                {item.orderStatus =="Comfirmed" && <p style={{color:"#34aa40"}}>Đã xác nhận</p>}
+                                                {item.orderStatus =="Comfirming" && <p style={{color:"blue"}}>Chờ xác nhận</p>}
+                                                {item.orderStatus =="Confirmed" && <p style={{color:"#34aa40"}}>Đã xác nhận</p>}
+                                                {item.orderStatus =="Cancel" && <p style={{color:"red"}}>Đã Hủy</p>}
+
                                             </td>
                                             <td>
                                                 <div className="action-table flex">

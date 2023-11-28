@@ -3,7 +3,7 @@ import '../../../App.css'
 // import '../../../Styles/Dashboard.css'
 import DashboardBody from './DashboardBody'
 import DashboardMenu from './DashboardMenu'
-import { faEnvelope, faFileInvoice, faHome, faInbox, faNewspaper, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faFileInvoice, faHome, faInbox, faLandmark, faNewspaper, faPiggyBank, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
 
 import socketIOClient from "socket.io-client" 
 import Axios from 'axios'
@@ -42,11 +42,11 @@ function Dashboard(props) {
             name: "Tài Khoản",
             icon: faUser
         }, 
-        // {
-        //     id: "7",
-        //     name: "Subscribers",
-        //     icon: faEnvelope
-        // },
+        {
+            id: "7",
+            name: "Ngân Hàng",
+            icon: faLandmark
+        },
     ]
     const [tabId, setTabId] = useState(props.match.params.id ? props.match.params.id : "1");
     const [openMenu, setOpenMenu] = useState(true); 

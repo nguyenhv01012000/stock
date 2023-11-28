@@ -78,8 +78,10 @@ export default function DashboardOrderCreate(props) {
                             order.orderList.map((item) => {
                                 axios.get(BACKEND + `/products/${item.id}`)
                                     .then(res => {
-                                        res.data.count = item.amount
-                                        setProductList([...productList, res.data])
+                                        if (res.data) {
+                                            res.data.count = item.amount
+                                            setProductList([...productList, res.data])
+                                        }
                                     })
                                 return null
                             })
@@ -122,8 +124,8 @@ export default function DashboardOrderCreate(props) {
             setProductList(listOrder);
     }, [])
 
-    const onSubmit = (event) => {
-        event.preventDefault()
+    const onSubmit = (status) => {
+        // event.preventDefault()
         var listOrder = []
         var ids = []
         var total = 0;
@@ -137,11 +139,7 @@ export default function DashboardOrderCreate(props) {
             listOrder.push(data)
             ids.push(productList[i]._id)
         }
-
-        var status = "Comfirming"
-        if (order.orderStatus == "Comfirming") status = "Comfirmed"
-        if (order.orderStatus == "Comfirmed") status = "Delivering"
-        if (order.orderStatus == "Delivering") status = "Delivered"
+        var status = status
 
         axios.post(BACKEND + `/order/update/${order._id}`, {
             orderName: orderName,
@@ -166,7 +164,7 @@ export default function DashboardOrderCreate(props) {
             <div className="create-box">
                 <div className="create-box-title flex">
                     <div className="create-box-title-text">
-                        Order infomation
+                        Thông Tin Đơn Hàng
                     </div>
                     <div
                         className="create-box-title-close flex-center"
@@ -177,7 +175,7 @@ export default function DashboardOrderCreate(props) {
                         <FontAwesomeIcon icon={faTimes} />
                     </div>
                 </div>
-                <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
+                {/* <form encType="multipart/form-data" ref={createForm}> */}
                     {/* <div className="create-box-row flex">
                         <div className="dashboard-left flex">Already have an account?</div>
                         <div className="dashboard-right">
@@ -203,7 +201,7 @@ export default function DashboardOrderCreate(props) {
                         </div>
                     </div> */}
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Name</div>
+                        <div className="dashboard-left flex">Tên</div>
                         <div className="dashboard-right">
                             <input
                                 type="text" name="name"
@@ -229,7 +227,7 @@ export default function DashboardOrderCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Phone</div>
+                        <div className="dashboard-left flex">Số Điện Thoại</div>
                         <div className="dashboard-right">
                             <input
                                 type="text" name="phone"
@@ -242,7 +240,7 @@ export default function DashboardOrderCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Province</div>
+                        <div className="dashboard-left flex">Tỉnh</div>
                         <div className="dashboard-right">
                             {/* <select 
                                 className="input"
@@ -274,7 +272,7 @@ export default function DashboardOrderCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">District</div>
+                        <div className="dashboard-left flex">Huyện</div>
                         <div className="dashboard-right">
                             {/* <select 
                                 className="input"
@@ -308,7 +306,7 @@ export default function DashboardOrderCreate(props) {
                     </div>
 
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Address</div>
+                        <div className="dashboard-left flex">Địa Chỉ</div>
                         <div className="dashboard-right">
                             <input
                                 type="text" name="phone"
@@ -321,7 +319,7 @@ export default function DashboardOrderCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Items</div>
+                        <div className="dashboard-left flex">Khóa Học</div>
                         <div className="dashboard-right">
                             {/* <select 
                                 className="input"
@@ -434,19 +432,27 @@ export default function DashboardOrderCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Payment method</div>
+                        <div className="dashboard-left flex">Phương Thức Thanh Toán</div>
                         <div className="dashboard-right">
                             {orderPaymentMethod}
                         </div>
                     </div>
-                    {order?.orderStatus == "Comfirming" &&
-                        <div className="flex-center" style={{ marginTop: '40px' }}>
-                            <button className="create-box-btn btn">
+                    {
+                    order?.orderStatus == "Comfirming" && 
+                    <div style={{display: "flex", justifyContent: "center"}}>
+                        <div className="flex-center" style={{ marginTop: '40px', marginRight: '40px' }}>
+                            <button className="create-box-btn btn" style={{width:"200px"}} onClick={() => onSubmit("Confirmed")}>
                                 Xác Nhận Đơn Hàng
                             </button>
                         </div>
+                        <div className="flex-center" style={{ marginTop: '40px' }}>
+                            <button className="create-box-btn btn" style={{background: "red", width:"200px"}} onClick={() => onSubmit("Cancel")}> 
+                                Hủy Đơn Hàng
+                            </button>
+                        </div>
+                    </div>
                     }
-                </form>
+                {/* </form> */}
             </div>
         </div>
     )

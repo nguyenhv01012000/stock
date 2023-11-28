@@ -283,6 +283,9 @@ export default function DashboardProductTable(props) {
                                     return (
                                         <tr key={index}>
                                             <td className="table-name table-mobile-productname">
+                                                <p>{item.teacherName}</p>
+                                            </td>
+                                            <td className="table-name table-mobile-productname">
                                                 <p>{item.productName}</p>
                                             </td>
                                             <td className="table-mobile-productimages" style={{display: 'flex'}}>
@@ -312,7 +315,7 @@ export default function DashboardProductTable(props) {
                                             <td className="table-mobile-productdate">
                                                 <p>{shortedDate}</p>
                                             </td>
-                                            <td className="star-rating">
+                                            {/* <td className="star-rating">
                                                 <div className="star-rating-list flex">
                                                     <p className={ 
                                                         averageRating > 0 ? "star-color star" :"star"
@@ -330,7 +333,7 @@ export default function DashboardProductTable(props) {
                                                         averageRating > 4 ? "star-color star" :"star"
                                                     }>★</p>
                                                 </div>
-                                            </td>
+                                            </td> */}
                                             <td>
                                                 <div className="action-table flex">
                                                     <div 

@@ -7,11 +7,36 @@ import { CartContext } from '../../contexts/Cart'
 import Div100vh from 'react-div-100vh';
 import classNames from 'classnames';
 import { faSearch, faUser, faCartPlus, faBars, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import NewsSmall from '../News/NewsSmall'
+import { BACKEND } from '../../env'
 
 function Header(props) {
 
-    const [hover, setHover] = useState(0)
-    const [totalCart, setTotalCart] = useState(0)
+    const [hover, setHover] = useState(0)    
+    const [hover1, setHover1] = useState(0)
+
+    const [search, setSearch] = useState("")
+    const [newsSearch, setNewsSearch] = useState([]);
+
+    useEffect(() => {
+        if (search == null || search == "") {
+            setNewsSearch([]);
+            return;
+        }
+        let config = {
+            params: {
+                // page: 0,
+                // limit: 5,
+                search: search
+            },
+        }
+        Axios.get(BACKEND + `/news`, config)
+            .then(res => {
+                const arr = [...res.data.news]
+                setNewsSearch(arr)
+            }
+            )
+    }, [search])
 
     const {
         setUserInfoFunc,
@@ -29,6 +54,7 @@ function Header(props) {
         plusCount,
         removeFromCart
     } = useContext(CartContext);
+
 
     useEffect(() => {
         // Axios.get(`http://localhost:4000/users/${localStorage.getItem('user-id')}`, {
@@ -71,8 +97,6 @@ function Header(props) {
         closeMobileMenuFunc()
     }
 
-    const [searchMobile, setSearchMobile] = useState("")
-
     const navBar = [
         {
             id: "1",
@@ -93,23 +117,39 @@ function Header(props) {
             dropdownContent: [
                 {
                     dropdownTitle: "Kiến Thức",
-                    dropdownList: ["Chứng khoán cho NĐT mới","Kiến thức Phân tích cơ bản","Kiến thức Phân tích kỹ thuật","Kiến thức Đầu tư tổng hợp","Tản mạn & Góc chia sẻ"]
+                    dropdownList: ["Chứng khoán cho NĐT mới", "Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp", "Tản mạn & Góc chia sẻ"]
                 },
                 {
                     dropdownTitle: "Góc Nhìn Và Thị Trường",
-                    dropdownList: ["Tin tức vĩ mô","Nhận định thị trường","Phân Tích Cổ Phiếu"] 
+                    dropdownList: ["Tin tức vĩ mô", "Nhận định thị trường", "Phân Tích Cổ Phiếu"]
                 },
                 {
                     dropdownTitle: "Sách Hay Sưu Tầm",
-                    dropdownList: ["Sách phân tích cơ bản","Sách phân tích kỹ thuật"]
+                    dropdownList: ["Sách phân tích cơ bản", "Sách phân tích kỹ thuật"]
                 }
             ]
         },
+        // {
+        //     id: "4",
+        //     label: 'Dành Cho Hội Viên',
+        //     url: "/account",
+        //     dropdownContent: []
+        // },
         {
             id: "4",
-            label: 'Dành Cho Hội Viên',
-            url: "/account",
-            dropdownContent: []
+            label: "Mở tài khoản",
+            url: "/news/account",
+            dropdownContent: [
+                {
+                    dropdownTitle: "Tài khoản chứng khoán VPS",
+                },
+                {
+                    dropdownTitle: "Tài khoản chứng khoán AIS",
+                },
+                {
+                    dropdownTitle: "Tài khoản chứng khoán MBS",
+                }
+            ]
         },
         {
             id: "5",
@@ -129,7 +169,6 @@ function Header(props) {
 
     return (
         <div className="fixed-top">
-
             <div className="container-fluid">
                 <div className="row align-items-center px-lg-5 bg-secondary">
                     <div className="col-12 col-md-8 text-white">
@@ -150,7 +189,7 @@ function Header(props) {
                 <nav className="navbar navbar-expand-lg bg-light navbar-light py-2 py-lg-0 px-lg-5">
                     <Link to="/" className="navbar-brand d-block">
                         <h1 className="m-0 display-5 text-uppercase">
-                            <img style={{ height: "45px" }} src="https://scontent.fhan3-5.fna.fbcdn.net/v/t1.15752-9/370016223_1460259698038526_3393128236471153605_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeHfvfSLREhvF07sYoa-838qjt6dDNsXYy6O3p0M2xdjLtoIc6yFv07FD6vqlZVC9EInRWDDUYRWZvFt7GBiQna-&_nc_ohc=DRRISp89_4UAX9oV9co&_nc_ht=scontent.fhan3-5.fna&oh=03_AdTwcyle2jxCBLwdBQycvdl0WLBYY2k-cP-S2KdYbjodtg&oe=6573298E" />
+                            <img style={{ height: "45px" }} src="../../img/370016223_1460259698038526_3393128236471153605_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeHfvfSLREhvF07sYoa-838qjt6dDNsXYy6O3p0M2xdjLtoIc6yFv07FD6vqlZVC9EInRWDDUYRWZvFt7GBiQna-&_nc_ohc=DRRISp89_4UAX9oV9co&_nc_ht=scontent.fhan3-5.fna&oh=03_AdTwcyle2jxCBLwdBQycvdl0WLBYY2k-cP-S2KdYbjodtg&oe=6573298E" />
                             <span className="text-primary">DOMINO</span>STOCK</h1>
                     </Link>
                     <button type="button" className="navbar-toggler" onClick={() => setOpenMobileMenu(!openMobileMenu)}>
@@ -166,9 +205,8 @@ function Header(props) {
                                 <div className="menu-mobile-search flex-center">
                                     <input
                                         onChange={(e) => {
-                                            setSearchMobile(e.target.value)
+                                            setSearch(e.target.value)
                                         }}
-                                        value={searchMobile}
                                         className="input" placeholder="Tìm Kiếm..." style={{ fontSize: '16px', height: '50px' }}
                                     ></input>
                                     <div onClick={() => {
@@ -178,48 +216,42 @@ function Header(props) {
                                         <FontAwesomeIcon icon={faSearch} style={{ marginLeft: '10px', color: '#777' }} />
                                     </div>
                                 </div>
-                                <div 
-                                className="menu-mobile-list"
-                            >
-                                {
-                                    navBar.map((item, index)=> {
-                                        return (
-                                            <div 
-                                                key={index}
-                                                style={{color: '#111', maxHeight: openSubMenu === item.id ? `1000px` : '40px'}}
-                                                className={classNames("menu-mobile-item a", {
-                                                    menu_mobile_item_active: location === item.url.toLowerCase() || 
-                                                    (item.url.toLowerCase() =="/news/category" && location.indexOf("/news/category") != -1),
-                                                })}
-                                            >
-                                                <div className="flex" style={{justifyContent: 'space-between',fontWeight: "bold"}}>
-                                                    <p
-                                                        id = {item.url.toLowerCase()}
-                                                        onClick={(event) => {
-                                                            if(item.url.toLowerCase() != "/news/category") redirect(event)
-                                                            else {
-                                                                if (!openSubMenu) {
-                                                                    setOpenSubMenu(item.id)
-                                                                } else {
-                                                                    if (openSubMenu === item.id) {
-                                                                        setOpenSubMenu(null)
-                                                                    } else {
-                                                                        setOpenSubMenu(item.id)
-                                                                    }
-                                                                }
-                                                            }
-                                                        }}
-                                                    >{item.label}</p>
-                                                    { item.dropdownContent.length > 0 && 
-                                                        <div
-                                                            style={{ 
-                                                                width: '30px',
-                                                            }}
-                                                            className="flex-center"
-                                                            onClick={()=>{
-                                                                if (!item.dropdownContent.length > 0) {
-                                                                    props.history.push(item.url);
-                                                                } else {
+                                {search && <div className="overflow-auto" style={{maxHeight: "350px" }}>
+                                    {
+                                        newsSearch.map((item, index) => {
+                                            return (
+                                                <NewsSmall
+                                                    key={index}
+                                                    news={item}
+                                                />
+                                            )
+                                        })
+                                    }
+                                    {
+                                        newsSearch.length == 0 && <div className="col" style={{ marginBottom: "15px" }}><b style={{ color: "black" }}>Không tìm thấy kết quả</b></div>
+                                    }
+                                </div>}
+                                <div
+                                    className="menu-mobile-list"
+                                >
+                                    {
+                                        navBar.map((item, index) => {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    style={{ color: '#111', maxHeight: openSubMenu === item.id ? `1000px` : '40px' }}
+                                                    className={classNames("menu-mobile-item a", {
+                                                        menu_mobile_item_active: location === item.url.toLowerCase() ||
+                                                            (item.url.toLowerCase() == "/news/category" && location.indexOf("/news/category") != -1) ||
+                                                            (item.url.toLowerCase() == "/news/account" && location.indexOf("/news/account") != -1),
+                                                    })}
+                                                >
+                                                    <div className="flex" style={{ justifyContent: 'space-between', fontWeight: "bold" }}>
+                                                        <p
+                                                            id={item.url.toLowerCase()}
+                                                            onClick={(event) => {
+                                                                if (item.url.toLowerCase() != "/news/category" || item.url.toLowerCase() == "/news/account") redirect(event)
+                                                                else {
                                                                     if (!openSubMenu) {
                                                                         setOpenSubMenu(item.id)
                                                                     } else {
@@ -230,51 +262,75 @@ function Header(props) {
                                                                         }
                                                                     }
                                                                 }
-                                                            }}>
-                                                            <FontAwesomeIcon icon={faAngleDown}/>
-                                                        </div>
-                                                    }
-                                                </div>
-                                                <div 
-                                                    className="menu-mobile-sub"
-                                                    ref={subHeight}
-                                                >
-                                                    { item.dropdownContent.map((item2, index)=>{ 
-                                                        return (
+                                                            }}
+                                                            className={item.label == 'Mở tài khoản' ? 'triangle1' : ''}
+                                                        >{item.label}</p>
+                                                        {item.dropdownContent.length > 0 &&
                                                             <div
-                                                                key={index}
-                                                                className="menu-item-sub-item"
-                                                            >
-                                                                <p
-                                                                    id = {`${item.url.toLowerCase()}/${item2.dropdownTitle.replace(/\s+/g, '')}`}
-                                                                    style={{fontWeight: "bold", color:"black"}}
-                                                                >{item2.dropdownTitle}</p>
-                                                                {
-                                                                    item2.dropdownList.map((item3,index)=>{
-                                                                        return (
-                                                                            <div
-                                                                                className="menu-item-sub-item2"
-                                                                                key={index} 
-                                                                            >
-                                                                                <p
-                                                                                    id = {`${item.url.toLowerCase()}/${item3}`}
-                                                                                    onClick={redirect}
-                                                                                    style={{fontWeight : location.indexOf(item3) != -1 ? "bold" : "normal"}}
-                                                                                >{item3}</p>
-                                                                            </div>
-                                                                        )
-                                                                    })
-                                                                }
+                                                                style={{
+                                                                    width: '30px',
+                                                                }}
+                                                                className="flex-center"
+                                                                onClick={() => {
+                                                                    if (!item.dropdownContent.length > 0) {
+                                                                        props.history.push(item.url);
+                                                                    } else {
+                                                                        if (!openSubMenu) {
+                                                                            setOpenSubMenu(item.id)
+                                                                        } else {
+                                                                            if (openSubMenu === item.id) {
+                                                                                setOpenSubMenu(null)
+                                                                            } else {
+                                                                                setOpenSubMenu(item.id)
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }}>
+                                                                <FontAwesomeIcon icon={faAngleDown} />
                                                             </div>
-                                                        )
+                                                        }
+                                                    </div>
+                                                    <div
+                                                        className="menu-mobile-sub"
+                                                        ref={subHeight}
+                                                    >
+                                                        {item.dropdownContent.map((item2, index) => {
+                                                            return (
+                                                                <div
+                                                                    key={index}
+                                                                    className="menu-item-sub-item"
+                                                                >
+                                                                    <p
+                                                                        id={`${item.url.toLowerCase()}/${item2.dropdownTitle}`}
+                                                                        style={{ fontWeight:"bold"  , color: "black" }}
+                                                                        onClick= {item.label == 'Mở tài khoản' ? redirect : null}
+                                                                    >{item2.dropdownTitle}</p>
+                                                                    {
+                                                                        item2.dropdownList && item2.dropdownList.map((item3, index) => {
+                                                                            return (
+                                                                                <div
+                                                                                    className="menu-item-sub-item2"
+                                                                                    key={index}
+                                                                                >
+                                                                                    <p
+                                                                                        id={`${item.url.toLowerCase()}/${item3}`}
+                                                                                        onClick={redirect}
+                                                                                        style={{ fontWeight: location.indexOf(item3) != -1 ? "bold" : "normal" }}
+                                                                                    >{item3}</p>
+                                                                                </div>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                            )
                                                         })
-                                                    }
+                                                        }
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                             <div
                                 className="menu-mobile-right"
@@ -337,14 +393,57 @@ function Header(props) {
                                     </div>
                                 </div>
                             </div>
-                            <Link to={userInfo ? "/account" : "/login"} className={(props.location.pathname == '/account' || props.location.pathname == '/login') ? "nav-item nav-link active" : "nav-item nav-link"}>Dành Cho Hội Viên <i className="fa fa-lock"></i></Link>
+                            <div className="nav-item dropdown" style={{width:"130px"}} onMouseEnter={() => {
+                                setHover1(1)
+                            }}
+                                onMouseLeave={() => {
+                                    setHover1(0)
+                                }}>
+                                <a href="#" className="nav-link dropdown-toggle triangle1" data-toggle="dropdown" style={{position:"relative"}}> Mở tài khoản 
+                                </a>
+                                <div className={hover1 ? "dropdown-menu rounded-0 m-0 show" : "dropdown-menu rounded-0 m-0"}>
+                                    <div className="menu-content row" style={{width:"300px"}}>
+                                        <div className="col" style={{ marginTop: "15px" }}>
+                                            <Link to="/news/account/Tài khoản chứng khoán VPS"
+                                                className={props.location.pathname.indexOf('Tài khoản chứng khoán VPS') != -1 ? "nav-link active" : "nav-link"}>
+                                                    Tài khoản chứng khoán VPS</Link>
+                                            <Link to="/news/account/Tài khoản chứng khoán AIS"
+                                                className={props.location.pathname.indexOf('Tài khoản chứng khoán AIS') != -1 ? "nav-link active" : "nav-link"}>
+                                                Tài khoản chứng khoán AIS </Link>
+                                            <Link to="/news/account/Tài khoản chứng khoán MBS"
+                                                className={props.location.pathname.indexOf('Tài khoản chứng khoán MBS') != -1 ? "nav-link active" : "nav-link"}>
+                                                Tài khoản chứng khoán MBS</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <Link to={userInfo ? "/account" : "/login"} className={(props.location.pathname == '/account' || props.location.pathname == '/login') ? "nav-item nav-link active" : "nav-item nav-link"}>Dành Cho Hội Viên <i className="fa fa-lock"></i></Link> */}
                             <Link to="/course" className={props.location.pathname == '/course' ? "nav-item nav-link active" : "nav-item nav-link"}>Khóa Học</Link>
                         </div>
                         <div className="input-group ml-auto" style={{ width: "100%", maxWidth: "300px" }}>
-                            <input type="text" className="form-control" placeholder="Tìm Kiếm..." />
+                            <input type="text" className="form-control" placeholder="Tìm Kiếm..." onChange={(event) => { setSearch(event.target.value) }} />
                             <div className="input-group-append">
                                 <button className="input-group-text text-secondary"><i
                                     className="fa fa-search"></i></button>
+                            </div>
+                            <div className={search ? "dropdown-menu rounded-0 m-0 show" : "dropdown-menu rounded-0 m-0"} style={{left: "-10%"}}>
+                                <div className="menu-content row overflow-auto" style={{ width: "400px", maxHeight: "350px" }}>
+                                    <div style={{ marginTop: "15px" }}>
+                                        {
+                                            newsSearch.map((item, index) => {
+                                                return (
+                                                    <NewsSmall
+                                                        key={index}
+                                                        news={item}
+                                                    />
+                                                )
+                                            })
+                                        }
+                                        {
+                                            newsSearch.length == 0 && <div className="col" style={{ marginBottom: "15px" }}><b style={{ color: "black" }}>Không tìm thấy kết quả</b></div>
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

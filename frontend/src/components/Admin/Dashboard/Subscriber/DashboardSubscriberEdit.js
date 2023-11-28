@@ -8,13 +8,17 @@ export default function DashboardSubscriberCreate(props) {
 
     const createForm = useRef();
     
-    const [subscriberEmail, setSubscriberEmail] = useState("")
+    const [bankAccount, setBankAccount] = useState("") 
+    const [bankName, setBankName] = useState("") 
+    const [accountName, setAccountName] = useState("") 
 
     const email = props.email;
  
     useEffect(()=> {
         if (email) {    
-            setSubscriberEmail(email.subscriberEmail)
+            setBankAccount(email.bankAccount)
+            setBankName(email.bankName)
+            setAccountName(email.accountName)
         }
     },[email])
 
@@ -22,8 +26,10 @@ export default function DashboardSubscriberCreate(props) {
         event.preventDefault()
 
         axios.post(BACKEND + `/email/update/${email._id}`, {
-            subscriberEmail: subscriberEmail
-        })
+            bankAccount: bankAccount,
+            bankName: bankName,
+            accountName: accountName,
+        },{headers: { "authorization": `Bearer ${localStorage.getItem('token')}` }})
 
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
@@ -34,7 +40,7 @@ export default function DashboardSubscriberCreate(props) {
             <div className="create-box"> 
                 <div className="create-box-title flex">
                     <div className="create-box-title-text">
-                        Email infomation
+                    Thông Tin Tài Khoản Ngân Hàng
                     </div>
                     <div  
                         className="create-box-title-close flex-center"
@@ -46,21 +52,45 @@ export default function DashboardSubscriberCreate(props) {
                     </div>
                 </div>
                 <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
+                <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Số Tài Khoản</div>
+                        <div className="dashboard-right">
+                            <input 
+                                type="number" name="email" 
+                                value={bankAccount}
+                                onChange={(event)=>{
+                                    setBankAccount(event.target.value)
+                                }} required
+                                ></input>
+                        </div>
+                    </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Email</div>
+                        <div className="dashboard-left flex">Tên Ngân Hàng</div>
                         <div className="dashboard-right">
                             <input 
                                 type="text" name="email" 
-                                value={subscriberEmail || ""}
+                                value={bankName}
                                 onChange={(event)=>{
-                                    setSubscriberEmail(event.target.value)
+                                    setBankName(event.target.value)
+                                }} required
+                                ></input>
+                        </div>
+                    </div>
+                    <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Tên Tài Khoản</div>
+                        <div className="dashboard-right">
+                            <input 
+                                type="text" name="email" 
+                                value={accountName}
+                                onChange={(event)=>{
+                                    setAccountName(event.target.value)
                                 }} required
                                 ></input>
                         </div>
                     </div>
                     <div className="flex-center" style={{marginTop: '40px'}}>
                         <button className="create-box-btn btn">
-                            Edit subscriber
+                            Cập Nhật Tài Khoản Ngân Hàng
                         </button>
                     </div>
                 </form>

@@ -53,7 +53,7 @@ function Checkout(props) {
     const [isPay, setIsPay] = useState("")
     const [date, setDate] = useState("")
     const [isHandle, setIsHandle] = useState(false)
-
+    const [email, setEmail] = useState([])
 
 
     useEffect(() => {
@@ -67,11 +67,11 @@ function Checkout(props) {
             "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
             "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
         ];
-            const date = new Date()
-            const day = date.getDate()
-            const month = date.getMonth()
-            const year = date.getFullYear()
-            setDate(`${day} ${monthNames[month]} ${year}`)
+        const date = new Date()
+        const day = date.getDate()
+        const month = date.getMonth()
+        const year = date.getFullYear()
+        setDate(`${day} ${monthNames[month]} ${year}`)
     }, [props.match.params.id])
 
     useEffect(() => {
@@ -113,6 +113,11 @@ function Checkout(props) {
                 setTinh(res.data[0].tinh)
                 setHuyen(res.data[0].huyen)
             })
+        Axios.get(BACKEND + `/email`)
+            .then(res => {
+                setEmail(res.data)
+            }
+            )
     }, [])
 
     const [methodPayment, setMethodPayMent] = useState(0)
@@ -128,7 +133,7 @@ function Checkout(props) {
 
     const placeAnOrder = () => {
 
-        if(isPay){
+        if (isPay) {
             props.history.push("/")
             return
         }
@@ -212,8 +217,8 @@ function Checkout(props) {
             }
         } else {
             setIsHandle(true)
-            Axios.post(BACKEND + `/order`, data).then( res => {
-                setIsPay(res.data)   
+            Axios.post(BACKEND + `/order`, data).then(res => {
+                setIsPay(res.data)
                 setIsHandle(false)
                 setTimeout(() => {
                     localStorage.removeItem('total')
@@ -370,6 +375,7 @@ function Checkout(props) {
                                     onClick={() => {
                                         setIsShowQR(false)
                                     }}
+                                    checked={methodPayment == 1}
                                 ></input>
                                 <label
                                     htmlFor="1" className="payment-method-label"
@@ -378,7 +384,7 @@ function Checkout(props) {
                                     Thanh toán chuyển khoản ngân hàng
                                 </label>
                             </div>
-                            <div
+                            {/* <div
                                 className="checkout-detail-ship-item flex"
                             >
                                 <input
@@ -409,7 +415,7 @@ function Checkout(props) {
                                     <img src="https://stccbo.zalopay.vn/zalopay-public/websites/ver201022/images/logozlp1.png" alt=""></img>
                                     ZaloPay
                                 </label>
-                            </div>
+                            </div> */}
                             <div className={isShowQR ? "qr-box flex-col" : "d-none"}>
                                 <div className="qr-code-box flex-center">
                                     <QRCode value={qrValue}></QRCode>
@@ -459,24 +465,32 @@ function Checkout(props) {
                                     <p>Sau khi chuyển khoản bạn email hoặc sms mã đơn hàng để được kích hoạt khoá học</p>
                                     <div className="checkout-info-title"><strong>Thông tin</strong> chuyển khoản ngân hàng</div>
                                     <div className="checkout-detail-items">
-                                        <div className="checkout-detail-title">Nguyễn Đăng Sơn:</div>
-                                        <div className="checkout-detail-item flex" style={{ alignItems: "center" }}>
-                                            <ul class="wc-bacs-bank-details order_details bacs_details">
-                                                <li class="bank_name">Ngân hàng: <strong>MB Bank – Chi nhánh Thăng Long</strong></li>
-                                                <li class="account_number">Số tài khoản: <strong>0740102054001</strong></li>
-                                                <li class="account_number">Nội dung: <strong>{isPay}-{userPhone}</strong></li>
-                                                <li class="account_number">Số tiền: <strong>{course.productFinalPrice && course.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</strong></li>
-                                            </ul>
-                                        </div>
+                                        {
+                                            email.map((item, index) => {
+                                                return (<div>
+                                                    <div className="checkout-detail-title">{item.accountName}:</div>
+                                                    <div className="checkout-detail-item flex" style={{ alignItems: "center" }}>
+                                                        <ul class="wc-bacs-bank-details order_details bacs_details">
+                                                            <li class="bank_name">Ngân hàng: <strong>{item.bankName}</strong></li>
+                                                            <li class="account_number">Số tài khoản: <strong>{item.bankAccount}</strong></li>
+                                                            <li class="account_number">Nội dung: <strong>{isPay}-{userPhone}</strong></li>
+                                                            <li class="account_number">Số tiền: <strong>{course.productFinalPrice && course.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</strong></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                )
+                                            })
+                                        }
                                     </div>
+
                                 </section>
                             </div>
                             <div
                                 className="checkout-info-row flex-center"
                                 onClick={placeAnOrder}
                             >
-                                {!isHandle && <div className="checkout-info-btn" style={{background: isPay ?  "#34aa40" : "#fc2754"}}> {isPay ? 'Hoàn Thành Thanh Toán' : 'Mua khóa học'}</div>}
-                                {isHandle && <div className="checkout-info-btn" style={{background: "blue"}}> ...Đang Chờ Xử Lý Đơn Hàng</div>}
+                                {!isHandle && <div className="checkout-info-btn" style={{ background: isPay ? "#34aa40" : "#fc2754" }}> {isPay ? 'Hoàn Thành Thanh Toán' : 'Mua khóa học'}</div>}
+                                {isHandle && <div className="checkout-info-btn" style={{ background: "blue" }}> ...Đang Chờ Xử Lý Đơn Hàng</div>}
                             </div>
                         </div>
                     }

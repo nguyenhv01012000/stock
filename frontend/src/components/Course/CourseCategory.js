@@ -16,13 +16,14 @@ function CourseCategory(props) {
     const [currentPage, setCurrentPage] = useState(1);
     const [pages, setPages] = useState([1]);
     const [count, setCount] = useState(1);
+    const amount = 9;
 
     useEffect(() => {
         window.scrollTo(0, 0)
         let config = {
             params: {
                 page: 0,
-                limit: 9,
+                limit: amount,
                 sort: category
             },
         }
@@ -30,9 +31,9 @@ function CourseCategory(props) {
             .then(res => {
                 const arr = [...res.data.products]
                 setCourseView(arr)
-                setCount(Math.ceil(Number(res.data.count) / 9))
+                setCount(Math.ceil(Number(res.data.count) / amount))
                 let pageNumbers = []
-                for (let i = 1; i <= Math.min(Math.ceil(Number(res.data.count) / 9), 5); i++) {
+                for (let i = 1; i <= Math.min(Math.ceil(Number(res.data.count) / amount), 5); i++) {
                     pageNumbers.push(i);
                 }
                 setPages(pageNumbers)
@@ -41,19 +42,52 @@ function CourseCategory(props) {
     }, [category])
 
     const choosePage = (number) => {
-        if (number == 1) {
-            let pagesClone = pages;
-            pagesClone.shift();
-            pagesClone.push(pagesClone[3] + 1);
-            setPages(pagesClone);
+        if (number == -1) {
+            let pageNumbers = []
+            for (let i = 1; i <= Math.min(count, 5); i++) {
+                pageNumbers.push(i);
+            }
+            setPages(pageNumbers)
+            setCurrentPage(pageNumbers[0]);
         } else {
-            let pagesClone = pages;
-            pagesClone.pop();
-            pagesClone.unshift(pagesClone[0] - 1);
-            setPages(pagesClone);
+            let pageNumbers = []
+            for (let i = Math.max(count - 4, 1); i <= count; i++) {
+                pageNumbers.push(i);
+            }
+            setPages(pageNumbers)
+            setCurrentPage(pageNumbers[pageNumbers.length -1]);
         }
-        if (currentPage + number >= 1 && currentPage + number <= 5) setCurrentPage(currentPage + number);
     }
+
+    useEffect(() => {
+        if(currentPage == pages[pages.length -1] && currentPage < count){
+            let pageNumbers = []
+            for (let i = Math.max(currentPage - 3, 1); i <= Math.min(currentPage + 1, count); i++) {
+                pageNumbers.push(i);
+            }
+            setPages(pageNumbers)
+        }
+        if(currentPage == pages[0] && currentPage > 1){
+            let pageNumbers = []
+            for (let i = Math.max(currentPage - 1, 1); i <= Math.min(currentPage + 3, count); i++) {
+                pageNumbers.push(i);
+            }
+            setPages(pageNumbers)
+        }
+        let config = {
+            params: {
+                page: currentPage - 1,
+                limit: amount,
+                sort: category
+            },
+        }
+        Axios.get(BACKEND + `/products`, config)
+            .then(res => {
+                const arr = [...res.data.products]
+                setCourseView(arr)
+            }
+            )
+    }, [currentPage])
 
     return (<div>
         {/* Breadcrumb Start */}

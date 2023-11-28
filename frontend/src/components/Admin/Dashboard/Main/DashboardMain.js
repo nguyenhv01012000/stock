@@ -271,7 +271,7 @@ export default function DashboardMain() {
                     ]}
                 />
             </div>
-            <div className="row flex" style={{flexWrap:"nowrap"}}>
+            {/* <div className="row flex" style={{flexWrap:"nowrap"}}>
                 <DashboardRecentReview
                     icon = {faStar}
                     title = "Recent Reviews"
@@ -283,14 +283,14 @@ export default function DashboardMain() {
                     title = "Todo list"
                     color = "green"
                 />
-            </div>
-            <div className="row flex">
+            </div> */}
+            {/* <div className="row flex">
                 <DashboardChartLine
                     icon = {faTasks}
                     order = {order}
                     color = "pink"
                 />
-            </div>
+            </div> */}
         </div>
     )
 }
