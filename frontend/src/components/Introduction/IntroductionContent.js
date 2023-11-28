@@ -174,9 +174,7 @@ function IntroductionContent(props) {
                                 <span className="price"><del aria-hidden="true"><span className="woocommerce-Price-amount amount"><bdi>{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}<span className="woocommerce-Price-currencySymbol">₫</span></bdi></span></del>
                                   <ins><span className="woocommerce-Price-amount amount"><bdi>{item.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}<span className="woocommerce-Price-currencySymbol">₫</span></bdi></span></ins></span>
                               </div>}
-                              <p className="box-excerpt is-small" style={{ height: '54px' }}>
-                                <ReactQuill value={item.productDes} readOnly theme={"bubble"} />
-                                </p>
+                              <p className="box-excerpt is-small" style={{ height: '54px' }}>{item.productTitle}</p>
                                 <Link  to={"/checkout/"+item._id} className="button btn-xemtl" tabIndex={0}>Đăng ký ngay</Link>
                             </div>
                           </div>

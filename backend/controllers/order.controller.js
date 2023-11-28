@@ -4,7 +4,7 @@ var Product = require("../models/product.model");
 const { BACKEND } = require("../env");
 
 module.exports.index = async function(req, res) {
-	var order = await Order.find();
+	var order = await Order.find().sort({ orderDate: "desc" });
 	res.json(order);
 }
 module.exports.orderInfo = function(req, res) {

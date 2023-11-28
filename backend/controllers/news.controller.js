@@ -40,7 +40,6 @@ module.exports.index = async function(req, res) {
 		news = await News.find({ newTitle: { $regex: '.*' + search + '.*' }, "newDate": { $lte: currentDate }})
 			.sort({ newDate: "desc" })
 			.sort({ newTime: "desc" })
-			.sort({ newTime: "desc" });
 			// .skip(pageOptions.page * pageOptions.limit)
 			// .limit(pageOptions.limit);
 		count = await News.count({ newTitle: { $regex: '.*' + search + '.*' }, "newDate": { $lte: currentDate }});
@@ -48,7 +47,6 @@ module.exports.index = async function(req, res) {
 	else if(sort){
 		news = await News.find({ newCate: req.query.sort, "newDate": { $lte: currentDate }})
 			.sort({ newDate: "desc" })
-			.sort({ newTime: "desc" })
 			.sort({ newTime: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit); 
