@@ -37,8 +37,8 @@ function Checkout(props) {
     const [userAvt, setUserAvt] = useState("")
     const [userPhone, setUserPhone] = useState("")
     const [userEmail, setUserEmail] = useState("")
-    const [userProvince, setUserProvince] = useState("")
-    const [userDistrict, setUserDistrict] = useState("")
+    const [userProvince, setUserProvince] = useState(null)
+    const [userDistrict, setUserDistrict] = useState(null)
     const [userAddress, setUserAddress] = useState("")
     const [provinceId, setProvinceId] = useState("")
     const [checkoutTab, setCheckoutTab] = useState(0)
@@ -76,38 +76,38 @@ function Checkout(props) {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        Axios.get(BACKEND + `/users/${localStorage.getItem('user-id')}`, {
-            headers: { "authorization": `Bearer ${localStorage.getItem('token')}` }
-        })
-            .then(res => {
-                setUserInfoFunc(res.data.user);
-                const userInfo = res.data.user
-                set_Id(userInfo._id)
-                setUserName(userInfo.userName)
-                setUserAvt(userInfo.userAvt)
-                setUserPhone(userInfo.userPhone)
-                setUserEmail(userInfo.userEmail)
-                setUserProvince(userInfo.userTinh)
-                setUserAddress(userInfo.userAddress)
-                if (userInfo.userDistrict !== "") {
-                    Axios.get(BACKEND + `/vietnam`)
-                        .then(res => {
-                            setTinh(res.data[0].tinh)
-                            setHuyen(res.data[0].huyen)
-                            res.data[0].tinh.filter((item) => {
-                                if (userInfo.userTinh === item.name) {
-                                    setProvinceId(item.id)
-                                }
-                                return null
-                            })
-                        }
-                        )
-                    setUserProvince(userInfo.userTinh)
-                }
-                if (userInfo.userHuyen !== "") {
-                    setUserDistrict(userInfo.userHuyen)
-                }
-            })
+        // Axios.get(BACKEND + `/users/${localStorage.getItem('user-id')}`, {
+        //     headers: { "authorization": `Bearer ${localStorage.getItem('token')}` }
+        // })
+        //     .then(res => {
+        //         setUserInfoFunc(res.data.user);
+        //         const userInfo = res.data.user
+        //         set_Id(userInfo._id)
+        //         setUserName(userInfo.userName)
+        //         setUserAvt(userInfo.userAvt)
+        //         setUserPhone(userInfo.userPhone)
+        //         setUserEmail(userInfo.userEmail)
+        //         setUserProvince(userInfo.userTinh)
+        //         setUserAddress(userInfo.userAddress)
+        //         if (userInfo.userDistrict !== "") {
+        //             Axios.get(BACKEND + `/vietnam`)
+        //                 .then(res => {
+        //                     setTinh(res.data[0].tinh)
+        //                     setHuyen(res.data[0].huyen)
+        //                     res.data[0].tinh.filter((item) => {
+        //                         if (userInfo.userTinh === item.name) {
+        //                             setProvinceId(item.id)
+        //                         }
+        //                         return null
+        //                     })
+        //                 }
+        //                 )
+        //             setUserProvince(userInfo.userTinh)
+        //         }
+        //         if (userInfo.userHuyen !== "") {
+        //             setUserDistrict(userInfo.userHuyen)
+        //         }
+        //     })
         Axios.get(BACKEND + `/vietnam`)
             .then(res => {
                 setTinh(res.data[0].tinh)
@@ -129,6 +129,34 @@ function Checkout(props) {
     const showQR = (text) => {
         setIsShowQR(true)
         setQRValue(text)
+    }
+
+    const continueOrder = () => {
+        if (!userName) {
+            setToast("Họ tên không được để trống")
+            setTimeout(() => {
+                setToast("")
+            }, 3000)
+            return
+        }
+        if (!userEmail) {
+            setToast("Email không được để trống")
+            setTimeout(() => {
+                setToast("")
+            }, 3000)
+            return
+        }
+        if (!userPhone) {
+            setToast("Số điện thoại không được để trống")
+            setTimeout(() => {
+                setToast("")
+            }, 3000)
+            return
+        }
+        setCheckoutTab(1)
+        if (window.innerWidth >= 750) {
+            window.scrollTo(0, 0)
+        }
     }
 
     const placeAnOrder = () => {
@@ -304,7 +332,7 @@ function Checkout(props) {
                                             setUserProvince(event.target.value)
                                         }}
                                     >
-                                        <option disabled>select a province</option>
+                                        <option defaultValue>Chọn Tỉnh</option>
                                         {tinh.map((item, index) => {
                                             return (
                                                 <option
@@ -324,7 +352,7 @@ function Checkout(props) {
                                             setUserDistrict(event.target.value)
                                         }}
                                     >
-                                        <option disabled>select a district</option>
+                                        <option defaultValue>Chọn Huyện</option>
                                         {huyen.map((item, index) => {
                                             if (item.tinh_id === provinceId) {
                                                 return (
@@ -352,12 +380,7 @@ function Checkout(props) {
                                 </div>
                                 <div
                                     className="checkout-info-row flex-center"
-                                    onClick={() => {
-                                        setCheckoutTab(1)
-                                        if (window.innerWidth >= 750) {
-                                            window.scrollTo(0, 0)
-                                        }
-                                    }}
+                                    onClick={continueOrder}
                                 >
                                     <div className="checkout-info-btn">Tiếp theo</div>
                                 </div>
