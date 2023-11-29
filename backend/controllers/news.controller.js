@@ -14,21 +14,21 @@ module.exports.index = async function(req, res) {
 	let currentDate = new Date();
 
 	if(sort == "view" || sort == "BÀI VIẾT ĐỌC NHIỀU"){
-		news = await News.find({"newDate": { $lte: currentDate }})
+		news = await News.find({"newDate": { $lte: currentDate }, newCate: { "$nin" : ["Tài khoản chứng khoán VPS", "Tài khoản chứng khoán AIS", "Tài khoản chứng khoán MBS"]}})
 			.sort({ newView: "desc" })
 			.sort({ newDate: "desc" })
 			.sort({ newTime: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
-		count = await News.count({"newDate": { $lte: currentDate }});
+		count = await News.count({"newDate": { $lte: currentDate }, newCate: { "$nin" : ["Tài khoản chứng khoán VPS", "Tài khoản chứng khoán AIS", "Tài khoản chứng khoán MBS"]}});
 	}else if(sort == "latest" || sort == "TIN MỚI NHÂT") {
-		news = await News.find({"newDate": { $lte: currentDate }})
+		news = await News.find({"newDate": { $lte: currentDate }, newCate: { "$nin" : ["Tài khoản chứng khoán VPS", "Tài khoản chứng khoán AIS", "Tài khoản chứng khoán MBS"]}})
 			.sort({ newDate: "desc" })
 			.sort({ newView: "desc" })
 			.sort({ newTime: "desc" })
 			.skip(pageOptions.page * pageOptions.limit)
 			.limit(pageOptions.limit);
-		count = await News.count({"newDate": { $lte: currentDate }});
+		count = await News.count({"newDate": { $lte: currentDate }, newCate: { "$nin" : ["Tài khoản chứng khoán VPS", "Tài khoản chứng khoán AIS", "Tài khoản chứng khoán MBS"]}});
 	}else if(sort == "hot") {
 		news = await News.find({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}, "newDate": { $lte: currentDate }})
 			.sort({ newDate: "desc" })
@@ -37,12 +37,12 @@ module.exports.index = async function(req, res) {
 			.limit(pageOptions.limit);
 		count = await News.count({ newCate: { "$in" : ["Kiến thức Phân tích cơ bản", "Kiến thức Phân tích kỹ thuật", "Kiến thức Đầu tư tổng hợp"]}, "newDate": { $lte: currentDate }});
 	}else if(search){
-		news = await News.find({ newTitle: { $regex: '.*' + search + '.*' }, "newDate": { $lte: currentDate }})
+		news = await News.find({ newTitle: { $regex: '.*' + search + '.*' }, "newDate": { $lte: currentDate }, newCate: { "$nin" : ["Tài khoản chứng khoán VPS", "Tài khoản chứng khoán AIS", "Tài khoản chứng khoán MBS"]}})
 			.sort({ newDate: "desc" })
 			.sort({ newTime: "desc" })
 			// .skip(pageOptions.page * pageOptions.limit)
 			// .limit(pageOptions.limit);
-		count = await News.count({ newTitle: { $regex: '.*' + search + '.*' }, "newDate": { $lte: currentDate }});
+		count = await News.count({ newTitle: { $regex: '.*' + search + '.*' }, "newDate": { $lte: currentDate }, newCate: { "$nin" : ["Tài khoản chứng khoán VPS", "Tài khoản chứng khoán AIS", "Tài khoản chứng khoán MBS"]}});
 	}
 	else if(sort){
 		news = await News.find({ newCate: req.query.sort, "newDate": { $lte: currentDate }})

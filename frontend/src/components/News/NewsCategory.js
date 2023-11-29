@@ -122,6 +122,9 @@ function NewsCategory(props) {
                                     )
                                 })
                             }
+                            {
+                                newsView.length == 0 && <div className="col"><h3 style={{display: "flex",justifyContent: "center"}}>Không có bài viết nào</h3></div>
+                            }
                         </div>
                         <div className="row">
                             <div className="col-12">

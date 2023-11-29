@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import '../../App.css'
 import '../../Styles/Home.css'
+import { Link, withRouter } from 'react-router-dom'
 
 export default function Footer(props) {
 
@@ -22,22 +23,23 @@ export default function Footer(props) {
                                 <i className="fa fa-volume-control-phone icon-modal" />
                             </div>
                             <div className="block-5">
-                                <a href="https://nhadaututhanhcong.com/product/lam-giau-tu-sieu-co-phieu-jesse-stine/">
-                                    <img className="block-6" src="https://nhadaututhanhcong.com/wp-content/uploads/2022/12/Screenshot-2022-12-16-235118.jpg" alt="" loading="lazy" />
-                                </a>
+                                <Link to="/course">
+                                    <img className="block-6" src="https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/400443687_896642841875476_1662751092193989732_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeGLEFe12JO8t7oNJnktxh6Q7m-qvtIPgqLub6q-0g-CojA59IFDryd-bsiPOFfL6IgaYjxLHTjkOciXH6cGj-I_&_nc_ohc=Ycg1saSZpAcAX9dCL5_&_nc_ht=scontent.fhan4-3.fna&oh=03_AdT82hBIMU8bZTN6rZg_4rGOAqK00us1whToWYSH6_xXwQ&oe=658EC52A" alt="" loading="lazy" />
+                                </Link>
                             </div>
                         </div>
                     </div>
                     <div className="block-2">
                         <h4 className="elementor-heading-title elementor-size-default">
-                            <p>phương pháp đầu tư siêu cổ phiếu của Jesse Stine<br />Kỷ lục giao dịch hậu bong bóng internet
+                            <p>Video khóa học đọc hiểu <br />Báo cáo tài chính các công ty niêm yết
                             </p>
                         </h4>
-                        <h4 style={{ width: '100%' }}><span style={{ color: '#ffffff' }}>Biên dịch</span></h4>
+                        <h4 style={{ width: '100%' }}><span style={{ color: '#ffffff' }}>MR Ngô Minh Đức</span></h4>
                         <h4 className="elementor-heading-title elementor-size-default">
-                            <p>Khúc Ngọc Tuyên, Thu Hà, Trương minh huy </p>
+                            <p>CEO CTCP LCTV Investment</p>
+                            <p>Giám đốc tư vấn đầu tư P64 chứng khoán VPS</p>
                         </h4>
-                        <a style={{ width: '100%' }} className="elementor-button">Đặt mua ngay ⟶</a>
+                        <Link to="/course" style={{ width: '100%' }} className="elementor-button">Đặt mua ngay ⟶</Link>
                     </div>
                     <a role="button" className="dialog-close-button" onClick={myFunction}>
                         <span aria-hidden="true">×</span>
