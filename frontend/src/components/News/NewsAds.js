@@ -5,13 +5,20 @@ import '../../Styles/News.css'
 import Axios from 'axios';
 import NewsSmall from '../News/NewsSmall';
 import { BACKEND } from '../../env';
+import LoadingOverlay from 'react-loading-overlay';
+import BounceLoader from 'react-spinners/BounceLoader';
 
 function NewsAds(props) {
 
   const [newsLatest, setNewsLatest] = useState([]);
   const [newsView, setNewsView] = useState([]);
+  const [isActive1, setIsActive1] = useState(false)
+  const [isActive2, setIsActive2] = useState(false)
+
 
   useEffect(() => {
+    setIsActive1(() => true)
+    setIsActive2(() => true)
     let config = {
       params: {
         page: 0,
@@ -21,8 +28,9 @@ function NewsAds(props) {
     }
     Axios.get(BACKEND + `/news`, config)
       .then(res => {
-         const arr = [...res.data.news]
+        const arr = [...res.data.news]
         setNewsLatest(arr)
+        setIsActive1(() => false)
       }
       )
     config = {
@@ -34,8 +42,9 @@ function NewsAds(props) {
     }
     Axios.get(BACKEND + `/news`, config)
       .then(res => {
-         const arr = [...res.data.news]
+        const arr = [...res.data.news]
         setNewsView(arr)
+        setIsActive2(() => false)
       }
       )
   }, [])
@@ -53,38 +62,47 @@ function NewsAds(props) {
       </div>
       {/* Ads End */}
       {/* Popular News Start */}
-      <div className="pb-3">
-        <div className="bg-light py-2 px-4 mb-3">
-          <h3 className="m-0">ĐỌC NHIỀU</h3>
+      <LoadingOverlay
+        active={isActive1}
+        spinner={<BounceLoader />}
+      >
+        <div className="pb-3">
+          <div className="bg-light py-2 px-4 mb-3">
+            <h3 className="m-0">ĐỌC NHIỀU</h3>
+          </div>
+          {
+            newsView.map((item, index) => {
+              return (
+                <NewsSmall
+                  key={index}
+                  news={item}
+                />
+              )
+            })
+          }
         </div>
-        {
-          newsView.map((item, index) => {
-            return (
-              <NewsSmall
-                key={index}
-                news={item}
-              />
-            )
-          })
-        }
-      </div>
+      </LoadingOverlay>
       {/* Popular News End */}
       {/* Popular News Start */}
-      <div className="pb-3">
-        <div className="bg-light py-2 px-4 mb-3">
-          <h3 className="m-0">MỚI NHẤT</h3>
-        </div>
-        {
-          newsLatest.map((item, index) => {
-            return (
-              <NewsSmall
-                key={index}
-                news={item}
-              />
-            )
-          })
-        }
-      </div>
+      <LoadingOverlay
+        active={isActive2}
+        spinner={<BounceLoader />}
+      >
+        <div className="pb-3">
+          <div className="bg-light py-2 px-4 mb-3">
+            <h3 className="m-0">MỚI NHẤT</h3>
+          </div>
+          {
+            newsLatest.map((item, index) => {
+              return (
+                <NewsSmall
+                  key={index}
+                  news={item}
+                />
+              )
+            })
+          }
+        </div></LoadingOverlay>
       {/* Popular News End */}
     </div>
   )

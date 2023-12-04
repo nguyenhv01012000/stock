@@ -88,6 +88,7 @@ export default function TOC(props) {
     }
   }, [currentHeadingID]);
 
+  if(headings.length)
   return (
     <div id="ez-toc-container" className="ez-toc-v2_0_57_1 ez-toc-wrap-center counter-hierarchy ez-toc-counter ez-toc-custom ez-toc-container-direction" style={{ width: "100%", fontSize: "larger", fontFamily: "Roboto, sans-serif" }} ref={wrapperRef}>
       <div className="ez-toc-title-container">
@@ -159,4 +160,5 @@ export default function TOC(props) {
       </nav>
     </div>
   );
+  else return (<div></div>);
 };

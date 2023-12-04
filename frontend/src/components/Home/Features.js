@@ -5,15 +5,20 @@ import News from '../News/News';
 import NewsSmall from '../News/NewsSmall';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import { BACKEND } from '../../env';
+import LoadingOverlay from 'react-loading-overlay';
+import BounceLoader from 'react-spinners/BounceLoader';
 
 export default function Features(props) {
 
     const [newsView, setNewsView] = useState([]);
     const [newsHot, setNewsHot] = useState([]);
-
+    const [isActive1, setIsActive1] = useState(false)
+    const [isActive2, setIsActive2] = useState(false)
 
 
     useEffect(() => {
+        setIsActive1(() => true)
+        setIsActive2(() => true)
         window.scrollTo(0, 0)
         let config = {
             params: {
@@ -24,8 +29,9 @@ export default function Features(props) {
         }
         Axios.get(BACKEND + `/news`, config)
             .then(res => {
-                 const arr = [...res.data.news]
+                const arr = [...res.data.news]
                 setNewsView(arr)
+                setIsActive1(() => false)
             }
             )
         config = {
@@ -37,58 +43,69 @@ export default function Features(props) {
         }
         Axios.get(BACKEND + `/news`, config)
             .then(res => {
-                 const arr = [...res.data.news]
+                const arr = [...res.data.news]
                 setNewsHot(arr)
+                setIsActive2(() => false)
             }
             )
     }, [])
 
     return (
         <div className="Features">
+
             <div>
                 <div className="container-fluid py-3">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8">
-                                <div className="row mb-3">
-                                    <div className="col-12">
-                                        <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                                            <h3 className="m-0">BÀI VIẾT ĐỌC NHIỀU</h3>
-                                            <Link className="text-secondary font-weight-medium text-decoration-none" to="/news/category/BÀI VIẾT ĐỌC NHIỀU">Xem Tất Cả</Link>
+                                <LoadingOverlay
+                                    active={isActive1}
+                                    spinner={<BounceLoader />}
+                                >
+                                    <div className="row mb-3">
+                                        <div className="col-12">
+                                            <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                                                <h3 className="m-0">BÀI VIẾT ĐỌC NHIỀU</h3>
+                                                <Link className="text-secondary font-weight-medium text-decoration-none" to="/news/category/BÀI VIẾT ĐỌC NHIỀU">Xem Tất Cả</Link>
+                                            </div>
                                         </div>
+                                        {
+                                            newsView.map((item, index) => {
+                                                return (
+                                                    <div className="col-lg-4">
+                                                        <News
+                                                            key={index}
+                                                            news={item}
+                                                        />
+                                                    </div>
+                                                )
+                                            })
+                                        }
                                     </div>
-                                    {
-                                        newsView.map((item, index) => {
-                                            return (
-                                                <div className="col-lg-4">
-                                                    <News   
-                                                        key={index}
-                                                        news={item}
-                                                    />
-                                               </div>
-                                            )
-                                        })
-                                    }
-                                </div>
+                                </LoadingOverlay>
                             </div>
 
                             <div className="col-lg-4 pt-3 pt-lg-0">
                                 {/* Popular News Start */}
-                                <div className="pb-3">
-                                    <div className="bg-light py-2 px-4 mb-3">
-                                        <h3 className="m-0">KIẾN THỨC HAY</h3>
-                                    </div>
-                                    {
-                                        newsHot.map((item, index) => {
-                                            return (
-                                                <NewsSmall   
-                                                    key={index}
-                                                    news={item}
-                                                />
-                                            )
-                                        })
-                                    }
-                                </div>
+                                <LoadingOverlay
+                                    active={isActive2}
+                                    spinner={<BounceLoader />}
+                                >
+                                    <div className="pb-3">
+                                        <div className="bg-light py-2 px-4 mb-3">
+                                            <h3 className="m-0">KIẾN THỨC HAY</h3>
+                                        </div>
+                                        {
+                                            newsHot.map((item, index) => {
+                                                return (
+                                                    <NewsSmall
+                                                        key={index}
+                                                        news={item}
+                                                    />
+                                                )
+                                            })
+                                        }
+                                    </div></LoadingOverlay>
                                 {/* Popular News End */}
                             </div>
                         </div>

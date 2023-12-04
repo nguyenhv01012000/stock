@@ -4,7 +4,12 @@
   }
 
   .newscontent-text .ql-editor {
-    min-height: 200px;
+    min-height: 100% !important;
+    max-height: 100% !important;
+  }
+
+  .quill-css .ql-editor {
+    min-height: 100% !important;
     max-height: 100% !important;
   }
   

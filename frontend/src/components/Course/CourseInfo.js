@@ -143,7 +143,9 @@ export default function CourseInfo(props) {
                 </div>
                 <div className="u-des-course" id="u-des-course" style={{ fontSize: '15px' }}>
                   <p className="detail_h2_title">Giới thiệu khóa học</p>
-                  <ReactQuill value={course.productDes} readOnly theme={"bubble"} />
+                  <div className="quill-css">
+                    <ReactQuill value={course.productDes} readOnly theme={"bubble"} />
+                  </div>
                 </div>
                 <div className="u-list-course" id="u-list-course">
                   <p className="detail_h2_title">Nội dung khóa học</p>

@@ -6,14 +6,19 @@ import { Link, withRouter } from 'react-router-dom'
 import Axios from 'axios';
 import CourseItem from './CourseItem'
 import { BACKEND } from '../../env'
+import LoadingOverlay from 'react-loading-overlay';
+import BounceLoader from 'react-spinners/BounceLoader';
 
 export default function CourseList(props) {
 
   const [courseView, setCourseView] = useState([]);
   const [courseLatest, setCourseLatest] = useState([]);
-
+  const [isActive1, setIsActive1] = useState(false)
+  const [isActive2, setIsActive2] = useState(false)
 
   useEffect(() => {
+    setIsActive1(() => true)
+    setIsActive2(() => true)
     window.scrollTo(0, 0)
 
     let config = {
@@ -27,6 +32,7 @@ export default function CourseList(props) {
       .then(res => {
         const arr = [...res.data.products]
         setCourseView(arr)
+        setIsActive1(() => false)
       }
       )
     config = {
@@ -40,6 +46,7 @@ export default function CourseList(props) {
       .then(res => {
         const arr = [...res.data.products]
         setCourseLatest(arr)
+        setIsActive2(() => false)
       }
       )
   }, [])
@@ -61,42 +68,52 @@ export default function CourseList(props) {
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
-              <div className="row">
-                <div className="col-12">
-                  <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                    <h3 className="m-0">TOP BÁN CHẠY</h3>
-                    <Link className="text-secondary font-weight-medium text-decoration-none" to="course-category/TOP BÁN CHẠY">Xem Tất Cả</Link>
+              <LoadingOverlay
+                active={isActive1}
+                spinner={<BounceLoader />}
+              >
+                <div className="row">
+                  <div className="col-12">
+                    <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                      <h3 className="m-0">TOP BÁN CHẠY</h3>
+                      <Link className="text-secondary font-weight-medium text-decoration-none" to="course-category/TOP BÁN CHẠY">Xem Tất Cả</Link>
+                    </div>
                   </div>
-                </div>
-                {courseView &&
-                  courseView.map((item, index) => {
-                    return (
+                  {courseView &&
+                    courseView.map((item, index) => {
+                      return (
                         <CourseItem
                           key={index}
                           course={item}
                         />
-                    )
-                  })
-                }
-              </div>
-              <div className="row">
-                <div className="col-12">
-                  <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                    <h3 className="m-0">KHÓA HỌC MỚI RA MẮT</h3>
-                    <Link className="text-secondary font-weight-medium text-decoration-none" to="course-category/KHÓA HỌC MỚI RA MẮT">Xem Tất Cả</Link>
-                  </div>
+                      )
+                    })
+                  }
                 </div>
-                {courseLatest &&
-                  courseLatest.map((item, index) => {
-                    return (
+              </LoadingOverlay>
+              <LoadingOverlay
+                active={isActive1}
+                spinner={<BounceLoader />}
+              >
+                <div className="row">
+                  <div className="col-12">
+                    <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                      <h3 className="m-0">KHÓA HỌC MỚI RA MẮT</h3>
+                      <Link className="text-secondary font-weight-medium text-decoration-none" to="course-category/KHÓA HỌC MỚI RA MẮT">Xem Tất Cả</Link>
+                    </div>
+                  </div>
+                  {courseLatest &&
+                    courseLatest.map((item, index) => {
+                      return (
                         <CourseItem
                           key={index}
                           course={item}
                         />
-                    )
-                  })
-                }
-              </div>
+                      )
+                    })
+                  }
+                </div>
+              </LoadingOverlay>
             </div>
             <NewsAds />
           </div>

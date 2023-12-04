@@ -15,6 +15,9 @@ import ReactQuill from 'react-quill';
 import TOC from './TOC';
 import Header from '../Home/Header';
 import Footer from '../Home/Footer';
+import LoadingOverlay from 'react-loading-overlay';
+import BounceLoader from 'react-spinners/BounceLoader';
+
 
 export default function NewsContent1(props) {
 
@@ -24,9 +27,11 @@ export default function NewsContent1(props) {
     ];
 
     const [news, setNews] = useState({})
+    const [isActive, setIsActive] = useState(false)
 
 
     useEffect(() => {
+        setIsActive(() => true)
         let config = {
             params: {
                 page: 0,
@@ -37,8 +42,9 @@ export default function NewsContent1(props) {
         Axios.get(BACKEND + `/news`, config)
             .then(res => {
                 const arr = [...res.data.news]
-                if(arr.length)setNews(arr[0])
+                if (arr.length) setNews(arr[0])
                 else setNews({})
+                setIsActive(()=>false)
             })
         if (news._id) {
             Axios.post(BACKEND + `/news/update/${news._id}`, {
@@ -50,7 +56,11 @@ export default function NewsContent1(props) {
     return (
         <div>
             <Header></Header>
-            <div className="container-fluid" style={{ marginTop: '100px' }}>
+            <LoadingOverlay
+                active={isActive}
+                spinner={<BounceLoader />}
+            >
+                           <div className="container-fluid" style={{ marginTop: '100px' }}>
                 <div className="container">
                     <nav className="breadcrumb bg-transparent m-0 p-0">
                         <Link className="breadcrumb-item" to="/">Trang chủ</Link>
@@ -72,11 +82,11 @@ export default function NewsContent1(props) {
                                         <span style={{fontSize:"16px"}}>{date}</span>
                                     </div> */}
                                     <h3 className="mb-3">{news.newTitle}</h3>
-                                    <div className="newscontent-text"
+                                    <div className="quill-css"
                                     >
                                         <ReactQuill value={news.newIntro} readOnly theme={"bubble"} />
                                     </div>
-                                    <TOC selector=".ql-editor" data={news}/>
+                                    <TOC selector=".ql-editor" data={news} />
                                     <div className="newscontent-text"
                                     >
                                         <ReactQuill value={news.newContent} readOnly theme={"bubble"} />
@@ -154,8 +164,8 @@ export default function NewsContent1(props) {
                     </div>
                 </div>
             </div>
-
-            <Footer/>
+            </LoadingOverlay>
+            <Footer />
         </div >
     )
 }

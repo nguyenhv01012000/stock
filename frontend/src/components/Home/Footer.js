@@ -24,7 +24,7 @@ export default function Footer(props) {
                             </div>
                             <div className="block-5">
                                 <Link to="/course">
-                                    <img className="block-6" src="https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/400443687_896642841875476_1662751092193989732_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeGLEFe12JO8t7oNJnktxh6Q7m-qvtIPgqLub6q-0g-CojA59IFDryd-bsiPOFfL6IgaYjxLHTjkOciXH6cGj-I_&_nc_ohc=Ycg1saSZpAcAX9dCL5_&_nc_ht=scontent.fhan4-3.fna&oh=03_AdT82hBIMU8bZTN6rZg_4rGOAqK00us1whToWYSH6_xXwQ&oe=658EC52A" alt="" loading="lazy" />
+                                    <img className="block-6" src="../../img/1232131.jpg" alt="" loading="lazy" />
                                 </Link>
                             </div>
                         </div>

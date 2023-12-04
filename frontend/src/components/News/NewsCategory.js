@@ -7,6 +7,8 @@ import Axios from 'axios';
 import News from '../News/News';
 import { Link } from 'react-router-dom/cjs/react-router-dom'
 import { BACKEND } from '../../env'
+import LoadingOverlay from 'react-loading-overlay';
+import BounceLoader from 'react-spinners/BounceLoader';
 
 function NewsCategory(props) {
 
@@ -17,8 +19,11 @@ function NewsCategory(props) {
     const [pages, setPages] = useState([1]);
     const [count, setCount] = useState(1);
     const amount = 9;
+    const [isActive1, setIsActive1] = useState(false)
+
 
     useEffect(() => {
+        setIsActive1(() => true)
         window.scrollTo(0, 0)
         let config = {
             params: {
@@ -37,6 +42,7 @@ function NewsCategory(props) {
                     pageNumbers.push(i);
                 }
                 setPages(pageNumbers)
+                setIsActive1(() => false)
             }
             )
     }, [category])
@@ -60,6 +66,7 @@ function NewsCategory(props) {
     }
 
     useEffect(() => {
+        setIsActive1(() => true)
         if(currentPage == pages[pages.length -1] && currentPage < count){
             let pageNumbers = []
             for (let i = Math.max(currentPage - 3, 1); i <= Math.min(currentPage + 1, count); i++) {
@@ -85,6 +92,7 @@ function NewsCategory(props) {
             .then(res => {
                 const arr = [...res.data.news]
                 setNewsView(arr)
+                setIsActive1(() => false)
             }
             )
     }, [currentPage])
@@ -104,6 +112,10 @@ function NewsCategory(props) {
             <div className="container-lg">
                 <div className="row">
                     <div className="col-lg-8">
+                        <LoadingOverlay
+                            active={isActive1}
+                            spinner={<BounceLoader />}
+                        >
                         <div className="row">
                             <div className="col-12">
                                 <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
@@ -126,6 +138,7 @@ function NewsCategory(props) {
                                 newsView.length == 0 && <div className="col"><h3 style={{display: "flex",justifyContent: "center"}}>Không có bài viết nào</h3></div>
                             }
                         </div>
+                        </LoadingOverlay>
                         <div className="row">
                             <div className="col-12">
                                 <nav aria-label="Page navigation">

@@ -19,6 +19,11 @@ function Header(props) {
     const [newsSearch, setNewsSearch] = useState([]);
 
     useEffect(() => {
+        setHover(0)
+        setHover1(0)
+    }, [props.location.pathname])
+
+    useEffect(() => {
         if (search == null || search == "") {
             setNewsSearch([]);
             return;

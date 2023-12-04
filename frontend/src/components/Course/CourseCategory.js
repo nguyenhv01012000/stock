@@ -7,6 +7,8 @@ import NewsAds from '../News/NewsAds';
 import CourseItem from './CourseItem';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import { BACKEND } from '../../env';
+import LoadingOverlay from 'react-loading-overlay';
+import BounceLoader from 'react-spinners/BounceLoader';
 
 function CourseCategory(props) {
 
@@ -17,8 +19,12 @@ function CourseCategory(props) {
     const [pages, setPages] = useState([1]);
     const [count, setCount] = useState(1);
     const amount = 9;
+    const [isActive1, setIsActive1] = useState(false)
+
 
     useEffect(() => {
+        setIsActive1(() => true)
+
         window.scrollTo(0, 0)
         let config = {
             params: {
@@ -37,6 +43,7 @@ function CourseCategory(props) {
                     pageNumbers.push(i);
                 }
                 setPages(pageNumbers)
+                setIsActive1(() => false)
             }
             )
     }, [category])
@@ -55,19 +62,21 @@ function CourseCategory(props) {
                 pageNumbers.push(i);
             }
             setPages(pageNumbers)
-            setCurrentPage(pageNumbers[pageNumbers.length -1]);
+            setCurrentPage(pageNumbers[pageNumbers.length - 1]);
         }
     }
 
     useEffect(() => {
-        if(currentPage == pages[pages.length -1] && currentPage < count){
+        setIsActive1(() => true)
+
+        if (currentPage == pages[pages.length - 1] && currentPage < count) {
             let pageNumbers = []
             for (let i = Math.max(currentPage - 3, 1); i <= Math.min(currentPage + 1, count); i++) {
                 pageNumbers.push(i);
             }
             setPages(pageNumbers)
         }
-        if(currentPage == pages[0] && currentPage > 1){
+        if (currentPage == pages[0] && currentPage > 1) {
             let pageNumbers = []
             for (let i = Math.max(currentPage - 1, 1); i <= Math.min(currentPage + 3, count); i++) {
                 pageNumbers.push(i);
@@ -85,6 +94,8 @@ function CourseCategory(props) {
             .then(res => {
                 const arr = [...res.data.products]
                 setCourseView(arr)
+                setIsActive1(() => false)
+
             }
             )
     }, [currentPage])
@@ -105,23 +116,28 @@ function CourseCategory(props) {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-8">
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                                    <h3 className="m-0">{category}</h3>
+                        <LoadingOverlay
+                            active={isActive1}
+                            spinner={<BounceLoader />}
+                        >
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                                        <h3 className="m-0">{category}</h3>
+                                    </div>
                                 </div>
+                                {courseView &&
+                                    courseView.map((item, index) => {
+                                        return (
+                                            <CourseItem
+                                                key={index}
+                                                course={item}
+                                            />
+                                        )
+                                    })
+                                }
                             </div>
-                            {courseView &&
-                                courseView.map((item, index) => {
-                                    return (
-                                        <CourseItem
-                                            key={index}
-                                            course={item}
-                                        />
-                                    )
-                                })
-                            }
-                        </div>
+                        </LoadingOverlay>
 
                         <div className="row">
                             <div className="col-12">

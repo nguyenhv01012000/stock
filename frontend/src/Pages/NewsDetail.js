@@ -6,17 +6,22 @@ import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { BACKEND } from '../env';
+import LoadingOverlay from 'react-loading-overlay';
+import BounceLoader from 'react-spinners/BounceLoader';
 
 function NewsDetail(props) {
 
     const [news, setNews] = useState({})
     const [newsView, setNewsView] = useState([]);
+    const [isActive, setIsActive] = useState(false)
 
     useEffect(() => {
+        setIsActive(() => true)
         window.scrollTo(0, 0)
         Axios.get(BACKEND + `/news/` + props.match.params.id)
             .then(res => {
                 setNews(res.data)
+                setIsActive(()=>false)
             }
             )
     }, [props.match.params.id])
@@ -40,10 +45,15 @@ function NewsDetail(props) {
     return (
         <div className="Home">
             <Header />
-            <NewsContent
-                news={news}
-                newsView={newsView}
-            />
+            <LoadingOverlay
+                active={isActive}
+                spinner={<BounceLoader />}
+            >
+                <NewsContent
+                    news={news}
+                    newsView={newsView}
+                />
+            </LoadingOverlay>
             <Footer />
         </div>
     );

@@ -68,7 +68,7 @@ export default function NewsContent(props) {
                                         <span style={{fontSize:"16px"}}>{date}</span>
                                     </div>
                                     <h3 className="mb-3">{news.newTitle}</h3>
-                                    <div className="newscontent-text"
+                                    <div className="quill-css"
                                     >
                                         <ReactQuill value={news.newIntro} readOnly theme={"bubble"} />
                                     </div>
