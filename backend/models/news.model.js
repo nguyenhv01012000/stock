@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 var newsSchema = new mongoose.Schema({
 	newImg: String,
-	newTime: String,
+	newTime: Date,
 	newCate: String,
 	newTitle: String,
 	newContent: String,

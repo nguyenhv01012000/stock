@@ -87,7 +87,7 @@ module.exports.postNews = async function(req, res) {
 	})
 	const data = {
 		newImg: imgArr[0],
-		newTime: req.body.newTime,
+		newTime: new Date(),
 		newCate: req.body.newCate,
 		newTitle: req.body.newTitle,
 		newContent: req.body.newContent,
