@@ -30,7 +30,7 @@ module.exports.postOrder = async function(req, res) {
 				orderList: req.body.orderList,
 				orderTotal: req.body.orderTotal,
 				orderPaymentMethod: req.body.orderPaymentMethod,
-				orderDate: req.body.orderDate,
+				orderDate: new Date(),
 				orderStatus: "Comfirming"
 			}
 			const orderList = req.body.orderList;

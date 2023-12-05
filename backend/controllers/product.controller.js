@@ -82,7 +82,7 @@ module.exports.postProduct = async function (req, res) {
 		productPrice: req.body.productPrice,
 		productFinalPrice: Math.ceil(req.body.productPrice - (req.body.productPrice * (req.body.productSale / 100))),
 		productGroupCate: req.body.productGroupCate,
-		productDate: req.body.productDate,
+		productDate: new Date(),
 		productImg: imgArr.length ? imgArr[0] : null,
 		productDes: req.body.productDes,
 		productSold: 0,
