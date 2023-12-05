@@ -6,6 +6,8 @@ import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'
 import { BACKEND } from '../../../../env';
+import LoadingOverlay from 'react-loading-overlay';
+import BounceLoader from 'react-spinners/BounceLoader';
 
 export default function DashboardNewsTable(props) {
 
@@ -13,15 +15,18 @@ export default function DashboardNewsTable(props) {
     const [isSortByTitle, setIsSortByTitle] = useState(false)
     const [isSortByView, setIsSortByView] = useState(false)
     const [constNews, setConstNews] = useState([])
-    
-    useEffect(()=>{
+    const [isActive1, setIsActive1] = useState(false)
+
+    useEffect(() => {
+        setIsActive1(() => true)
         axios.get(BACKEND + `/news`)
             .then(res => {
                 setNews(res.data.news)
                 setConstNews(res.data.news)
+                setIsActive1(() => false)
             }
-        )
-    },[props.isChange]) 
+            )
+    }, [props.isChange])
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
@@ -57,11 +62,11 @@ export default function DashboardNewsTable(props) {
             pages.push(currentPage - 1, currentPage, currentPage + 1);
         } else {
             if (currentPage === 1) {
-                pages.push(currentPage, currentPage + 1, currentPage + 2 );
+                pages.push(currentPage, currentPage + 1, currentPage + 2);
             } else if (currentPage === 2) {
                 pages.push(currentPage - 1, currentPage, currentPage + 1);
             } else if (currentPage > 2 && currentPage < pageNumbers.length - 1) {
-                pages.push(currentPage -1, currentPage, currentPage + 1);
+                pages.push(currentPage - 1, currentPage, currentPage + 1);
             } else if (currentPage === pageNumbers.length - 1) {
                 pages.push(currentPage - 1, currentPage, currentPage + 1);
             } else {
@@ -73,18 +78,18 @@ export default function DashboardNewsTable(props) {
             pages.push(currentPage - 1, currentPage, currentPage + 1);
         } else {
             if (currentPage === 1) {
-                pages.push(currentPage, currentPage + 1, currentPage + 2 );
+                pages.push(currentPage, currentPage + 1, currentPage + 2);
             } else if (currentPage === 2) {
                 pages.push(currentPage - 1, currentPage, currentPage + 1);
             } else if (currentPage > 2 && currentPage < pageNumbers.length - 1) {
-                pages.push(currentPage -1, currentPage, currentPage + 1);
+                pages.push(currentPage - 1, currentPage, currentPage + 1);
             } else if (currentPage === pageNumbers.length - 1) {
                 pages.push(currentPage - 1, currentPage, currentPage + 1);
             } else {
                 pages.push(currentPage - 2, currentPage - 1, currentPage);
             }
         }
-    } else if (pageNumbers.length === 2){
+    } else if (pageNumbers.length === 2) {
         if (currentPage === 2) {
             pages.push(currentPage - 1, currentPage);
         } else {
@@ -104,12 +109,12 @@ export default function DashboardNewsTable(props) {
         axios.post(BACKEND + `/news/delete/:${event.target.id}`, {
             productId: event.target.id
         })
-        setNews(news.filter((item)=>{
+        setNews(news.filter((item) => {
             return item._id !== event.target.id
         }))
     }
 
-    const searchOnSubmit = (event) =>{
+    const searchOnSubmit = (event) => {
         event.preventDefault()
     }
     const searchOnChange = (event) => {
@@ -128,20 +133,20 @@ export default function DashboardNewsTable(props) {
         if (event.target.id === "Title") {
             if (isSortByTitle) {
                 const sortByTitle = [...news]
-                sortByTitle.sort(function(a, b) {
+                sortByTitle.sort(function (a, b) {
                     var titleA = a.newTitle.toLowerCase();
-                    var titleB = b.newTitle.toLowerCase(); 
-                    if(titleA === titleB) return 0; 
+                    var titleB = b.newTitle.toLowerCase();
+                    if (titleA === titleB) return 0;
                     return titleA > titleB ? 1 : -1;
                 })
                 setIsSortByTitle(false)
                 setNews(sortByTitle)
             } else {
                 const sortByTitle = [...news]
-                sortByTitle.sort(function(a, b) {
+                sortByTitle.sort(function (a, b) {
                     var titleA = a.newTitle.toLowerCase();
-                    var titleB = b.newTitle.toLowerCase(); 
-                    if(titleA === titleB) return 0; 
+                    var titleB = b.newTitle.toLowerCase();
+                    if (titleA === titleB) return 0;
                     return titleA < titleB ? 1 : -1;
                 })
                 setIsSortByTitle(true)
@@ -151,20 +156,20 @@ export default function DashboardNewsTable(props) {
         if (event.target.id === "Views") {
             if (isSortByView) {
                 const sortByView = [...news]
-                sortByView.sort(function(a, b) {
+                sortByView.sort(function (a, b) {
                     var ViewA = a.newView;
-                    var ViewB = b.newView; 
-                    if(ViewA === ViewB) return 0; 
+                    var ViewB = b.newView;
+                    if (ViewA === ViewB) return 0;
                     return ViewA > ViewB ? 1 : -1;
                 })
                 setIsSortByView(false)
                 setNews(sortByView)
             } else {
                 const sortByView = [...news]
-                sortByView.sort(function(a, b) {
+                sortByView.sort(function (a, b) {
                     var ViewA = a.newView;
-                    var ViewB = b.newView; 
-                    if(ViewA === ViewB) return 0; 
+                    var ViewB = b.newView;
+                    if (ViewA === ViewB) return 0;
                     return ViewA < ViewB ? 1 : -1;
                 })
                 setIsSortByView(true)
@@ -174,9 +179,9 @@ export default function DashboardNewsTable(props) {
     }
 
     return (
-        <div className="topfive flex-col" style={{width: '100%'}}>
+        <div className="topfive flex-col" style={{ width: '100%' }}>
             <div className={`headerbox flex-center ${props.color}`}>
-                <FontAwesomeIcon icon={props.icon} className="icon"/>
+                <FontAwesomeIcon icon={props.icon} className="icon" />
             </div>
             <div className="top-location-container">
                 <div className="headerbox-header">
@@ -184,12 +189,12 @@ export default function DashboardNewsTable(props) {
                 </div>
                 <div className="topfive-content flex-col">
                     <div className="dashboard-addnew flex">
-                        <div 
+                        <div
                             className="dashboard-addnew-btn"
                             onClick={props.setOpenCreateFunc}
                         >Thêm bài viết</div>
                         <div className="dashboard-addnew-search">
-                            <form 
+                            <form
                                 onSubmit={searchOnSubmit}
                             >
                                 <input type="text" placeholder="Search records"
@@ -198,88 +203,92 @@ export default function DashboardNewsTable(props) {
                             </form>
                         </div>
                     </div>
-                    <table className="dashboard-table" style={{tableLayout: 'fixed'}}>
-                        <tbody>
-                            <tr>
+                    <LoadingOverlay
+                        active={isActive1}
+                        spinner={<BounceLoader />}
+                    >
+                        <table className="dashboard-table" style={{ tableLayout: 'fixed' }}>
+                            <tbody>
+                                <tr>
+                                    {
+                                        props.table.map((item, index) => {
+                                            return (
+                                                <th
+                                                    key={index} className="table-new-title"
+                                                    onClick={(event) => {
+                                                        sortTable(event)
+                                                    }}
+                                                    id={item}
+                                                >
+                                                    {item}
+                                                </th>
+                                            )
+                                        })
+                                    }
+                                </tr>
                                 {
-                                    props.table.map((item, index) => {
+                                    current.map((item, index) => {
+                                        const date = new Date(item.newDate)
+                                        const day = date.getDate();
+                                        const month = date.getMonth() + 1;
+                                        const year = date.getFullYear();
+                                        const shortedDate = day + '/' + month + '/' + year;
+
                                         return (
-                                            <th 
-                                                key={index} className="table-new-title"
-                                                onClick={(event)=>{
-                                                    sortTable(event)
-                                                }}
-                                                id={item}
-                                            >
-                                                {item}
-                                            </th>
+                                            <tr key={index}>
+                                                <td>
+                                                    <p>{item.newTitle}</p>
+                                                </td>
+                                                <td
+                                                    style={{ display: 'flex' }}
+                                                    className="table-mobile-collectionbanner">
+                                                    <img
+                                                        src={item.newImg}
+                                                        width="120px" height="80px"
+                                                        style={{ padding: '5px 0' }}
+                                                        alt=""
+                                                    />
+                                                </td>
+                                                <td className="table-mobile-newscate">
+                                                    <p>{item.newCate}</p>
+                                                </td>
+                                                <td className="table-mobile-newsdate">
+                                                    <p>{shortedDate}</p>
+                                                </td>
+                                                <td className="table-mobile-newsview">
+                                                    <p>{item.newView}</p>
+                                                </td>
+                                                <td>
+                                                    <div className="action-table flex">
+                                                        <div
+                                                            className="action-item flex-center action-green"
+                                                            onClick={props.setOpenEditFunc}
+                                                            id={item._id}
+                                                        >
+                                                            <FontAwesomeIcon style={{ pointerEvents: 'none' }} icon={faPencilAlt} />
+                                                        </div>
+                                                        <div
+                                                            className="action-item flex-center action-red"
+                                                            onClick={deleteOnClick}
+                                                            id={item._id}
+                                                        >
+                                                            <FontAwesomeIcon style={{ pointerEvents: 'none' }} icon={faTimes} />
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         )
                                     })
                                 }
-                            </tr>
-                            {
-                                current.map((item, index) => {
-                                    const date = new Date(item.newDate)
-                                    const day = date.getDate();
-                                    const month = date.getMonth() + 1;
-                                    const year = date.getFullYear();
-                                    const shortedDate = day + '/' + month + '/' + year;
-
-                                    return (
-                                        <tr key={index}>
-                                            <td>
-                                                <p>{item.newTitle}</p>
-                                            </td>  
-                                            <td 
-                                                style={{display: 'flex'}}
-                                                className="table-mobile-collectionbanner">
-                                                <img 
-                                                    src={item.newImg} 
-                                                    width="120px" height="80px"
-                                                    style={{padding: '5px 0'}}
-                                                    alt=""
-                                                />
-                                            </td> 
-                                            <td className="table-mobile-newscate">
-                                                <p>{item.newCate}</p>
-                                            </td>
-                                            <td className="table-mobile-newsdate">
-                                                <p>{shortedDate}</p>
-                                            </td>
-                                            <td className="table-mobile-newsview">
-                                                <p>{item.newView}</p>
-                                            </td>
-                                            <td>
-                                                <div className="action-table flex">
-                                                    <div 
-                                                        className="action-item flex-center action-green"
-                                                        onClick={props.setOpenEditFunc}
-                                                        id={item._id}
-                                                        >
-                                                        <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faPencilAlt}/>
-                                                    </div>
-                                                    <div 
-                                                        className="action-item flex-center action-red"
-                                                        onClick={deleteOnClick}
-                                                        id={item._id}
-                                                        >
-                                                        <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                    
-                    <div className="pagination-container flex" style={{ justifyContent: 'flex-end', margin: '20px 0'}}>
+                            </tbody>
+                        </table>
+                    </LoadingOverlay>
+                    <div className="pagination-container flex" style={{ justifyContent: 'flex-end', margin: '20px 0' }}>
                         <div className="pagnigation flex-center" onClick={choosePage}>
                             <div id="-1" className={classNames({
                                 pagnigation_disable: currentPage === 1
                             })}>←</div>
-                            { pages.map(function(number, index) { 
+                            {pages.map(function (number, index) {
                                 if (currentPage === number) {
                                     return (
                                         <div key={number} id={number} className="pagnigation-active">
@@ -288,12 +297,12 @@ export default function DashboardNewsTable(props) {
                                     )
                                 } else {
                                     return (
-                                    <div 
-                                        key={number}
-                                        id={number}
+                                        <div
+                                            key={number}
+                                            id={number}
                                         >
                                             {number}
-                                    </div>
+                                        </div>
                                     )
                                 }
                             })}

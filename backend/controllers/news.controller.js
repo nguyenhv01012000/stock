@@ -52,7 +52,7 @@ module.exports.index = async function(req, res) {
 			.limit(pageOptions.limit); 
 		count = await News.count({ newCate: req.query.sort, "newDate": { $lte: currentDate }});
 	}else{
-		news = await News.find();
+		news = await News.find().sort({ newTime: "desc" });
 		count = await News.count();
 	}
 	res.json({news: news, count:count});

@@ -46,7 +46,7 @@ module.exports.index = async function (req, res) {
 			.limit(pageOptions.limit);
 		count = await Product.count();
 	} else {
-		products = await Product.find();
+		products = await Product.find().sort({ productDate: "desc" });
 		count = await Product.count();
 	}
 	res.json({ products: products, count: count });

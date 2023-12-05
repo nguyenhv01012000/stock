@@ -6,6 +6,8 @@ import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'
 import { BACKEND } from '../../../../env';
+import LoadingOverlay from 'react-loading-overlay';
+import BounceLoader from 'react-spinners/BounceLoader';
 
 export default function DashboardUserTable(props) {
 
@@ -13,12 +15,15 @@ export default function DashboardUserTable(props) {
     const [isSortByName, setIsSortByName] = useState(false)
     const [isSortByTotal, setIsSortByTotal] = useState(false)
     const [constOrder, setConstOrder] = useState([])
-    
+    const [isActive1, setIsActive1] = useState(false)
+
     useEffect(()=>{
+        setIsActive1(() => true)
         axios.get(BACKEND + `/order`)
             .then(res => {
                 setOrder(res.data)
                 setConstOrder(res.data)
+                setIsActive1(() => false)
             }
         )
     },[props.isChange]) 
@@ -202,6 +207,10 @@ export default function DashboardUserTable(props) {
                             </form>
                         </div>
                     </div> */}
+                    <LoadingOverlay
+                        active={isActive1}
+                        spinner={<BounceLoader />}
+                    >
                     <table className="dashboard-table" style={{tableLayout: 'fixed'}}>
                         <tbody>
                             <tr className="dashboard-order">
@@ -291,7 +300,7 @@ export default function DashboardUserTable(props) {
                             }
                         </tbody>
                     </table>
-                    
+                    </LoadingOverlay>
                     <div className="pagination-container flex" style={{ justifyContent: 'flex-end', margin: '20px 0'}}>
                         <div className="pagnigation flex-center" onClick={choosePage}>
                             <div id="-1" className={classNames({
