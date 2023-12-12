@@ -1,7 +1,7 @@
 .news {
     /* margin: 0 10px;  */
     /* width: calc(25% - 20px); */
-    height: max-content;
+    height: 450px;
     display: flex;
     flex-direction: column;   
     border: 1px #ddd solid;
