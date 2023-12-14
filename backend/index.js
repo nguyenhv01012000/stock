@@ -46,23 +46,13 @@ app.ws("/subscribe", (ws, req) => {
   });
 });
 
-// app.use(function(req, res, next) {
-//   res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type, Accept,Authorization,Origin");
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-//   next();
-// });
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+app.use(function(req, res, next) {
+  res.header('application/json;charset=UTF-8')
+  res.header('Access-Control-Allow-Credentials', true)
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
-app.use(cors());
 
 app.use("/products", productRoutes);
 app.use("/news", newsRoutes);
@@ -73,7 +63,8 @@ app.use("/order", orderRoutes);
 app.use("/vietnam", vietnamRoutes);
 app.use("/todos", todosRoutes);
 app.use("/notice", noticeRoutes);
-// app.options('*', cors());  
+app.use(cors());
+app.options('*', cors());  
 
 io.on('connection', async function (socket) {  
 
