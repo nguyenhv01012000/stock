@@ -1,8 +1,9 @@
 const express = require('express')
 const http = require("http");
+const https = require('https');
+const fs = require('fs');
 const app = express();
 const socketIo = require("socket.io");
-const server = http.createServer(app);
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
@@ -16,7 +17,7 @@ var newsRoutes = require('./routes/news');
 var userRoutes = require('./routes/user');
 var chatRoutes = require('./routes/chat');
 var emailRoutes = require('./routes/email');  
-var orderRoutes = require('./routes/order');
+var orderRoutes = require('./routes/order'); 
 var vietnamRoutes = require('./routes/vietnam');
 var todosRoutes = require('./routes/todos');
 var noticeRoutes = require('./routes/notice');
@@ -26,6 +27,12 @@ mongoose.connect('mongodb://domino:password123@103.221.222.134:27011/domino?auth
   useFindAndModify: false,
   useUnifiedTopology: true
 });
+
+var options = {
+  key: fs.readFileSync('privatekey.pem'),
+  cert: fs.readFileSync('certificate.pem'),
+};
+const server = https.createServer(options, app);
 
 var cors = require('cors');
 app.use(bodyParser.json());
