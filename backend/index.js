@@ -32,7 +32,7 @@ mongoose.connect('mongodb://domino:password123@103.221.222.134:27011/domino?auth
 //   key: fs.readFileSync('privatekey.pem'),
 //   cert: fs.readFileSync('certificate.pem'),
 // };
-const server = http.createServer(options, app);
+const server = http.createServer(app);
 
 var cors = require('cors');
 app.use(bodyParser.json());
