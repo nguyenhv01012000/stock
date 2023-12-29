@@ -28,11 +28,13 @@ mongoose.connect('mongodb://domino:password123@103.221.222.134:27011/domino?auth
   useUnifiedTopology: true
 });
 
-var options = {
-  key: fs.readFileSync('privatekey.pem'),
-  cert: fs.readFileSync('certificate.pem'),
-};
-const server = https.createServer(options, app);
+// var options = {
+//   key: fs.readFileSync('privatekey.pem'),
+//   cert: fs.readFileSync('certificate.pem'),
+// };
+// const server = https.createServer(options, app);
+const server = http.createServer(app);  
+
 
 var cors = require('cors');
 app.use(bodyParser.json());
