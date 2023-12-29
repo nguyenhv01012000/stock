@@ -141,7 +141,7 @@ io.on('connection', async function (socket) {
   })
 })
 
-server.listen(4000, () => console.log(`Listening on port ${4000}`));
+server.listen(4004, () => console.log(`Listening on port ${4004}`));
 
 process.on('uncaughtException', function (err) {
   console.error(err);

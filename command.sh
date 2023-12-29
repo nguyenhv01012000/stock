@@ -9,7 +9,7 @@ then
     git pull
     cd ./backend
     docker build -t stock-backend .
-    docker container run -p 4004:4000 --name "stock-backend" stock-backend  
+    docker container run -p 4004:4004 --name "stock-backend" stock-backend  
 elif [ $1 == '3' ]
 then 
     docker stop stock-backend
