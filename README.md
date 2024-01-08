@@ -33,7 +33,9 @@ sudo cp /build /var/www/domino
 sudo systemctl restart nginx
 ```
 video hướng dẫn: 
+
 https://www.youtube.com/watch?v=1sdaPoXWQrw&list=PL_-VfJajZj0XGfh528VqhlgXUfzw1Y0N7&index=22
+
 https://www.youtube.com/watch?v=zFwcLLl1gNw&list=PL_-VfJajZj0XGfh528VqhlgXUfzw1Y0N7&index=28
 
 ## Shalom!
