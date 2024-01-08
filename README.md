@@ -21,6 +21,8 @@ npm start
 
 Install Docker, Nginx
 
+Tổng hợp cái lệnh thực thi trong command.sh
+
 ```
 --deploy mongoDB
 bash command.sh 6 
@@ -30,10 +32,8 @@ bash command.sh 3
 bash command.sh 2
 
 --deploy service frontend
-cd frontend
-npm run build
-sudo cp /build /var/www/domino 
-sudo systemctl restart nginx
+bash command.sh 7 
+
 ```
 video hướng dẫn: 
 
