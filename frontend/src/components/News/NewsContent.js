@@ -60,7 +60,7 @@ export default function NewsContent(props) {
                         <div className="col-lg-8">
                             {/* News Detail Start */}
                             <div className="position-relative mb-3">
-                                <img className="img-fluid w-100" src={news.newImg} style={{maxHeight:"388px"}}/>
+                                <img className="img-fluid w-100" src={news.newImg} style={{maxHeight:"600px"}}/>
                                 <div className="overlay position-relative bg-light">
                                     <div className="mb-3">
                                         <a href style={{fontSize:"16px"}}>{news.newCate}</a>
