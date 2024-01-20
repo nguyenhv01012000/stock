@@ -17,6 +17,7 @@ import Header from '../Home/Header';
 import Footer from '../Home/Footer';
 import LoadingOverlay from 'react-loading-overlay';
 import BounceLoader from 'react-spinners/BounceLoader';
+import {Helmet} from "react-helmet";
 
 
 export default function NewsContent1(props) {
@@ -55,6 +56,16 @@ export default function NewsContent1(props) {
 
     return (
         <div>
+            <Helmet>
+                <title>{news.newTitle}</title>
+                <meta name="description" content={news.newTitle} />
+                <link rel="canonical" href={`https://chungkhoandomino.com/news/account/${props.match.params.id}`}/>
+                <meta property="og:locale" content="vi_VN" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={news.newTitle} />
+                <meta property="og:url" content={`https://chungkhoandomino.com/news/account/${props.match.params.id}`} />
+                <meta property="og:image" content={news.newImg} />
+            </Helmet>
             <Header></Header>
             <LoadingOverlay
                 active={isActive}

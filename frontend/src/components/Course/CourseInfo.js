@@ -6,6 +6,8 @@ import { Link, withRouter } from 'react-router-dom'
 import draftToHtml from "draftjs-to-html";
 import { EditorState, ContentState, convertToRaw, convertFromHTML, convertFromRaw } from "draft-js";
 import ReactQuill from 'react-quill'
+import {Helmet} from "react-helmet";
+
 export default function CourseInfo(props) {
 
   const course = props.course
@@ -18,6 +20,16 @@ export default function CourseInfo(props) {
 
   return (
     <div>
+      <Helmet>
+                <title>{course.productName}</title>
+                <meta name="description" content={course.productName} />
+                <link rel="canonical" href={`https://chungkhoandomino.com/course/${course._id}`}/>
+                <meta property="og:locale" content="vi_VN" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={course.productName} />
+                <meta property="og:url" content={`https://chungkhoandomino.com/course/${course._id}`} />
+                <meta property="og:image" content={course.productName} />
+            </Helmet>
       {/* Breadcrumb Start */}
       <div className="container-fluid" style={{ marginTop: '100px', marginBottom: '10px' }}>
         <div className="container">

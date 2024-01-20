@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom'
 import { BACKEND } from '../../env'
 import LoadingOverlay from 'react-loading-overlay';
 import BounceLoader from 'react-spinners/BounceLoader';
+import {Helmet} from "react-helmet";
 
 function NewsCategory(props) {
 
@@ -98,6 +99,16 @@ function NewsCategory(props) {
     }, [currentPage])
 
     return (<div>
+        <Helmet>
+                <title>{category}</title>
+                <meta name="description" content={category} />
+                <link rel="canonical" href={`https://chungkhoandomino.com/news/category/${category}`}/>
+                <meta property="og:locale" content="vi_VN" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={category} />
+                <meta property="og:url" content={`https://chungkhoandomino.com/news/detail/${category}`} />
+                <meta property="og:image" content={category} />
+            </Helmet>
         {/* Breadcrumb Start */}
         <div className="container-fluid" style={{ marginTop: '100px' }}>
             <div className="container">

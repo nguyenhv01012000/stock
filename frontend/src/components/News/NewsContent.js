@@ -13,6 +13,7 @@ import { BACKEND } from '../../env';
 import draftToMarkdown from 'draftjs-to-markdown';
 import ReactQuill from 'react-quill';
 import TOC from './TOC';
+import {Helmet} from "react-helmet";
 
 export default function NewsContent(props) {
 
@@ -44,6 +45,17 @@ export default function NewsContent(props) {
 
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>{news.newTitle}</title>
+                <meta name="description" content={news.newTitle} data-react-helmet="true"/>
+                <link rel="canonical" href={`https://chungkhoandomino.com/news/detail/${news._id}`}/>
+                <meta property="og:locale" content="vi_VN" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={news.newTitle} />
+                <meta property="og:url" content={`https://chungkhoandomino.com/news/detail/${news._id}`} />
+                <meta property="og:image" content={news.newImg} />
+            </Helmet>
             <div className="container-fluid" style={{ marginTop: '100px' }}>
                 <div className="container">
                     <nav className="breadcrumb bg-transparent m-0 p-0">
