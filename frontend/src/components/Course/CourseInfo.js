@@ -23,11 +23,11 @@ export default function CourseInfo(props) {
       <Helmet>
                 <title>{course.productName}</title>
                 <meta name="description" content={course.productName} />
-                <link rel="canonical" href={`https://chungkhoandomino.com/course/${course._id}`}/>
+                <link rel="canonical" href={`https://chungkhoandomino.com/course/${encodeURIComponent(course.productName)}`}/>
                 <meta property="og:locale" content="vi_VN" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={course.productName} />
-                <meta property="og:url" content={`https://chungkhoandomino.com/course/${course._id}`} />
+                <meta property="og:url" content={`https://chungkhoandomino.com/course/${encodeURIComponent(course.productName)}`} />
                 <meta property="og:image" content={course.productName} />
             </Helmet>
       {/* Breadcrumb Start */}

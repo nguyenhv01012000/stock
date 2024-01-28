@@ -90,7 +90,7 @@ export default function NewsContent(props) {
                                             newsView.map((item, index) => {
                                                 return (
                                                     <div>
-                                                        <Link to={"/news/detail/" + item._id}>{item.newTitle}</Link>
+                                                        <Link to={"/news/detail/" + encodeURIComponent(item.newTitle)}>{item.newTitle}</Link>
                                                         <br />
                                                     </div>
                                                 )
