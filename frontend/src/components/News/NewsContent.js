@@ -49,11 +49,11 @@ export default function NewsContent(props) {
                 <meta charSet="utf-8" />
                 <title>{news.newTitle}</title>
                 <meta name="description" content={news.newTitle} data-react-helmet="true"/>
-                <link rel="canonical" href={`https://chungkhoandomino.com/news/detail/${news._id}`}/>
+                <link rel="canonical" href={`https://chungkhoandomino.com/news/detail/${encodeURIComponent(news.newTitle)}`}/>
                 <meta property="og:locale" content="vi_VN" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={news.newTitle} />
-                <meta property="og:url" content={`https://chungkhoandomino.com/news/detail/${news._id}`} />
+                <meta property="og:url" content={`https://chungkhoandomino.com/news/detail/${encodeURIComponent(news.newTitle)}`} />
                 <meta property="og:image" content={news.newImg} />
             </Helmet>
             <div className="container-fluid" style={{ marginTop: '100px' }}>

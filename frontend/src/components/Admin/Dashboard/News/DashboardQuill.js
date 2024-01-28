@@ -4,9 +4,12 @@ import "react-quill/dist/quill.snow.css"; // ES6
 import ImageResize from "quill-image-resize-module-react";
 import VideoResize from 'quill-video-resize-module2'
 import "./DashboardQuill.css";
+import quillEmoji from "react-quill-emoji";
+import "react-quill-emoji/dist/quill-emoji.css";
 
-const fontSizeArr = ["14px", "16px", "18px"];
+const fontSizeArr = ["12px", "14px", "16px", "18px"];
 const fontArr = ['Ubuntu', 'Raleway', 'Roboto', 'Lato', 'Montserrat', 'Times-New', 'Arial'];
+
 
 export default function DashboardQuill(props) {
   const [blog, setBlog] = useState("");
@@ -15,12 +18,23 @@ export default function DashboardQuill(props) {
   useMemo(() => {
     const Size = Quill.import("attributors/style/size");
     const Font = Quill.import('formats/font');
+    const Embed = Quill.import('blots/embed');
     Font.whitelist = ['Ubuntu', 'Raleway', 'Roboto', 'Lato', 'Montserrat', 'Times-New', 'Arial'] ;
+    Quill.register(Font, true);
     Size.whitelist = fontSizeArr;
-    Quill.register(Font, true)
+    // Quill.register(Size, true);
     Quill.register("modules/imageResize", ImageResize);
     Quill.register('modules/VideoResize', VideoResize);
-    //Quill.register(Size, true);
+    Quill.register(
+      {
+        "formats/emoji": quillEmoji.EmojiBlot,
+        "modules/emoji-toolbar": quillEmoji.ToolbarEmoji,
+        "modules/emoji-textarea": quillEmoji.TextAreaEmoji,
+        "modules/emoji-shortname": quillEmoji.ShortNameEmoji
+      },
+      true
+    );
+
   }, []);
 
   const editorRef = useRef();
@@ -72,7 +86,9 @@ export default function DashboardQuill(props) {
               },
             ],
             ["link", "image", "video"],
-            ['clean']
+            ['clean'],
+            ['emoji'],
+            
           ],
           clipboard: {
             matchVisual: false
@@ -83,7 +99,10 @@ export default function DashboardQuill(props) {
           VideoResize: {
             modules: [ 'Resize', 'DisplaySize'],
             tagName: 'iframe', // iframe | video
-      }
+          },
+          "emoji-toolbar": true,
+          "emoji-textarea": false,
+          "emoji-shortname": true
         }}
         // formats={[
         //   "header",

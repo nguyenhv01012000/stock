@@ -15,7 +15,7 @@ function CourseDetail(props) {
   useEffect(() => {
     setIsActive(() => true)
     window.scrollTo(0, 0)
-    Axios.get(BACKEND + `/products/` + props.match.params.id)
+    Axios.get(BACKEND + `/products/name/` + props.match.params.id)
       .then(res => {
         setCourse(res.data)
         setIsActive(()=>false)

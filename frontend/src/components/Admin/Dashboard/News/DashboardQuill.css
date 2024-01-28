@@ -35,6 +35,11 @@
   .ql-toolbar.ql-snow .ql-formats {
     margin-right: 0;
   }
+
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before {
+    content: "Small";
+    font-size: 12px;
+  }
   
   .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before {
     content: "Normal";
@@ -68,7 +73,7 @@
     .ql-active {
       &:before {
         content: attr(data-value) !important;
-        font-size: 14px;
+        font-size: 16px;
       }
     }
   }

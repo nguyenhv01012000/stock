@@ -18,7 +18,7 @@ function NewsDetail(props) {
     useEffect(() => {
         setIsActive(() => true)
         window.scrollTo(0, 0)
-        Axios.get(BACKEND + `/news/` + props.match.params.id)
+        Axios.get(BACKEND + `/news/name/` + props.match.params.id)
             .then(res => {
                 setNews(res.data)
                 setIsActive(()=>false)

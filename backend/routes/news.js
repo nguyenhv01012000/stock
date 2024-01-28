@@ -8,6 +8,7 @@ var controller = require("../controllers/news.controller");
 router.get("/", controller.index);
 router.get("/category/:cate", controller.cate);
 router.get("/:id", controller.news);
+router.get("/name/:name", controller.newsByName);
 router.post("/delete/:id", controller.deleteNews);
 router.post("/update/:id", upload.array("newImg", 12), controller.updateNews); 
 router.post("/",  upload.array("newImg", 12), controller.postNews);

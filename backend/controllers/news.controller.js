@@ -58,6 +58,13 @@ module.exports.index = async function(req, res) {
 	res.json({news: news, count:count});
 };
 
+module.exports.newsByName = function(req, res) {
+	var name = req.params.name;
+	News.findOne ({ "newTitle" : name }).then(function(news) {
+		res.json(news);
+	});
+};
+
 module.exports.news = function(req, res) {
 	var id = req.params.id;
 	News.findById({ _id: id }).then(function(news) {

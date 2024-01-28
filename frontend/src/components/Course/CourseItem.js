@@ -11,7 +11,7 @@ function CourseItem(props) {
     return (
         <div className="col-lg-4 col-md-4 col-sm-6">
         <div className="position-relative mb-3 course-popover">
-          <Link to={"/course/" + course._id} className="course-box-slider pop">
+          <Link to={"/course/" + encodeURIComponent(course.productName)} className="course-box-slider pop">
             <span className="sale-off">-{course.productSale}%</span>
             <div className="img-course">
               <img className="img-responsive " src={course.productImg} alt={course.productName} style={{ height:'140px'}} loading="lazy" />

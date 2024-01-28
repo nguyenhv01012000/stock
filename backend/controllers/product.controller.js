@@ -59,6 +59,13 @@ module.exports.product = function (req, res) {
 	});
 }
 
+module.exports.productByName = function (req, res) {
+	var name = req.params.name;
+	Product.findOne ({ "productName" : name }).then(function(products) {
+		res.json(products);
+	});
+}
+
 module.exports.postProduct = async function (req, res) {
 	const imgArr = [];
 	if (req.files.productImg)

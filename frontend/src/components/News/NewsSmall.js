@@ -27,14 +27,14 @@ function NewsSmall(props) {
     return (
         <div className="d-flex mb-3" style={{ cursor: "pointer" }}
         >
-            <Link className="h6 m-0" to={`/news/detail/${news._id}`}> <img src={news.newImg} style={{ width: '100px', height: '100px' }} /></Link>
+            <Link className="h6 m-0" to={`/news/detail/${encodeURIComponent(news.newTitle)}`}> <img src={news.newImg} style={{ width: '100px', height: '100px' }} /></Link>
             <div className="w-100 d-flex flex-column justify-content-center bg-light px-3" style={{ height: '100px' }}>
                 <div className="mb-1" style={{ fontSize: '13px' }}>
                     <Link to={`/news/category/${news.newCate}`}>{news.newCate}</Link>
                     <span className="px-1">/</span>
                     <span>{date}</span>
                 </div>
-                <Link className="h6 m-0" to={`/news/detail/${news._id}`} style={{fontWeight: "bold"}}>{news.newTitle}</Link>
+                <Link className="h6 m-0" to={`/news/detail/${encodeURIComponent(news.newTitle)}`} style={{fontWeight: "bold"}}>{news.newTitle}</Link>
             </div>
         </div>
     )

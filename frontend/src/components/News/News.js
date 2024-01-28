@@ -26,7 +26,7 @@ function News(props) {
         <div 
             className="news"
             onClick={()=>{ 
-                props.history.push(`/news/detail/${news._id}`)
+                props.history.push(`/news/detail/${encodeURIComponent(news.newTitle)}`)
             }}
         >
             {news &&

@@ -152,7 +152,7 @@ function IntroductionContent(props) {
                           <div className="product-small box has-hover box-normal box-text-bottom">
                             <div className="box-image">
                               <div className="image-cover">
-                                <Link to={"/course/" + item._id} aria-label="Khóa học Chứng khoán Free" tabIndex={0}>
+                                <Link to={"/course/" + encodeURIComponent(item.productName)} aria-label="Khóa học Chứng khoán Free" tabIndex={0}>
                                   <img width={1191} height={1191} src={item.productImg} className="attachment-original size-original" alt="Z4486508269138 8fced4ced0e9a6cf38aaf8c002cf0642" decoding="async" /> </Link>
                               </div>
                               <div className="image-tools top right show-on-hover" />
