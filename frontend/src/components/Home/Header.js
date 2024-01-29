@@ -12,7 +12,7 @@ import { BACKEND } from '../../env'
 
 function Header(props) {
 
-    const [hover, setHover] = useState(0)    
+    const [hover, setHover] = useState(0)
     const [hover1, setHover1] = useState(0)
 
     const [search, setSearch] = useState("")
@@ -78,6 +78,18 @@ function Header(props) {
         // }
         // setTotalCart(totalCartVirtual)
     }, [cartItems])
+
+    useEffect(()=> {
+        Axios.get(BACKEND + `/users/${localStorage.getItem('user-id')}`, { 
+            headers: {"authorization" : `Bearer ${localStorage.getItem('token')}`}
+        })
+        .then(res => { 
+            setUserInfoFunc(res.data.user);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    },[]) 
 
     const [openMobileMenu, setOpenMobileMenu] = useState(false)
 
@@ -196,8 +208,8 @@ function Header(props) {
                         <h1 className="m-0 display-5 text-uppercase">
                             <img style={{ height: "45px" }} src="../../img/370016223_1460259698038526_3393128236471153605_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeHfvfSLREhvF07sYoa-838qjt6dDNsXYy6O3p0M2xdjLtoIc6yFv07FD6vqlZVC9EInRWDDUYRWZvFt7GBiQna-&_nc_ohc=DRRISp89_4UAX9oV9co&_nc_ht=scontent.fhan3-5.fna&oh=03_AdTwcyle2jxCBLwdBQycvdl0WLBYY2k-cP-S2KdYbjodtg&oe=6573298E" />
                             {/* <span className="text-primary">DOMINO</span>STOCK</h1> */}
-                            <img style={{ height: "45px",width: "200px" }} src="../../img/logo.png" />
-                            </h1>
+                            <img style={{ height: "45px", width: "200px" }} src="../../img/logo.png" />
+                        </h1>
                     </Link>
                     <button type="button" className="navbar-toggler" onClick={() => setOpenMobileMenu(!openMobileMenu)}>
                         <span className="navbar-toggler-icon"></span>
@@ -223,7 +235,7 @@ function Header(props) {
                                         <FontAwesomeIcon icon={faSearch} style={{ marginLeft: '10px', color: '#777' }} />
                                     </div>
                                 </div>
-                                {search && <div className="overflow-auto" style={{maxHeight: "350px" }}>
+                                {search && <div className="overflow-auto" style={{ maxHeight: "350px" }}>
                                     {
                                         newsSearch.map((item, index) => {
                                             return (
@@ -309,8 +321,8 @@ function Header(props) {
                                                                 >
                                                                     <p
                                                                         id={`${item.url.toLowerCase()}/${item2.dropdownTitle}`}
-                                                                        style={{ fontWeight:"bold"  , color: "black" }}
-                                                                        onClick= {item.label == 'Mở tài khoản' ? redirect : null}
+                                                                        style={{ fontWeight: "bold", color: "black" }}
+                                                                        onClick={item.label == 'Mở tài khoản' ? redirect : null}
                                                                     >{item2.dropdownTitle}</p>
                                                                     {
                                                                         item2.dropdownList && item2.dropdownList.map((item3, index) => {
@@ -338,6 +350,18 @@ function Header(props) {
                                         })
                                     }
                                 </div>
+                                <Link to={userInfo ? "/account" : "/login"}
+                                className="menu-mobile-login flex"
+                                onClick={()=>closeMobileMenuFunc()}
+                                >
+                                <div className="db-item-circle" data-toggle="dropdown"><img className="img-responsive" src={userInfo?.userAvt ? userInfo?.userAvt : "https://static.thenounproject.com/png/4035889-200.png"} onerror="this.src='/media/img/av-df.png'" alt="" loading="lazy" /><span className="caret" /></div>
+                                { userInfo &&
+                                    <p>{userInfo.userName}</p>
+                                }
+                                { !userInfo && 
+                                    <p>Đăng nhập</p>
+                                }
+                            </Link>
                             </div>
                             <div
                                 className="menu-mobile-right"
@@ -400,20 +424,20 @@ function Header(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="nav-item dropdown" style={{width:"130px"}} onMouseEnter={() => {
+                            <div className="nav-item dropdown" style={{ width: "130px" }} onMouseEnter={() => {
                                 setHover1(1)
                             }}
                                 onMouseLeave={() => {
                                     setHover1(0)
                                 }}>
-                                <a href="#" className="nav-link dropdown-toggle triangle1" data-toggle="dropdown" style={{position:"relative"}}> Mở tài khoản 
+                                <a href="#" className="nav-link dropdown-toggle triangle1" data-toggle="dropdown" style={{ position: "relative" }}> Mở tài khoản
                                 </a>
                                 <div className={hover1 ? "dropdown-menu rounded-0 m-0 show" : "dropdown-menu rounded-0 m-0"}>
-                                    <div className="menu-content row" style={{width:"300px"}}>
+                                    <div className="menu-content row" style={{ width: "300px" }}>
                                         <div className="col" style={{ marginTop: "15px" }}>
                                             <Link to="/news/account/Tài khoản chứng khoán VPS"
                                                 className={props.location.pathname.indexOf('Tài khoản chứng khoán VPS') != -1 ? "nav-link active" : "nav-link"}>
-                                                    Tài khoản chứng khoán VPS</Link>
+                                                Tài khoản chứng khoán VPS</Link>
                                             <Link to="/news/account/Tài khoản chứng khoán AIS"
                                                 className={props.location.pathname.indexOf('Tài khoản chứng khoán AIS') != -1 ? "nav-link active" : "nav-link"}>
                                                 Tài khoản chứng khoán AIS </Link>
@@ -427,13 +451,13 @@ function Header(props) {
                             {/* <Link to={userInfo ? "/account" : "/login"} className={(props.location.pathname == '/account' || props.location.pathname == '/login') ? "nav-item nav-link active" : "nav-item nav-link"}>Dành Cho Hội Viên <i className="fa fa-lock"></i></Link> */}
                             <Link to="/course" className={props.location.pathname == '/course' ? "nav-item nav-link active" : "nav-item nav-link"}>Khóa Học</Link>
                         </div>
-                        <div className="input-group ml-auto" style={{ width: "100%", maxWidth: "300px" }}>
+                        <div className="input-group ml-auto" style={{ width: "100%", maxWidth: "300px", marginRight: "20px" }}>
                             <input type="text" className="form-control" placeholder="Tìm Kiếm..." onChange={(event) => { setSearch(event.target.value) }} />
                             <div className="input-group-append">
                                 <button className="input-group-text text-secondary"><i
                                     className="fa fa-search"></i></button>
                             </div>
-                            <div className={search ? "dropdown-menu rounded-0 m-0 show" : "dropdown-menu rounded-0 m-0"} style={{left: "-10%"}}>
+                            <div className={search ? "dropdown-menu rounded-0 m-0 show" : "dropdown-menu rounded-0 m-0"} style={{ left: "-10%" }}>
                                 <div className="menu-content row overflow-auto" style={{ width: "400px", maxHeight: "350px" }}>
                                     <div style={{ marginTop: "15px" }}>
                                         {
@@ -452,6 +476,12 @@ function Header(props) {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="navbar-nav mr-auto py-0">
+                            {
+                                userInfo ? <Link to="/account" className="db-item-circle" data-toggle="dropdown"><img className="img-responsive" src={userInfo?.userAvt ? userInfo?.userAvt : "https://static.thenounproject.com/png/4035889-200.png"} onerror="this.src='/media/img/av-df.png'" alt="" loading="lazy" /></Link> :
+                                    <Link to="/login" className={props.location.pathname == '/login' ? "nav-item nav-link active" : "nav-item nav-link"}>Đăng Nhập</Link>
+                            }
                         </div>
                     </div>
                 </nav>

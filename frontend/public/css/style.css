@@ -11961,3 +11961,24 @@ right: 0vmax;
 position: absolute;
 transform: rotate(45deg);
 }
+
+.db-item-circle { display: inline-block; }
+.db-item-circle img { max-height: 40px; max-width: 40px; border-radius: 25px; float: left; min-height: 30px; /*margin-top: -3px;*/ }
+
+.menu-mobile-login {
+  margin: 0 20px;
+  align-items: center;
+  height: 70px;
+  cursor: pointer;
+  border-top: 1px #ddd solid;
+}
+.menu-mobile-login .icon {
+  font-size: 18px;
+}
+.menu-mobile-login p {
+  margin-top: 1px;
+  margin-left: 20px;
+  font-size: 16px;
+  color: black;
+  font-weight: bold;
+}

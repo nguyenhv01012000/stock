@@ -93,14 +93,14 @@ function Login(props) {
                                 {arrSuccess && <div className="login-success">{arrSuccess}</div>}
                             </div>
                             <form className="flex-col" onSubmit={sendAccount}>
-                                <label>Email</label>
+                                <label>Email <span style={{color:"red"}}>*</span></label>
                                 <input
                                     value={email}
                                     onChange={(event) => {
                                         setEmail(event.target.value)
                                     }}
                                 ></input>
-                                <label>Mật khẩu</label>
+                                <label>Mật khẩu <span style={{color:"red"}}>*</span></label>
                                 <input
                                     value={password}
                                     onChange={(event) => {
@@ -110,7 +110,7 @@ function Login(props) {
                                 ></input>
                                 <button>Đăng nhập</button>
                             </form>
-                            <div className="login-forgot">Quên mật khẩu?</div>
+                            {/* <div className="login-forgot">Quên mật khẩu?</div> */}
                             <div className="login-register" onClick={() => { setTab(1) }}>Tạo tài khoản mới</div>
                         </div>
                     }
@@ -122,21 +122,21 @@ function Login(props) {
                                 {arrSuccess && <div className="login-success">{arrSuccess}</div>}
                             </div>
                             <form className="flex-col" onSubmit={sendAccount}>
-                                <label>Tên *</label>
+                                <label>Tên <span style={{color:"red"}}>*</span></label>
                                 <input
                                     value={name}
                                     onChange={(event) => {
                                         setName(event.target.value)
                                     }}
                                 ></input>
-                                <label>Email *</label>
+                                <label>Email <span style={{color:"red"}}>*</span></label>
                                 <input
                                     value={email}
                                     onChange={(event) => {
                                         setEmail(event.target.value)
                                     }}
                                 ></input>
-                                <label>Mật khẩu *</label>
+                                <label>Mật khẩu <span style={{color:"red"}}>*</span></label>
                                 <input
                                     value={password}
                                     onChange={(event) => {

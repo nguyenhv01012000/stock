@@ -143,10 +143,10 @@ function AccountInfo(props) {
                         <FontAwesomeIcon icon={faUserAlt} className="icon"/>
                         Tài khoản
                     </div>
-                    <div className={tab === 1 ? "account-menu-item menu-item-active flex" : "account-menu-item flex"} onClick={()=>{setTab(1)}}>
+                    {/* <div className={tab === 1 ? "account-menu-item menu-item-active flex" : "account-menu-item flex"} onClick={()=>{setTab(1)}}>
                         <FontAwesomeIcon icon={faFileAlt} className="icon"/>
                         Đơn hàng
-                    </div>
+                    </div> */}
                     <div className={tab === 2 ? "account-menu-item menu-item-active flex" : "account-menu-item flex"} onClick={()=>{
                         localStorage.removeItem('user-id')
                         localStorage.removeItem('token');
