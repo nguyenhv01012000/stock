@@ -61,7 +61,8 @@ function IntroductionContent(props) {
     <div>
       {/* Main News Slider Start */}
       <div style={{ marginTop: '80px', height: '726.8px' }} className="position-relative">
-        <video className="video-banner" preload playsInline autoPlay muted loop>
+        <div class="bg fill bg-fill bg-loaded"></div>
+        <video className="video-bg" preload playsInline autoPlay muted loop>
           <source src="../img/Market-Loop-Background-Video-High-Resolution.mp4" type="video/mp4" />
         </video>
         <div className="text-box-content text dark overlay-center">

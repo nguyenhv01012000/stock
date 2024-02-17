@@ -11982,3 +11982,34 @@ transform: rotate(45deg);
   color: black;
   font-weight: bold;
 }
+
+.bg-fill {
+  background-position: 50% 50%;
+  background-repeat: no-repeat!important;
+  background-size: cover!important;
+}
+
+.fill {
+  height: 100%;
+  left: 0;
+  margin: 0!important;
+  padding: 0!important;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.bg-loaded {
+  background-image: url(../img/intro.png);
+}
+
+.video-bg {
+  font-family: "object-fit: cover; object-position: center center;";
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: 50% 50%;
+  object-position: 50% 50%;
+  position: absolute;
+  width: 100%;
+}
