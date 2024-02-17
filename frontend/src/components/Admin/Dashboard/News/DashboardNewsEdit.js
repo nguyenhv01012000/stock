@@ -29,7 +29,7 @@ export default function DashboardNewsCreate(props) {
     const [newsCate, setNewsCate] = useState("")
     const [newsContent, setNewsContent] = useState("")
     const [deleteImgId, setDeleteImgId] = useState(null)
-    const [autoSave, setAutoSave] = useState(false)
+    // const [autoSave, setAutoSave] = useState(false)
 
 
 
@@ -44,34 +44,34 @@ export default function DashboardNewsCreate(props) {
         }
     }, [news])
 
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-     }
+    // function sleep(ms) {
+    //     return new Promise(resolve => setTimeout(resolve, ms));
+    //  }
 
-    useEffect(async() => {
-        await sleep(15000)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
-        const formData = new FormData();
-        const imageArr = Array.from(file);
-        imageArr.forEach(image => {
-            formData.append('newImg', image);
-        });
-        formData.append("newCate", newsCate);
-        formData.append("newTitle", newsTitle);
-        formData.append("newContent", newsContent);
-        formData.append("newDate", newsDate);
-        formData.append("newIntro", newsIntro);
-        formData.append("deleteImgId", deleteImgId);
-        axios.post(BACKEND + `/news/update/${news._id}`, formData, config)
-            .then(() => {
-                console.log("save news")
-                setAutoSave(!autoSave)
-            })
-    },[autoSave])
+    // useEffect(async() => {
+    //     await sleep(15000)
+    //     const config = {
+    //         headers: {
+    //             'content-type': 'multipart/form-data'
+    //         }
+    //     }
+    //     const formData = new FormData();
+    //     const imageArr = Array.from(file);
+    //     imageArr.forEach(image => {
+    //         formData.append('newImg', image);
+    //     });
+    //     formData.append("newCate", newsCate);
+    //     formData.append("newTitle", newsTitle);
+    //     formData.append("newContent", newsContent);
+    //     formData.append("newDate", newsDate);
+    //     formData.append("newIntro", newsIntro);
+    //     formData.append("deleteImgId", deleteImgId);
+    //     axios.post(BACKEND + `/news/update/${news._id}`, formData, config)
+    //         .then(() => {
+    //             console.log("save news")
+    //             setAutoSave(!autoSave)
+    //         })
+    // },[autoSave])
 
     const convertDate = (dateString) => {
         const date = new Date(dateString)
