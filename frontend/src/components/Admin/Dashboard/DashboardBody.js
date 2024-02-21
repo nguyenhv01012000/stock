@@ -123,6 +123,7 @@ export default function DashboardBody(props) {
                     setCloseEditFunc={props.setCloseEditFunc}
                     setToastFunc={setToastFunc}
                     news={news} 
+                    productId={props.productId}
                 />
             }
             { (props.openCreate && tabId === "6") &&

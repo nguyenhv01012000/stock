@@ -4,7 +4,7 @@ const router = express.Router();
 
 var controller = require("../controllers/product.controller");
 
-var upload = multer({ dest: './public/images'})
+var upload = multer({ dest: './public/images', limits: { fieldSize: 2 * 1024 * 1024 }})
 
 router.get("/", controller.index);
 router.get("/:id", controller.product);

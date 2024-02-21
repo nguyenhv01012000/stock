@@ -97,8 +97,8 @@ module.exports.postNews = async function(req, res) {
 		newTime: new Date(),
 		newCate: req.body.newCate,
 		newTitle: req.body.newTitle,
-		newContent: req.body.newContent,
-		newIntro: req.body.newIntro,
+		newContent: req.body.newContent || "",
+		newIntro: req.body.newIntro || "",
 		newDate: req.body.newDate,
 		newView: 0
 	}
@@ -122,8 +122,8 @@ module.exports.updateNews = async function(req, res) {
 		const data = {
 			newCate: req.body.newCate,
 			newTitle: req.body.newTitle,
-			newContent: req.body.newContent,
-			newIntro: req.body.newIntro,
+			newContent: req.body.newContent || "",
+			newIntro: req.body.newIntro || "",
 			newDate: req.body.newDate,
 		}
 	

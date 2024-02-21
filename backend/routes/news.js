@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer")
-var upload = multer({ dest: './public/images'})
+var upload = multer({ dest: './public/images', limits: { fieldSize: 2 * 1024 * 1024 }})
 
 var controller = require("../controllers/news.controller");
 

@@ -16,6 +16,7 @@ export default function DashboardNewsCreate(props) {
     const [file, setFile] = useState([])
     const [cateList, setCateList] = useState([])
     const news = props.news;
+    const productId = props.productId;
     const [isActive1, setIsActive1] = useState(false)
 
     const handleOnChange = (event) => {
@@ -31,10 +32,13 @@ export default function DashboardNewsCreate(props) {
     const [deleteImgId, setDeleteImgId] = useState(null)
     // const [autoSave, setAutoSave] = useState(false)
 
-
+    useEffect(() => {
+        setIsActive1(true)
+    },[])
 
     useEffect(() => {
-        if (news) {
+        if (news && productId == news._id) {
+            setIsActive1(false)
             setNewsTitle(news.newTitle)
             setNewsImg([news.newImg])
             setNewsCate(news.newCate)
@@ -134,25 +138,26 @@ export default function DashboardNewsCreate(props) {
     }
 
     return (
-        <LoadingOverlay
-            active={isActive1}
-            spinner={<BounceLoader />}
-        >
-            <div className="DashboardProductInfo">
-                <div className="create-box">
-                    <div className="create-box-title flex">
-                        <div className="create-box-title-text">
-                            Thông tin bài viết
-                        </div>
-                        <div
-                            className="create-box-title-close flex-center"
-                            onClick={() => {
-                                props.setCloseEditFunc(false);
-                            }}
-                        >
-                            <FontAwesomeIcon icon={faTimes} />
-                        </div>
+
+        <div className="DashboardProductInfo">
+            <div className="create-box">
+                <div className="create-box-title flex">
+                    <div className="create-box-title-text">
+                        Thông tin bài viết
                     </div>
+                    <div
+                        className="create-box-title-close flex-center"
+                        onClick={() => {
+                            props.setCloseEditFunc(false);
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faTimes} />
+                    </div>
+                </div>
+                <LoadingOverlay
+                    active={isActive1}
+                    spinner={<BounceLoader />}
+                >
                     <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
                         <div className="create-box-row flex">
                             <div className="dashboard-left flex">Tiêu Đề</div>
@@ -260,8 +265,9 @@ export default function DashboardNewsCreate(props) {
                             </button>
                         </div>
                     </form>
-                </div>
+                </LoadingOverlay>
+
             </div>
-        </LoadingOverlay>
+        </div>
     )
 }
