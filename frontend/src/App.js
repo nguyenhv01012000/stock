@@ -21,6 +21,7 @@ import Course from './Pages/Course';
 import CourseDetail from './Pages/CourseDetail';
 import CourseCategoryList from './Pages/CourseCategoryList';
 import NewsContent1 from './components/News/NewsContent1';
+import {Helmet} from "react-helmet";
 
 function App(props) { 
   

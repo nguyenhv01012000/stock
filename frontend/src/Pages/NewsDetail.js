@@ -10,10 +10,14 @@ import LoadingOverlay from 'react-loading-overlay';
 import BounceLoader from 'react-spinners/BounceLoader';
 
 function NewsDetail(props) {
-
+    document.title = capitalizeFirstLetter(props.match.params.id.replaceAll("-", " "));
     const [news, setNews] = useState({})
     const [newsView, setNewsView] = useState([]);
     const [isActive, setIsActive] = useState(false)
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     useEffect(() => {
         setIsActive(() => true)
